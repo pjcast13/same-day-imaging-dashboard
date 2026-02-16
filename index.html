@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Same-Day Urgent Imaging Access | Current State Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cardinal: #8C1515;
+    --cardinal-light: #B83A4B;
+    --navy: #0A0E1A;
+    --navy-mid: #111827;
+    --navy-surface: #1E2A3E;
+    --slate: #2A3650;
+    --text-primary: #F0F2F7;
+    --text-secondary: #8B95A8;
+    --text-muted: #5A6478;
+    --ct: #E8913A;
+    --mri: #6C8EEF;
+    --us: #4ECDC4;
+    --green: #10B981;
+    --red: #E85D75;
+    --yellow: #F0A830;
+    --border: rgba(255,255,255,0.06);
+    --border-accent: rgba(140,21,21,0.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--navy);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+  body::before {
+    content:'';
+    position:fixed; top:0; left:0; right:0; height:400px;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(140,21,21,0.08) 0%, transparent 100%);
+    pointer-events:none;
+  }
+  .dash { max-width:1440px; margin:0 auto; padding:32px 40px 48px; position:relative; z-index:1; }
+
+  /* Header */
+  .hdr { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid var(--border); }
+  .hdr-left { display:flex; flex-direction:column; gap:6px; }
+  .badge {
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(140,21,21,0.12); border:1px solid var(--border-accent);
+    padding:4px 12px; border-radius:20px; font-size:11px; font-weight:500;
+    color:var(--cardinal-light); letter-spacing:0.5px; text-transform:uppercase; width:fit-content;
+  }
+  .badge::before { content:''; width:6px; height:6px; background:var(--cardinal); border-radius:50%; }
+  .hdr h1 { font-family:'Playfair Display',serif; font-size:32px; font-weight:600; letter-spacing:-0.5px; line-height:1.1; }
+  .hdr-sub { font-size:14px; color:var(--text-secondary); margin-top:2px; }
+  .hdr-right { text-align:right; font-size:12px; color:var(--text-muted); line-height:1.6; }
+  .hdr-right strong { color:var(--text-secondary); font-weight:500; }
+
+  /* Metrics */
+  .metrics { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:24px; }
+  .mc {
+    background:var(--navy-mid); border:1px solid var(--border); border-radius:12px;
+    padding:20px 22px; position:relative; overflow:hidden;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .mc:hover { border-color:rgba(255,255,255,0.1); transform:translateY(-1px); }
+  .mc::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--border); }
+  .mc.accent::after { background:var(--cardinal); }
+  .mc.target::after { background:var(--green); }
+  .mc-label { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); margin-bottom:10px; }
+  .mc-val { font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:600; line-height:1; }
+  .mc-val .u { font-size:16px; font-weight:400; color:var(--text-secondary); margin-left:3px; }
+  .mc-detail { font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.4; }
+  .hl { color:var(--cardinal-light); font-weight:500; }
+  .gr { color:var(--green); font-weight:500; }
+
+  /* KPI banners */
+  .kpi-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .kpi-box { border-radius:10px; padding:14px 18px; }
+  .kpi-box h4 { font-size:12px; font-weight:600; margin-bottom:4px; letter-spacing:0.3px; }
+  .kpi-box p { font-size:12px; color:var(--text-secondary); line-height:1.5; }
+
+  /* Cards & Grid */
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:16px; }
+  .card {
+    background:var(--navy-mid); border:1px solid var(--border); border-radius:12px; padding:24px;
+  }
+  .card-title { font-size:15px; font-weight:600; margin-bottom:2px; }
+  .card-sub { font-size:12px; color:var(--text-muted); margin-bottom:16px; }
+  .card-hdr { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; }
+  .legend span { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text-secondary); }
+  .legend .dot { width:8px; height:8px; border-radius:50%; }
+
+  /* Trend indicator */
+  .trend { display:inline-flex; align-items:center; gap:4px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; padding:2px 8px; border-radius:10px; }
+  .trend.up { background:rgba(232,93,117,0.12); color:var(--red); }
+  .trend.down { background:rgba(16,185,129,0.12); color:var(--green); }
+  .trend.flat { background:rgba(139,149,168,0.12); color:var(--text-secondary); }
+
+  /* Table */
+  .dtbl { width:100%; border-collapse:collapse; }
+  .dtbl th { text-align:left; font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); padding:0 0 10px; border-bottom:1px solid var(--border); }
+  .dtbl th:nth-child(2), .dtbl th:nth-child(3) { text-align:right; }
+  .dtbl td { padding:9px 0; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); color:var(--text-secondary); }
+  .dtbl td:nth-child(1) { font-weight:500; color:var(--text-primary); font-size:12px; }
+  .dtbl td:nth-child(2), .dtbl td:nth-child(3) { text-align:right; font-family:'JetBrains Mono',monospace; font-size:12px; }
+
+  /* Priority bars */
+  .prow { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+  .prow-label { width:80px; font-size:12px; font-weight:500; color:var(--text-secondary); text-align:right; flex-shrink:0; }
+  .prow-bar { flex:1; height:26px; background:rgba(255,255,255,0.03); border-radius:6px; overflow:hidden; }
+  .prow-fill { height:100%; border-radius:6px; display:flex; align-items:center; padding-left:10px; }
+  .prow-val { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; color:var(--text-primary); white-space:nowrap; }
+
+  /* Insight box */
+  .insight { margin-top:14px; padding:12px 14px; background:rgba(255,255,255,0.02); border-radius:8px; border:1px solid var(--border); }
+  .insight h5 { font-size:11px; color:var(--text-muted); font-weight:500; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:5px; }
+  .insight p { font-size:12px; color:var(--text-secondary); line-height:1.5; }
+
+  /* Footer */
+  .footer { text-align:center; padding:28px 0 0; border-top:1px solid var(--border); margin-top:8px; }
+  .footer-text { font-size:11px; color:var(--text-muted); letter-spacing:0.3px; }
+  .footer-brand { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:8px; }
+  .footer-line { width:40px; height:1px; background:var(--border); }
+  .footer-brand-text { font-family:'Playfair Display',serif; font-size:12px; color:var(--text-muted); font-weight:500; letter-spacing:1px; }
+
+  @media (max-width:1200px) { .grid3 { grid-template-columns:1fr 1fr; } }
+  @media (max-width:900px) {
+    .dash { padding:20px; }
+    .metrics { grid-template-columns:repeat(2,1fr); }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .kpi-row { grid-template-columns:1fr; }
+    .hdr { flex-direction:column; gap:12px; }
+    .hdr-right { text-align:left; }
+    .mc-val { font-size:24px; }
+  }
+</style>
+</head>
+<body>
+<div class="dash">
+
+  <!-- Header -->
+  <header class="hdr">
+    <div class="hdr-left">
+      <div class="badge">Phase 1 - Current State</div>
+      <h1>Same-Day Urgent Imaging Access</h1>
+      <div class="hdr-sub">Current State Analysis &nbsp;|&nbsp; FY26 Baseline Data</div>
+    </div>
+    <div class="hdr-right">
+      <div><strong>Project Lead:</strong> Elizabeth Sheridan</div>
+      <div><strong>Sponsors:</strong> T. Morrison, Dr. Crews, E. Oyekan</div>
+      <div style="margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted)">PRJ0213271</div>
+    </div>
+  </header>
+
+  <!-- Metric Cards -->
+  <div class="metrics">
+    <div class="mc accent">
+      <div class="mc-label">Total Cases</div>
+      <div class="mc-val">1,079</div>
+      <div class="mc-detail">216/mo avg across 3 modalities</div>
+    </div>
+    <div class="mc accent">
+      <div class="mc-label">Scheduling Process (Order to Sched)</div>
+      <div class="mc-val">33.4<span class="u">min</span></div>
+      <div class="mc-detail">Median | Mean: 52.0 | P90: 134 min</div>
+    </div>
+    <div class="mc accent">
+      <div class="mc-label">Access (Order to Begin Exam)</div>
+      <div class="mc-val">3.2<span class="u">hrs</span></div>
+      <div class="mc-detail">189 min median | Includes travel + wait</div>
+    </div>
+    <div class="mc">
+      <div class="mc-label">After-Hours Volume</div>
+      <div class="mc-val">25.7<span class="u">%</span></div>
+      <div class="mc-detail">277 cases after 5 PM <span class="hl">vs. 13% prior est.</span></div>
+    </div>
+    <div class="mc target">
+      <div class="mc-label">Scheduling Target</div>
+      <div class="mc-val" style="color:var(--green)">~17<span class="u">min</span></div>
+      <div class="mc-detail"><span class="gr">50% reduction</span> from 33.4 min baseline</div>
+    </div>
+  </div>
+
+  <!-- KPI Context -->
+  <div class="kpi-row">
+    <div class="kpi-box" style="background:rgba(232,145,58,0.06);border:1px solid rgba(232,145,58,0.15);">
+      <h4 style="color:var(--ct)">SCHEDULING PROCESS KPI: Order to Scheduled On</h4>
+      <p>Measures how fast the system responds to an urgent order. Reflects the clinic/coordinator experience and scheduling workflow efficiency.</p>
+    </div>
+    <div class="kpi-box" style="background:rgba(108,142,239,0.06);border:1px solid rgba(108,142,239,0.15);">
+      <h4 style="color:var(--mri)">ACCESS KPI: Order to Begin Exam</h4>
+      <p>Measures how quickly the patient actually gets imaged. Includes travel time, other appointments, and patient choice. A proxy for overall access.</p>
+    </div>
+  </div>
+
+  <!-- TAT Charts Row -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Order to Scheduled On</div>
+          <div class="card-sub">Scheduling process efficiency (median min)</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span class="trend flat">FLAT</span>
+          <div class="legend">
+            <span><span class="dot" style="background:var(--ct)"></span>CT</span>
+            <span><span class="dot" style="background:var(--mri)"></span>MRI</span>
+            <span><span class="dot" style="background:var(--us)"></span>US</span>
+          </div>
+        </div>
+      </div>
+      <canvas id="tatSched" height="260"></canvas>
+      <div class="insight">
+        <h5>Trend</h5>
+        <p>No significant improvement over 5 months. All modalities trending flat or slightly up. MRI peaked at 52 min in Nov before recovering. US creeping upward (20 to 30 min). <strong style="color:var(--text-primary)">Process redesign has not yet begun</strong>, so flat baseline is expected.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Order to Begin Exam</div>
+          <div class="card-sub">Patient access measure (median min)</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span class="trend flat">VOLATILE</span>
+          <div class="legend">
+            <span><span class="dot" style="background:var(--ct)"></span>CT</span>
+            <span><span class="dot" style="background:var(--mri)"></span>MRI</span>
+            <span><span class="dot" style="background:var(--us)"></span>US</span>
+          </div>
+        </div>
+      </div>
+      <canvas id="tatBegin" height="260"></canvas>
+      <div class="insight">
+        <h5>Trend</h5>
+        <p><strong style="color:var(--mri)">MRI is the access pain point</strong>, swinging 4.5 to 7.5 hrs. CT stable around 3 hrs. US steady at ~2 hrs. MRI volatility likely reflects slot availability and protocol complexity, not scheduling workflow.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Volume + Hour Row -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Monthly Case Volume</div>
+          <div class="card-sub">By modality, Sep 2025 - Jan 2026</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span class="trend flat">STABLE</span>
+          <div class="legend">
+            <span><span class="dot" style="background:var(--ct)"></span>CT</span>
+            <span><span class="dot" style="background:var(--mri)"></span>MRI</span>
+            <span><span class="dot" style="background:var(--us)"></span>US</span>
+          </div>
+        </div>
+      </div>
+      <canvas id="volume" height="240"></canvas>
+      <div class="insight">
+        <h5>Trend</h5>
+        <p>Volume fairly stable at ~216/mo. CT dipped in Jan (77 vs avg 102). US growing share (16% Sep to 36% Jan). MRI steady at ~45/mo. Dec was highest volume month (246), likely holiday coverage effects.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Exam Start by Hour of Day</div>
+          <div class="card-sub">Peak at 3 PM | <span style="color:var(--cardinal-light)">After 5 PM highlighted</span></div>
+        </div>
+        <span class="trend up">25.7% AFTER HRS</span>
+      </div>
+      <canvas id="hourly" height="240"></canvas>
+      <div class="insight">
+        <h5>Trend</h5>
+        <p>Strong afternoon ramp 1-4 PM accounts for 54% of all cases. <span class="hl">After-hours demand (25.7%) is nearly double the prior 13% estimate.</span> RSC closes at 5 PM but 272 exams begin after that. Supports case for extended RSC hours to 9 PM.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Priority + Depts + Locations -->
+  <div class="grid3">
+    <div class="card">
+      <div class="card-title">Volume by Order Priority</div>
+      <div class="card-sub">STAT + Expedite = 96% of all cases</div>
+      <div style="margin-top:12px">
+        <div class="prow">
+          <div class="prow-label">STAT</div>
+          <div class="prow-bar"><div class="prow-fill" style="width:100%;background:rgba(232,93,117,0.15);border-left:3px solid var(--red)"><span class="prow-val">634 (58.8%)</span></div></div>
+        </div>
+        <div class="prow">
+          <div class="prow-label">Expedite</div>
+          <div class="prow-bar"><div class="prow-fill" style="width:63.1%;background:rgba(240,168,48,0.15);border-left:3px solid var(--yellow)"><span class="prow-val">400 (37.1%)</span></div></div>
+        </div>
+        <div class="prow">
+          <div class="prow-label">Urgent</div>
+          <div class="prow-bar"><div class="prow-fill" style="width:3.8%;background:rgba(139,92,246,0.15);border-left:3px solid #8B5CF6"><span class="prow-val">24 (2.2%)</span></div></div>
+        </div>
+        <div class="prow">
+          <div class="prow-label">ASAP</div>
+          <div class="prow-bar"><div class="prow-fill" style="width:3.2%;background:rgba(59,130,246,0.15);border-left:3px solid #3B82F6"><span class="prow-val">20 (1.9%)</span></div></div>
+        </div>
+        <div class="prow">
+          <div class="prow-label">Med Emrg</div>
+          <div class="prow-bar"><div class="prow-fill" style="width:0.5%;background:rgba(16,185,129,0.15);border-left:3px solid var(--green)"><span class="prow-val">1</span></div></div>
+        </div>
+      </div>
+      <div class="insight">
+        <h5>Insight</h5>
+        <p>9 order priority options exist, but only 2 are meaningfully used. Supports case for <strong style="color:var(--text-primary)">simplified order definitions</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Performing Sites</div>
+      <div class="card-sub">Cases and median TAT (order to scheduled)</div>
+      <table class="dtbl">
+        <thead><tr><th>Site</th><th>Cases</th><th>TAT</th></tr></thead>
+        <tbody>
+          <tr><td>Stanford Hospital</td><td>217</td><td style="color:var(--green)">32.0m</td></tr>
+          <tr><td>Neuroscience</td><td>197</td><td>43.1m</td></tr>
+          <tr><td>OP Center RWC</td><td>161</td><td>36.5m</td></tr>
+          <tr><td>Img Ctr Palo Alto</td><td>129</td><td>34.1m</td></tr>
+          <tr><td>Blake Wilbur</td><td>127</td><td>42.1m</td></tr>
+          <tr><td>Advanced Med Ctr</td><td>94</td><td style="color:var(--green)">2.0m</td></tr>
+          <tr><td>Cancer SB</td><td>87</td><td style="color:var(--green)">26.6m</td></tr>
+          <tr><td>EHC</td><td>39</td><td>43.3m</td></tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <h5>Insight</h5>
+        <p><strong style="color:var(--green)">Advanced Med Ctr has 2 min TAT</strong> on 94 cases, likely a different workflow worth studying. Cancer SB and Stanford Hospital beat median. Neuroscience and EHC are slowest.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Top Ordering Locations</div>
+      <div class="card-sub">Where same-day orders originate</div>
+      <canvas id="locations" height="280"></canvas>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-text">Data: 1,079 same-day STAT/Expedite cases | Sep 2025 - Jan 2026 | Source: Epic | 2 records excluded (negative TAT)</div>
+    <div class="footer-brand">
+      <div class="footer-line"></div>
+      <div class="footer-brand-text">Stanford Health Care</div>
+      <div class="footer-line"></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ─── Chart.js Global Config ─────────────────────────────────
+Chart.defaults.color = '#5A6478';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.04)';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.legend.display = false;
+Chart.defaults.plugins.tooltip.backgroundColor = '#1E2A3E';
+Chart.defaults.plugins.tooltip.borderColor = 'rgba(255,255,255,0.1)';
+Chart.defaults.plugins.tooltip.borderWidth = 1;
+Chart.defaults.plugins.tooltip.cornerRadius = 8;
+Chart.defaults.plugins.tooltip.titleFont = { family: "'DM Sans'", size: 12, weight: 600 };
+Chart.defaults.plugins.tooltip.bodyFont = { family: "'JetBrains Mono'", size: 11 };
+Chart.defaults.plugins.tooltip.padding = 10;
+Chart.defaults.scale.grid = { color: 'rgba(255,255,255,0.04)' };
+
+var months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan'];
+
+// ─── TAT: Order to Scheduled On ─────────────────────────────
+new Chart(document.getElementById('tatSched'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      { label: 'CT', data: [31.4, 43.1, 45.3, 43.4, 38.2], borderColor: '#E8913A', backgroundColor: 'rgba(232,145,58,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#E8913A', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
+      { label: 'MRI', data: [33.4, 38.4, 52.1, 44.4, 40.4], borderColor: '#6C8EEF', backgroundColor: 'rgba(108,142,239,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#6C8EEF', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
+      { label: 'US', data: [20.1, 18.9, 26.0, 23.3, 30.1], borderColor: '#4ECDC4', backgroundColor: 'rgba(78,205,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#4ECDC4', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      y: {
+        min: 0, max: 60,
+        ticks: { callback: function(v) { return v + 'm'; }, font: { family: "'JetBrains Mono'" } },
+        grid: { drawBorder: false }
+      },
+      x: { grid: { display: false }, ticks: { font: { weight: 500 } } }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' min'; }
+        }
+      },
+      annotation: {
+        annotations: {
+          target: {
+            type: 'line', yMin: 17, yMax: 17,
+            borderColor: '#10B981', borderDash: [8, 4], borderWidth: 2,
+            label: { display: true, content: 'TARGET ~17m', position: 'end', backgroundColor: 'transparent', color: '#10B981', font: { family: "'JetBrains Mono'", size: 10, weight: 600 } }
+          }
+        }
+      }
+    }
+  }
+});
+
+// ─── TAT: Order to Begin ────────────────────────────────────
+new Chart(document.getElementById('tatBegin'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      { label: 'CT', data: [189.5, 198.7, 144.6, 198.6, 179.1], borderColor: '#E8913A', backgroundColor: 'rgba(232,145,58,0.06)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#E8913A', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
+      { label: 'MRI', data: [340.9, 269.5, 452.3, 411.5, 307.1], borderColor: '#6C8EEF', backgroundColor: 'rgba(108,142,239,0.06)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#6C8EEF', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
+      { label: 'US', data: [105.3, 103.2, 155.1, 142.6, 148.0], borderColor: '#4ECDC4', backgroundColor: 'rgba(78,205,196,0.06)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#4ECDC4', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      y: {
+        min: 0, max: 500,
+        ticks: {
+          callback: function(v) { return v >= 60 ? Math.round(v/60) + 'h' : v + 'm'; },
+          font: { family: "'JetBrains Mono'" }
+        },
+        grid: { drawBorder: false }
+      },
+      x: { grid: { display: false }, ticks: { font: { weight: 500 } } }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(0) + ' min (' + (ctx.parsed.y/60).toFixed(1) + ' hrs)'; }
+        }
+      }
+    }
+  }
+});
+
+// ─── Monthly Volume ─────────────────────────────────────────
+new Chart(document.getElementById('volume'), {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [
+      { label: 'CT', data: [104, 125, 89, 115, 77], backgroundColor: '#E8913A', borderRadius: 0 },
+      { label: 'US', data: [56, 70, 59, 85, 68], backgroundColor: '#4ECDC4', borderRadius: 0 },
+      { label: 'MRI', data: [49, 47, 45, 46, 44], backgroundColor: '#6C8EEF', borderRadius: {topLeft:4, topRight:4} }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: { stacked: true, grid: { display: false }, ticks: { font: { weight: 500 } } },
+      y: { stacked: true, ticks: { font: { family: "'JetBrains Mono'" } }, grid: { drawBorder: false } }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          afterBody: function(items) {
+            var total = 0;
+            items.forEach(function(i) { total += i.parsed.y; });
+            return 'Total: ' + total;
+          }
+        }
+      }
+    }
+  }
+});
+
+// ─── Hourly Distribution ────────────────────────────────────
+var hourLabels = ['8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p','10p','11p'];
+var hourVals = [7, 11, 42, 75, 83, 112, 144, 181, 147, 55, 63, 55, 48, 38, 8, 5];
+var hourColors = hourVals.map(function(v, i) {
+  if (i >= 9) return 'rgba(184,58,75,0.7)';
+  if (i === 7) return 'rgba(240,242,247,0.85)';
+  return 'rgba(42,54,80,0.6)';
+});
+
+new Chart(document.getElementById('hourly'), {
+  type: 'bar',
+  data: {
+    labels: hourLabels,
+    datasets: [{ data: hourVals, backgroundColor: hourColors, borderRadius: 3 }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { ticks: { font: { family: "'JetBrains Mono'" } }, grid: { drawBorder: false } }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          title: function(items) {
+            var map = {'8a':'8 AM','9a':'9 AM','10a':'10 AM','11a':'11 AM','12p':'12 PM','1p':'1 PM','2p':'2 PM','3p':'3 PM','4p':'4 PM','5p':'5 PM','6p':'6 PM','7p':'7 PM','8p':'8 PM','9p':'9 PM','10p':'10 PM','11p':'11 PM'};
+            return map[items[0].label] || items[0].label;
+          },
+          label: function(ctx) {
+            var suffix = ctx.dataIndex >= 9 ? ' (after hours)' : '';
+            return ctx.parsed.y + ' cases' + suffix;
+          }
+        }
+      }
+    }
+  }
+});
+
+// ─── Top Locations ──────────────────────────────────────────
+var locNames = ['Express Care Hoover','Breast Oncology','Sports Medicine','GI Oncology','Neurosurgery SNHC','Ortho-Sports Med','Int Med Menlo Park','Infusion Treatment'];
+var locVals = [88, 71, 61, 45, 35, 33, 26, 25];
+var locColors = locVals.map(function(v, i) { return i === 0 ? 'rgba(184,58,75,0.8)' : 'rgba(42,54,80,0.5)'; });
+
+new Chart(document.getElementById('locations'), {
+  type: 'bar',
+  data: {
+    labels: locNames,
+    datasets: [{ data: locVals, backgroundColor: locColors, borderRadius: 4 }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: { ticks: { font: { family: "'JetBrains Mono'" } }, grid: { drawBorder: false } },
+      y: { grid: { display: false }, ticks: { font: { size: 11, color: '#8B95A8' } } }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: { label: function(ctx) { return ctx.parsed.x + ' cases'; } }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
