@@ -4,551 +4,536 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Same-Day Urgent Imaging Access | Current State Dashboard</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cardinal: #8C1515;
-    --cardinal-light: #B83A4B;
-    --navy: #0A0E1A;
-    --navy-mid: #111827;
-    --navy-surface: #1E2A3E;
-    --slate: #2A3650;
-    --text-primary: #F0F2F7;
-    --text-secondary: #8B95A8;
-    --text-muted: #5A6478;
-    --ct: #E8913A;
-    --mri: #6C8EEF;
-    --us: #4ECDC4;
-    --green: #10B981;
-    --red: #E85D75;
-    --yellow: #F0A830;
-    --border: rgba(255,255,255,0.06);
-    --border-accent: rgba(140,21,21,0.25);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--navy);
-    color: var(--text-primary);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-  }
-  body::before {
-    content:'';
-    position:fixed; top:0; left:0; right:0; height:400px;
-    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(140,21,21,0.08) 0%, transparent 100%);
-    pointer-events:none;
-  }
-  .dash { max-width:1440px; margin:0 auto; padding:32px 40px 48px; position:relative; z-index:1; }
-
-  /* Header */
-  .hdr { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid var(--border); }
-  .hdr-left { display:flex; flex-direction:column; gap:6px; }
-  .badge {
-    display:inline-flex; align-items:center; gap:6px;
-    background:rgba(140,21,21,0.12); border:1px solid var(--border-accent);
-    padding:4px 12px; border-radius:20px; font-size:11px; font-weight:500;
-    color:var(--cardinal-light); letter-spacing:0.5px; text-transform:uppercase; width:fit-content;
-  }
-  .badge::before { content:''; width:6px; height:6px; background:var(--cardinal); border-radius:50%; }
-  .hdr h1 { font-family:'Playfair Display',serif; font-size:32px; font-weight:600; letter-spacing:-0.5px; line-height:1.1; }
-  .hdr-sub { font-size:14px; color:var(--text-secondary); margin-top:2px; }
-  .hdr-right { text-align:right; font-size:12px; color:var(--text-muted); line-height:1.6; }
-  .hdr-right strong { color:var(--text-secondary); font-weight:500; }
-
-  /* Metrics */
-  .metrics { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:24px; }
-  .mc {
-    background:var(--navy-mid); border:1px solid var(--border); border-radius:12px;
-    padding:20px 22px; position:relative; overflow:hidden;
-    transition: border-color 0.3s, transform 0.2s;
-  }
-  .mc:hover { border-color:rgba(255,255,255,0.1); transform:translateY(-1px); }
-  .mc::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--border); }
-  .mc.accent::after { background:var(--cardinal); }
-  .mc.target::after { background:var(--green); }
-  .mc-label { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); margin-bottom:10px; }
-  .mc-val { font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:600; line-height:1; }
-  .mc-val .u { font-size:16px; font-weight:400; color:var(--text-secondary); margin-left:3px; }
-  .mc-detail { font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.4; }
-  .hl { color:var(--cardinal-light); font-weight:500; }
-  .gr { color:var(--green); font-weight:500; }
-
-  /* KPI banners */
-  .kpi-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
-  .kpi-box { border-radius:10px; padding:14px 18px; }
-  .kpi-box h4 { font-size:12px; font-weight:600; margin-bottom:4px; letter-spacing:0.3px; }
-  .kpi-box p { font-size:12px; color:var(--text-secondary); line-height:1.5; }
-
-  /* Cards & Grid */
-  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
-  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:16px; }
-  .card {
-    background:var(--navy-mid); border:1px solid var(--border); border-radius:12px; padding:24px;
-  }
-  .card-title { font-size:15px; font-weight:600; margin-bottom:2px; }
-  .card-sub { font-size:12px; color:var(--text-muted); margin-bottom:16px; }
-  .card-hdr { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
-  .legend { display:flex; gap:14px; flex-wrap:wrap; }
-  .legend span { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text-secondary); }
-  .legend .dot { width:8px; height:8px; border-radius:50%; }
-
-  /* Trend indicator */
-  .trend { display:inline-flex; align-items:center; gap:4px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; padding:2px 8px; border-radius:10px; }
-  .trend.up { background:rgba(232,93,117,0.12); color:var(--red); }
-  .trend.down { background:rgba(16,185,129,0.12); color:var(--green); }
-  .trend.flat { background:rgba(139,149,168,0.12); color:var(--text-secondary); }
-
-  /* Table */
-  .dtbl { width:100%; border-collapse:collapse; }
-  .dtbl th { text-align:left; font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); padding:0 0 10px; border-bottom:1px solid var(--border); }
-  .dtbl th:nth-child(2), .dtbl th:nth-child(3) { text-align:right; }
-  .dtbl td { padding:9px 0; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); color:var(--text-secondary); }
-  .dtbl td:nth-child(1) { font-weight:500; color:var(--text-primary); font-size:12px; }
-  .dtbl td:nth-child(2), .dtbl td:nth-child(3) { text-align:right; font-family:'JetBrains Mono',monospace; font-size:12px; }
-
-  /* Priority bars */
-  .prow { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-  .prow-label { width:80px; font-size:12px; font-weight:500; color:var(--text-secondary); text-align:right; flex-shrink:0; }
-  .prow-bar { flex:1; height:26px; background:rgba(255,255,255,0.03); border-radius:6px; overflow:hidden; }
-  .prow-fill { height:100%; border-radius:6px; display:flex; align-items:center; padding-left:10px; }
-  .prow-val { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; color:var(--text-primary); white-space:nowrap; }
-
-  /* Insight box */
-  .insight { margin-top:14px; padding:12px 14px; background:rgba(255,255,255,0.02); border-radius:8px; border:1px solid var(--border); }
-  .insight h5 { font-size:11px; color:var(--text-muted); font-weight:500; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:5px; }
-  .insight p { font-size:12px; color:var(--text-secondary); line-height:1.5; }
-
-  /* Footer */
-  .footer { text-align:center; padding:28px 0 0; border-top:1px solid var(--border); margin-top:8px; }
-  .footer-text { font-size:11px; color:var(--text-muted); letter-spacing:0.3px; }
-  .footer-brand { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:8px; }
-  .footer-line { width:40px; height:1px; background:var(--border); }
-  .footer-brand-text { font-family:'Playfair Display',serif; font-size:12px; color:var(--text-muted); font-weight:500; letter-spacing:1px; }
-
-  @media (max-width:1200px) { .grid3 { grid-template-columns:1fr 1fr; } }
-  @media (max-width:900px) {
-    .dash { padding:20px; }
-    .metrics { grid-template-columns:repeat(2,1fr); }
-    .grid2, .grid3 { grid-template-columns:1fr; }
-    .kpi-row { grid-template-columns:1fr; }
-    .hdr { flex-direction:column; gap:12px; }
-    .hdr-right { text-align:left; }
-    .mc-val { font-size:24px; }
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #F6F7F9; font-family: 'DM Sans', sans-serif; }
+  button { cursor: pointer; }
+  button:hover { opacity: 0.9; }
 </style>
 </head>
 <body>
-<div class="dash">
+<div id="root"></div>
+<script type="text/babel">
+var useState = React.useState;
+var useMemo = React.useMemo;
+var LineChart = Recharts.LineChart;
+var Line = Recharts.Line;
+var XAxis = Recharts.XAxis;
+var YAxis = Recharts.YAxis;
+var CartesianGrid = Recharts.CartesianGrid;
+var Tooltip = Recharts.Tooltip;
+var BarChart = Recharts.BarChart;
+var Bar = Recharts.Bar;
+var Cell = Recharts.Cell;
+var ResponsiveContainer = Recharts.ResponsiveContainer;
+var ReferenceLine = Recharts.ReferenceLine;
 
-  <!-- Header -->
-  <header class="hdr">
-    <div class="hdr-left">
-      <div class="badge">Phase 1 - Current State</div>
-      <h1>Same-Day Urgent Imaging Access</h1>
-      <div class="hdr-sub">Current State Analysis &nbsp;|&nbsp; FY26 Baseline Data</div>
-    </div>
-    <div class="hdr-right">
-      <div><strong>Project Lead:</strong> Elizabeth Sheridan</div>
-      <div><strong>Sponsors:</strong> T. Morrison, Dr. Crews, E. Oyekan</div>
-      <div style="margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted)">PRJ0213271</div>
-    </div>
-  </header>
+var C = {
+  bg: "#F6F7F9", card: "#FFFFFF", cardBorder: "#E2E5EB",
+  accent: "#2563EB", accentLight: "#EFF4FF",
+  ct: "#0891B2", ctBg: "#ECFEFF", ctBorder: "#A5F3FC",
+  mri: "#DB2777", mriBg: "#FDF2F8", mriBorder: "#FBCFE8",
+  us: "#7C3AED", usBg: "#F5F3FF", usBorder: "#DDD6FE",
+  overall: "#475569", text: "#1E293B", textMuted: "#64748B", textDim: "#94A3B8",
+  stat: "#D97706", expedite: "#2563EB", urgent: "#059669", asap: "#7C3AED", emergency: "#DC2626",
+  afterHours: "#D97706", green: "#059669", red: "#DC2626", white: "#FFFFFF",
+  shadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
+  shadowLg: "0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04)",
+};
+var font = "'DM Sans', sans-serif";
+var monoFont = "'JetBrains Mono', 'Fira Code', monospace";
+var modColor = { CT: C.ct, MRI: C.mri, US: C.us };
 
-  <!-- Metric Cards -->
-  <div class="metrics">
-    <div class="mc accent">
-      <div class="mc-label">Total Cases</div>
-      <div class="mc-val">1,079</div>
-      <div class="mc-detail">216/mo avg across 3 modalities</div>
-    </div>
-    <div class="mc accent">
-      <div class="mc-label">Scheduling Process (Order to Sched)</div>
-      <div class="mc-val">33.4<span class="u">min</span></div>
-      <div class="mc-detail">Median | Mean: 52.0 | P90: 134 min</div>
-    </div>
-    <div class="mc accent">
-      <div class="mc-label">Access (Order to Begin Exam)</div>
-      <div class="mc-val">3.2<span class="u">hrs</span></div>
-      <div class="mc-detail">189 min median | Includes travel + wait</div>
-    </div>
-    <div class="mc">
-      <div class="mc-label">After-Hours Volume</div>
-      <div class="mc-val">25.7<span class="u">%</span></div>
-      <div class="mc-detail">277 cases after 5 PM <span class="hl">vs. 13% prior est.</span></div>
-    </div>
-    <div class="mc target">
-      <div class="mc-label">Scheduling Target</div>
-      <div class="mc-val" style="color:var(--green)">~17<span class="u">min</span></div>
-      <div class="mc-detail"><span class="gr">50% reduction</span> from 33.4 min baseline</div>
-    </div>
-  </div>
+var schedTATAll = [
+  { month: "Sep", CT: 31.4, MRI: 33.4, US: 20.1, Overall: 30.4 },
+  { month: "Oct", CT: 43.1, MRI: 38.4, US: 18.9, Overall: 29.1 },
+  { month: "Nov", CT: 45.3, MRI: 52.1, US: 26.0, Overall: 39.0 },
+  { month: "Dec", CT: 43.4, MRI: 44.4, US: 23.3, Overall: 34.0 },
+  { month: "Jan", CT: 38.2, MRI: 40.4, US: 30.1, Overall: 36.2 },
+];
+var schedTrendsAll = [
+  { mod: "CT", change: "+6.8", pct: "+22%", color: C.ct },
+  { mod: "MRI", change: "+7.0", pct: "+21%", color: C.mri },
+  { mod: "US", change: "+10.0", pct: "+50%", color: C.us },
+  { mod: "Overall", change: "+5.8", pct: "+19%", color: C.overall },
+];
+var accessTATAll = [
+  { month: "Sep", CT: 189.5, MRI: 340.9, US: 105.3 },
+  { month: "Oct", CT: 198.7, MRI: 269.5, US: 103.2 },
+  { month: "Nov", CT: 144.6, MRI: 452.3, US: 155.1 },
+  { month: "Dec", CT: 198.6, MRI: 411.5, US: 142.6 },
+  { month: "Jan", CT: 179.1, MRI: 307.1, US: 148.0 },
+];
+var accessTrendsAll = [
+  { mod: "CT", change: "-10", pct: "-5%", color: C.ct },
+  { mod: "MRI", change: "-34", pct: "-10%", color: C.mri },
+  { mod: "US", change: "+43", pct: "+41%", color: C.us },
+];
+var monthlyVolumeAll = [
+  { month: "Sep", CT: 104, MRI: 49, US: 56, total: 209 },
+  { month: "Oct", CT: 125, MRI: 47, US: 70, total: 242 },
+  { month: "Nov", CT: 89, MRI: 45, US: 59, total: 193 },
+  { month: "Dec", CT: 115, MRI: 46, US: 85, total: 246 },
+  { month: "Jan", CT: 77, MRI: 44, US: 68, total: 189 },
+];
+var volTrendsAll = [
+  { mod: "CT", change: "-27", pct: "-26%", color: C.ct },
+  { mod: "MRI", change: "-5", pct: "-10%", color: C.mri },
+  { mod: "US", change: "+12", pct: "+21%", color: C.us },
+  { mod: "Total", change: "-20", pct: "-10%", color: C.overall },
+];
+var hourlyData = [
+  { hour: "7a", cases: 8, block: "morning" },
+  { hour: "8a", cases: 15, block: "morning" },
+  { hour: "9a", cases: 22, block: "morning" },
+  { hour: "10a", cases: 42, block: "morning" },
+  { hour: "11a", cases: 75, block: "morning" },
+  { hour: "12p", cases: 83, block: "afternoon" },
+  { hour: "1p", cases: 112, block: "afternoon" },
+  { hour: "2p", cases: 144, block: "afternoon" },
+  { hour: "3p", cases: 181, block: "afternoon" },
+  { hour: "4p", cases: 147, block: "afternoon" },
+  { hour: "5p", cases: 55, block: "after" },
+  { hour: "6p", cases: 63, block: "after" },
+  { hour: "7p", cases: 55, block: "after" },
+  { hour: "8p", cases: 48, block: "after" },
+  { hour: "9p", cases: 38, block: "after" },
+];
+var timeBlocks = [
+  { label: "Morning (8a-12p)", cases: 218, pct: 20.2, color: C.accent },
+  { label: "Afternoon (12p-5p)", cases: 584, pct: 54.1, color: C.green },
+  { label: "After Hours (5p-12a)", cases: 277, pct: 25.7, color: C.afterHours },
+];
+var metricsData = {
+  All: { totalCases: "1,079", totalDetail: "216/mo avg across 3 modalities", schedVal: "33.4m", schedDetail: "Median \u00b7 Mean 52.0 \u00b7 P90: 134m", accessVal: "3.2 hrs", accessDetail: "189 min median \u00b7 Includes travel + wait", afterVal: "25.7%", afterDetail: "277 cases after 5 PM (vs 13% est.)", targetVal: "~17m", targetDetail: "50% reduction from 33.4m baseline" },
+  CT: { totalCases: "510", totalDetail: "102/mo avg \u00b7 47.3% of all cases", schedVal: "38.8m", schedDetail: "Median \u00b7 Mean 60.4 \u00b7 P90: 135m", accessVal: "3.1 hrs", accessDetail: "187 min median \u00b7 Stable month-to-month", afterVal: "22.9%", afterDetail: "117 cases after 5 PM", targetVal: "~17m", targetDetail: "50% reduction from baseline" },
+  MRI: { totalCases: "231", totalDetail: "46/mo avg \u00b7 21.4% of all cases", schedVal: "41.6m", schedDetail: "Median \u00b7 Mean 80.0 \u00b7 P90: 191m", accessVal: "6.0 hrs", accessDetail: "358 min median \u00b7 Highest of all modalities", afterVal: "64.1%", afterDetail: "148 of 231 cases after 5 PM", targetVal: "~17m", targetDetail: "50% reduction from baseline" },
+  US: { totalCases: "338", totalDetail: "68/mo avg \u00b7 31.3% of all cases", schedVal: "22.6m", schedDetail: "Median \u00b7 Mean 37.2 \u00b7 P90: 95m", accessVal: "2.2 hrs", accessDetail: "134 min median \u00b7 Fastest modality", afterVal: "2.1%", afterDetail: "7 cases after 5 PM", targetVal: "~17m", targetDetail: "50% reduction from baseline" },
+};
+var priorityDataAll = {
+  All: [ { name: "STAT", value: 634, pct: 58.8, color: C.stat }, { name: "Expedite", value: 400, pct: 37.1, color: C.expedite }, { name: "Urgent", value: 24, pct: 2.2, color: C.urgent }, { name: "ASAP", value: 20, pct: 1.9, color: C.asap }, { name: "Med Emergency", value: 1, pct: 0.1, color: C.emergency } ],
+  CT: [ { name: "STAT", value: 381, pct: 74.7, color: C.stat }, { name: "Expedite", value: 116, pct: 22.7, color: C.expedite }, { name: "Urgent", value: 7, pct: 1.4, color: C.urgent }, { name: "ASAP", value: 5, pct: 1.0, color: C.asap }, { name: "Med Emergency", value: 1, pct: 0.2, color: C.emergency } ],
+  MRI: [ { name: "Expedite", value: 178, pct: 77.1, color: C.expedite }, { name: "STAT", value: 35, pct: 15.2, color: C.stat }, { name: "Urgent", value: 9, pct: 3.9, color: C.urgent }, { name: "ASAP", value: 9, pct: 3.9, color: C.asap } ],
+  US: [ { name: "STAT", value: 218, pct: 64.5, color: C.stat }, { name: "Expedite", value: 106, pct: 31.4, color: C.expedite }, { name: "Urgent", value: 8, pct: 2.4, color: C.urgent }, { name: "ASAP", value: 6, pct: 1.8, color: C.asap } ],
+};
+var siteDataAll = {
+  All: [ { site: "Stanford Hospital", cases: 217, tat: "32.0m" }, { site: "Neuroscience", cases: 197, tat: "43.1m" }, { site: "OP Center RWC", cases: 161, tat: "36.5m" }, { site: "Img Ctr Palo Alto", cases: 129, tat: "34.1m" }, { site: "Blake Wilbur", cases: 127, tat: "42.1m" }, { site: "Advanced Med Ctr", cases: 94, tat: "2.0m" }, { site: "Cancer SB", cases: 87, tat: "26.6m" }, { site: "EHC", cases: 39, tat: "43.3m" } ],
+  CT: [ { site: "Neuroscience", cases: 148, tat: "45.1m" }, { site: "OP Center RWC", cases: 88, tat: "29.9m" }, { site: "Img Ctr Palo Alto", cases: 73, tat: "33.0m" }, { site: "Stanford Hospital", cases: 69, tat: "37.8m" }, { site: "Blake Wilbur", cases: 48, tat: "35.4m" }, { site: "Cancer SB", cases: 45, tat: "60.2m" }, { site: "EHC", cases: 23, tat: "37.7m" }, { site: "SH500", cases: 9, tat: "37.4m" } ],
+  MRI: [ { site: "Img Ctr Palo Alto", cases: 56, tat: "40.9m" }, { site: "Blake Wilbur", cases: 53, tat: "50.3m" }, { site: "OP Center RWC", cases: 50, tat: "51.2m" }, { site: "Neuroscience", cases: 43, tat: "31.4m" }, { site: "Stanford Hospital", cases: 8, tat: "93.0m" }, { site: "Advanced Med Ctr", cases: 6, tat: "36.3m" }, { site: "Cancer SB", cases: 5, tat: "48.8m" }, { site: "EHC Loc 2", cases: 5, tat: "20.0m" } ],
+  US: [ { site: "Stanford Hospital", cases: 140, tat: "27.5m" }, { site: "Advanced Med Ctr", cases: 88, tat: "1.7m" }, { site: "Cancer SB", cases: 37, tat: "12.5m" }, { site: "Blake Wilbur", cases: 26, tat: "38.6m" }, { site: "OP Center RWC", cases: 23, tat: "31.1m" }, { site: "EHC", cases: 12, tat: "49.0m" }, { site: "Neuroscience", cases: 6, tat: "52.9m" }, { site: "EHC Loc 2", cases: 5, tat: "53.7m" } ],
+};
+var orderingDataAll = {
+  All: [ { name: "Express Care Hoover", cases: 88 }, { name: "Breast Oncology", cases: 71 }, { name: "Sports Medicine", cases: 61 }, { name: "GI Oncology", cases: 45 }, { name: "Neurosurgery SNHC", cases: 35 }, { name: "Ortho-Sports Med", cases: 33 }, { name: "Int Med Menlo Park", cases: 26 }, { name: "Infusion Treatment", cases: 25 } ],
+  CT: [ { name: "Express Care Hoover", cases: 51 }, { name: "GI Oncology", cases: 40 }, { name: "Neurosurgery SNHC", cases: 19 }, { name: "Int Med Menlo Park", cases: 18 }, { name: "Lung Transplant", cases: 16 }, { name: "Head/Neck Oncology", cases: 16 }, { name: "Internal Med West", cases: 12 }, { name: "Otolaryngology/HNS", cases: 12 } ],
+  MRI: [ { name: "Sports Medicine", cases: 60 }, { name: "Ortho-Sports Med", cases: 19 }, { name: "Breast Oncology", cases: 12 }, { name: "Neurosurgery SNHC", cases: 12 }, { name: "Ortho - Hand", cases: 9 }, { name: "Ortho - Spine Center", cases: 9 }, { name: "Ortho - Foot & Ankle", cases: 8 }, { name: "Ortho - Trauma", cases: 7 } ],
+  US: [ { name: "Breast Oncology", cases: 52 }, { name: "Express Care Hoover", cases: 31 }, { name: "CCSB 3rd Floor", cases: 18 }, { name: "Infusion Treatment", cases: 14 }, { name: "Gynecology", cases: 10 }, { name: "Gyn Oncology", cases: 9 }, { name: "Liver Transplant", cases: 9 }, { name: "CCSB 4th Floor", cases: 9 } ],
+};
+var examData = {
+  CT: [ { exam: "CT Abdomen Pelvis w/ Contrast", cases: 84, pct: 16.5 }, { exam: "CT Head w/o Contrast", cases: 60, pct: 11.8 }, { exam: "CT Chest w/o Contrast", cases: 58, pct: 11.4 }, { exam: "CT Chest/Abd/Pelvis w/ Contrast", cases: 39, pct: 7.6 }, { exam: "CT Neck w/ Contrast", cases: 22, pct: 4.3 }, { exam: "CT Abd/Pelvis w/o Contrast", cases: 13, pct: 2.5 }, { exam: "CT Chest w/ Contrast", cases: 11, pct: 2.2 }, { exam: "CT Chest Angio (PE Protocol)", cases: 10, pct: 2.0 }, { exam: "CT Sinus w/o Contrast", cases: 9, pct: 1.8 }, { exam: "CT C-Spine w/o Contrast", cases: 9, pct: 1.8 }, { exam: "CT Shoulder w/o Contrast (R)", cases: 8, pct: 1.6 }, { exam: "CT Maxillofacial w/o Contrast", cases: 8, pct: 1.6 }, { exam: "CT Abd/Pelvis Low Dose (Stone)", cases: 8, pct: 1.6 }, { exam: "CT L-Spine w/o Contrast", cases: 8, pct: 1.6 } ],
+  MRI: [ { exam: "MR Knee w/o Contrast (L)", cases: 25, pct: 10.8 }, { exam: "MR Knee w/o Contrast (R)", cases: 20, pct: 8.7 }, { exam: "MR Lumbar Spine w/o Contrast", cases: 17, pct: 7.4 }, { exam: "MR Breast w/ & w/o Contrast (Bilat)", cases: 15, pct: 6.5 }, { exam: "MR C-Spine w/o Contrast", cases: 10, pct: 4.3 }, { exam: "MR Shoulder w/o Contrast (R)", cases: 10, pct: 4.3 }, { exam: "MR Brain w/ & w/o Contrast", cases: 9, pct: 3.9 }, { exam: "MR Ankle w/o Contrast (R)", cases: 9, pct: 3.9 }, { exam: "MR Shoulder w/o Contrast (L)", cases: 8, pct: 3.5 }, { exam: "MR Brain w/o Contrast", cases: 6, pct: 2.6 }, { exam: "MR Ankle w/o Contrast (L)", cases: 6, pct: 2.6 }, { exam: "MR Foot w/o Contrast (R)", cases: 6, pct: 2.6 }, { exam: "MR Hip w/o Contrast (R)", cases: 5, pct: 2.2 }, { exam: "MR Elbow w/o Contrast (L)", cases: 4, pct: 1.7 } ],
+  US: [ { exam: "US LE DVT Unilateral (L)", cases: 47, pct: 13.9 }, { exam: "US LE DVT Unilateral (R)", cases: 32, pct: 9.5 }, { exam: "US Breast Limited (L)", cases: 32, pct: 9.5 }, { exam: "US Breast Limited (R)", cases: 29, pct: 8.6 }, { exam: "US LE DVT Bilateral", cases: 23, pct: 6.8 }, { exam: "US UE DVT (R)", cases: 13, pct: 3.8 }, { exam: "US UE DVT (L)", cases: 11, pct: 3.3 }, { exam: "US Abd Liver Transplant Doppler", cases: 10, pct: 3.0 }, { exam: "US Breast Core Biopsy (R)", cases: 8, pct: 2.4 }, { exam: "US Pelvis TA/TV", cases: 8, pct: 2.4 }, { exam: "US Scrotum", cases: 8, pct: 2.4 }, { exam: "US Breast Limited (Bilat)", cases: 7, pct: 2.1 }, { exam: "US Breast Core Biopsy (L)", cases: 7, pct: 2.1 }, { exam: "US Abdomen", cases: 7, pct: 2.1 } ],
+};
+var examSummary = { CT: { total: 510, unique: 93 }, MRI: { total: 231, unique: 59 }, US: { total: 338, unique: 52 } };
 
-  <!-- KPI Context -->
-  <div class="kpi-row">
-    <div class="kpi-box" style="background:rgba(232,145,58,0.06);border:1px solid rgba(232,145,58,0.15);">
-      <h4 style="color:var(--ct)">SCHEDULING PROCESS KPI: Order to Scheduled On</h4>
-      <p>Measures how fast the system responds to an urgent order. Reflects the clinic/coordinator experience and scheduling workflow efficiency.</p>
+function MetricCard(props) {
+  return (
+    <div style={{ background: props.highlight ? C.accentLight : C.card, border: "1px solid " + (props.highlight ? "#BFDBFE" : C.cardBorder), borderRadius: 10, padding: "16px 20px", boxShadow: C.shadow, flex: 1, minWidth: 170 }}>
+      <div style={{ fontFamily: font, fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{props.label}</div>
+      <div style={{ fontFamily: monoFont, fontSize: 26, fontWeight: 700, color: props.highlight ? C.accent : C.text, lineHeight: 1.1, marginBottom: 4 }}>{props.value}</div>
+      <div style={{ fontFamily: font, fontSize: 11, color: C.textMuted, lineHeight: 1.4 }}>{props.detail}</div>
     </div>
-    <div class="kpi-box" style="background:rgba(108,142,239,0.06);border:1px solid rgba(108,142,239,0.15);">
-      <h4 style="color:var(--mri)">ACCESS KPI: Order to Begin Exam</h4>
-      <p>Measures how quickly the patient actually gets imaged. Includes travel time, other appointments, and patient choice. A proxy for overall access.</p>
+  );
+}
+function SectionTitle(props) {
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <h2 style={{ fontFamily: font, fontSize: 16, fontWeight: 600, color: C.text, margin: 0 }}>{props.children}</h2>
+      {props.subtitle && <p style={{ fontFamily: font, fontSize: 12, color: C.textDim, margin: "3px 0 0 0" }}>{props.subtitle}</p>}
     </div>
-  </div>
-
-  <!-- TAT Charts Row -->
-  <div class="grid2">
-    <div class="card">
-      <div class="card-hdr">
+  );
+}
+function ChartCard(props) {
+  return <div style={Object.assign({ background: C.card, border: "1px solid " + C.cardBorder, borderRadius: 10, padding: 22, boxShadow: C.shadow }, props.style || {})}>{props.children}</div>;
+}
+function ModLegend(props) {
+  var items = [{ label: "CT", color: C.ct }, { label: "MRI", color: C.mri }, { label: "US", color: C.us }];
+  if (props.filter !== "All") items = items.filter(function(i) { return i.label === props.filter; });
+  if (props.showOverall && props.filter === "All") items.push({ label: "Overall", color: C.overall });
+  return (
+    <div style={{ display: "flex", gap: 16, marginBottom: 6 }}>
+      {items.map(function(m) { return <div key={m.label} style={{ display: "flex", alignItems: "center", gap: 5 }}><div style={{ width: 8, height: 8, borderRadius: "50%", background: m.color }} /><span style={{ fontFamily: font, fontSize: 11, color: C.textMuted }}>{m.label}</span></div>; })}
+    </div>
+  );
+}
+function TrendRow(props) {
+  return (
+    <div style={{ display: "flex", gap: 12, marginTop: 10, flexWrap: "wrap" }}>
+      {props.trends.map(function(t) {
+        return (
+          <div key={t.mod} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: t.color }} />
+            <span style={{ fontFamily: font, fontSize: 11, color: C.textMuted }}>{t.mod}</span>
+            <span style={{ fontFamily: monoFont, fontSize: 11, fontWeight: 600, color: t.change.startsWith("+") ? C.red : C.green, background: t.change.startsWith("+") ? "#FEF2F2" : "#F0FDF4", padding: "1px 6px", borderRadius: 4 }}>{t.change} ({t.pct})</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+function Callout(props) {
+  return <div style={{ marginTop: 12, padding: "8px 12px", background: props.bg, borderLeft: "3px solid " + props.color, borderRadius: "0 6px 6px 0", fontSize: 12, color: props.color, lineHeight: 1.5 }}>{props.children}</div>;
+}
+var tooltipStyle = {
+  contentStyle: { background: C.white, border: "1px solid " + C.cardBorder, borderRadius: 8, fontFamily: font, fontSize: 12, color: C.text, boxShadow: C.shadowLg },
+  itemStyle: { color: C.text, padding: "2px 0" },
+  labelStyle: { color: C.textMuted, fontWeight: 600, marginBottom: 4 },
+};
+function AccessTooltip(props) {
+  if (!props.active || !props.payload) return null;
+  return (
+    <div style={Object.assign({}, tooltipStyle.contentStyle, { padding: "10px 14px" })}>
+      <div style={tooltipStyle.labelStyle}>{props.label}</div>
+      {props.payload.map(function(p) { return <div key={p.dataKey} style={Object.assign({}, tooltipStyle.itemStyle, { color: p.color })}>{p.dataKey}: {Math.floor(p.value)}min ({(p.value / 60).toFixed(1)}h)</div>; })}
+    </div>
+  );
+}
+function GroupLabel(props) {
+  return <div style={{ fontFamily: font, fontSize: 10, fontWeight: 600, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>{props.children}</div>;
+}
+function ExamTable(props) {
+  var exams = examData[props.modality];
+  var summary = examSummary[props.modality];
+  var topCases = exams.reduce(function(s, e) { return s + e.cases; }, 0);
+  var otherCases = summary.total - topCases;
+  var otherUnique = summary.unique - exams.length;
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
         <div>
-          <div class="card-title">Order to Scheduled On</div>
-          <div class="card-sub">Scheduling process efficiency (median min)</div>
+          <div style={{ fontFamily: font, fontSize: 14, fontWeight: 600, color: C.text }}>{props.modality}</div>
+          <div style={{ fontFamily: font, fontSize: 11, color: C.textDim }}>{summary.unique} unique exams</div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span class="trend flat">FLAT</span>
-          <div class="legend">
-            <span><span class="dot" style="background:var(--ct)"></span>CT</span>
-            <span><span class="dot" style="background:var(--mri)"></span>MRI</span>
-            <span><span class="dot" style="background:var(--us)"></span>US</span>
+        <div style={{ fontFamily: monoFont, fontSize: 16, fontWeight: 700, color: props.color, background: props.bgColor, border: "1px solid " + props.borderColor, borderRadius: 6, padding: "4px 10px" }}>{summary.total}</div>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+        {exams.map(function(e, i) {
+          return (
+            <div key={e.exam} style={{ display: "flex", alignItems: "center", padding: "4px 4px", background: i % 2 === 0 ? "#F8FAFC" : "transparent", borderRadius: 3, gap: 6 }}>
+              <span style={{ fontSize: 11, color: C.textMuted, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{e.exam}</span>
+              <span style={{ fontFamily: monoFont, fontSize: 11, color: C.text, width: 32, textAlign: "right", flexShrink: 0 }}>{e.cases}</span>
+              <div style={{ width: 50, flexShrink: 0 }}>
+                <div style={{ width: "100%", height: 5, background: "#F1F5F9", borderRadius: 3, overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: (e.cases / exams[0].cases) * 100 + "%", background: props.color, borderRadius: 3, opacity: 0.7 }} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        {otherCases > 0 && (
+          <div style={{ display: "flex", alignItems: "center", padding: "5px 4px 2px", borderTop: "1px dashed " + C.cardBorder, marginTop: 3, gap: 6 }}>
+            <span style={{ fontSize: 10, color: C.textDim, flex: 1, fontStyle: "italic" }}>+{otherUnique} more</span>
+            <span style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim, width: 32, textAlign: "right" }}>{otherCases}</span>
+            <div style={{ width: 50 }} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Dashboard() {
+  var filterState = useState("All");
+  var filter = filterState[0];
+  var setFilter = filterState[1];
+  var examOpenState = useState(false);
+  var examOpen = examOpenState[0];
+  var setExamOpen = examOpenState[1];
+  var modKeys = filter === "All" ? ["CT", "MRI", "US"] : [filter];
+  var schedTAT = useMemo(function() { return filter === "All" ? schedTATAll : schedTATAll.map(function(d) { var r = { month: d.month }; r[filter] = d[filter]; return r; }); }, [filter]);
+  var accessTAT = useMemo(function() { return filter === "All" ? accessTATAll : accessTATAll.map(function(d) { var r = { month: d.month }; r[filter] = d[filter]; return r; }); }, [filter]);
+  var monthlyVolume = useMemo(function() { return filter === "All" ? monthlyVolumeAll : monthlyVolumeAll.map(function(d) { var r = { month: d.month }; r[filter] = d[filter]; return r; }); }, [filter]);
+  var schedTrends = filter === "All" ? schedTrendsAll : schedTrendsAll.filter(function(t) { return t.mod === filter; });
+  var accessTrends = filter === "All" ? accessTrendsAll : accessTrendsAll.filter(function(t) { return t.mod === filter; });
+  var volTrends = filter === "All" ? volTrendsAll : volTrendsAll.filter(function(t) { return t.mod === filter || t.mod === "Total"; });
+  var accessYMax = filter === "MRI" ? 500 : filter === "CT" ? 250 : filter === "US" ? 200 : 500;
+  var m = metricsData[filter];
+  var priorityData = priorityDataAll[filter];
+  var siteData = siteDataAll[filter];
+  var orderingData = orderingDataAll[filter];
+  var maxPriority = Math.max.apply(null, priorityData.map(function(p) { return p.value; }));
+  var maxOrdering = Math.max.apply(null, orderingData.map(function(o) { return o.cases; }));
+  var filterButtons = [
+    { key: "All", label: "All Modalities", color: C.accent, bg: C.accentLight, border: "#BFDBFE" },
+    { key: "CT", label: "CT", color: C.ct, bg: C.ctBg, border: C.ctBorder },
+    { key: "MRI", label: "MRI", color: C.mri, bg: C.mriBg, border: C.mriBorder },
+    { key: "US", label: "US", color: C.us, bg: C.usBg, border: C.usBorder },
+  ];
+  var modSplitData = [
+    { name: "CT", value: 510, color: C.ct },
+    { name: "MRI", value: 231, color: C.mri },
+    { name: "US", value: 338, color: C.us },
+  ];
+  var examMods = filter === "All" ? ["CT", "MRI", "US"] : [filter];
+  var examColors = { CT: { color: C.ct, bg: C.ctBg, border: C.ctBorder }, MRI: { color: C.mri, bg: C.mriBg, border: C.mriBorder }, US: { color: C.us, bg: C.usBg, border: C.usBorder } };
+
+  return (
+    <div style={{ background: C.bg, minHeight: "100vh", fontFamily: font, color: C.text, padding: "28px 36px 50px" }}>
+      {/* Header */}
+      <div style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+            <div style={{ background: "linear-gradient(135deg, #2563EB, #7C3AED)", width: 6, height: 28, borderRadius: 3 }} />
+            <h1 style={{ fontFamily: font, fontSize: 24, fontWeight: 700, color: C.text, margin: 0, letterSpacing: "-0.02em" }}>Same-Day Urgent Imaging Access</h1>
+          </div>
+          <p style={{ fontSize: 13, color: C.textDim, margin: "0 0 0 16px" }}>Current State Analysis &middot; FY26 Baseline Data</p>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ fontSize: 12, color: C.textDim }}>Lead: <span style={{ color: C.textMuted, fontWeight: 500 }}>E. Sheridan</span> &nbsp;|&nbsp; Sponsors: <span style={{ color: C.textMuted, fontWeight: 500 }}>T. Morrison, Dr. Crews, E. Oyekan</span></div>
+          <div style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim, marginTop: 3 }}>PRJ0213271 &nbsp;&middot;&nbsp; Sep 2025 - Jan 2026 &nbsp;&middot;&nbsp; 1,079 cases</div>
+        </div>
+      </div>
+      {/* Filter */}
+      <div style={{ display: "flex", gap: 8, marginBottom: 20, padding: "12px 16px", background: C.white, borderRadius: 10, border: "1px solid " + C.cardBorder, boxShadow: C.shadow, alignItems: "center" }}>
+        <span style={{ fontSize: 12, fontWeight: 600, color: C.textMuted, marginRight: 4 }}>Filter:</span>
+        {filterButtons.map(function(b) {
+          var active = filter === b.key;
+          return <button key={b.key} onClick={function() { setFilter(b.key); }} style={{ fontFamily: font, fontSize: 13, fontWeight: active ? 600 : 500, color: active ? b.color : C.textMuted, background: active ? b.bg : "transparent", border: "1.5px solid " + (active ? b.border : "transparent"), borderRadius: 7, padding: "6px 16px", transition: "all 0.15s ease" }}>{b.label}</button>;
+        })}
+        {filter !== "All" && <span style={{ fontFamily: monoFont, fontSize: 11, color: modColor[filter], marginLeft: "auto", fontWeight: 600 }}>{examSummary[filter].total} cases &middot; {examSummary[filter].unique} exam types</span>}
+      </div>
+      {/* Metric Cards */}
+      <div style={{ display: "flex", gap: 20, marginBottom: 24, flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 0", minWidth: 400, display: "flex", flexDirection: "column" }}>
+          <GroupLabel>Workload</GroupLabel>
+          <div style={{ display: "flex", gap: 12, flex: 1 }}>
+            <MetricCard label="Total Cases" value={m.totalCases} detail={m.totalDetail} />
+            <MetricCard label="After-Hours" value={m.afterVal} detail={m.afterDetail} />
+            <div style={{ background: C.card, border: "1px solid " + C.cardBorder, borderRadius: 10, padding: "16px 20px", boxShadow: C.shadow, flex: 1, minWidth: 170 }}>
+              <div style={{ fontFamily: font, fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Modality Split</div>
+              <div style={{ display: "flex", gap: 0, height: 8, borderRadius: 4, overflow: "hidden", marginBottom: 10 }}>
+                {modSplitData.map(function(s) { return <div key={s.name} style={{ width: (s.value / 1079) * 100 + "%", background: s.color, opacity: filter !== "All" && filter !== s.name ? 0.2 : 1, transition: "opacity 0.2s" }} />; })}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                {modSplitData.map(function(s) {
+                  return (
+                    <div key={s.name} style={{ display: "flex", alignItems: "center", gap: 6, opacity: filter !== "All" && filter !== s.name ? 0.35 : 1, transition: "opacity 0.2s" }}>
+                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: s.color }} />
+                      <span style={{ fontFamily: font, fontSize: 11, color: C.textMuted, width: 28 }}>{s.name}</span>
+                      <span style={{ fontFamily: monoFont, fontSize: 11, color: C.text, fontWeight: 600 }}>{s.value}</span>
+                      <span style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim }}>({((s.value / 1079) * 100).toFixed(0)}%)</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style={{ width: 1, background: C.cardBorder, alignSelf: "stretch", marginTop: 20 }} />
+        <div style={{ flex: "1 1 0", minWidth: 400, display: "flex", flexDirection: "column" }}>
+          <GroupLabel>Performance</GroupLabel>
+          <div style={{ display: "flex", gap: 12, flex: 1 }}>
+            <MetricCard label="Order \u2192 Scheduled" value={m.schedVal} detail={m.schedDetail} highlight={true} />
+            <MetricCard label="Order \u2192 Exam Begin" value={m.accessVal} detail={m.accessDetail} highlight={true} />
+            <MetricCard label="Scheduling Target" value={m.targetVal} detail={m.targetDetail} />
           </div>
         </div>
       </div>
-      <canvas id="tatSched" height="260"></canvas>
-      <div class="insight">
-        <h5>Trend</h5>
-        <p>No significant improvement over 5 months. All modalities trending flat or slightly up. MRI peaked at 52 min in Nov before recovering. US creeping upward (20 to 30 min). <strong style="color:var(--text-primary)">Process redesign has not yet begun</strong>, so flat baseline is expected.</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Order to Begin Exam</div>
-          <div class="card-sub">Patient access measure (median min)</div>
+      {/* KPI Explanation */}
+      <div style={{ background: C.white, border: "1px solid " + C.cardBorder, borderRadius: 8, padding: "14px 22px", marginBottom: 24, display: "flex", gap: 32, flexWrap: "wrap", boxShadow: C.shadow }}>
+        <div style={{ flex: 1, minWidth: 260 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: C.accent, marginBottom: 3 }}>Scheduling KPI &middot; Order &rarr; Scheduled On</div>
+          <div style={{ fontSize: 12, color: C.textMuted, lineHeight: 1.5 }}>How fast the system responds to an urgent order. Reflects coordinator experience and scheduling workflow efficiency.</div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span class="trend flat">VOLATILE</span>
-          <div class="legend">
-            <span><span class="dot" style="background:var(--ct)"></span>CT</span>
-            <span><span class="dot" style="background:var(--mri)"></span>MRI</span>
-            <span><span class="dot" style="background:var(--us)"></span>US</span>
+        <div style={{ width: 1, background: C.cardBorder, alignSelf: "stretch" }} />
+        <div style={{ flex: 1, minWidth: 260 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: C.us, marginBottom: 3 }}>Access KPI &middot; Order &rarr; Begin Exam</div>
+          <div style={{ fontSize: 12, color: C.textMuted, lineHeight: 1.5 }}>How quickly the patient actually gets imaged. Includes travel time, other appointments, and patient choice.</div>
+        </div>
+      </div>
+      {/* Charts Row 1 */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 }}>
+        <ChartCard>
+          <SectionTitle subtitle="Monthly median, minutes">Scheduling TAT: Order &rarr; Scheduled</SectionTitle>
+          <ModLegend showOverall={true} filter={filter} />
+          <ResponsiveContainer width="100%" height={240}>
+            <LineChart data={schedTAT} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
+              <XAxis dataKey="month" tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
+              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} domain={[0, 60]} />
+              <Tooltip contentStyle={tooltipStyle.contentStyle} itemStyle={tooltipStyle.itemStyle} labelStyle={tooltipStyle.labelStyle} />
+              <ReferenceLine y={17} stroke={C.green} strokeDasharray="6 4" strokeWidth={2} label={{ value: "Target 17m", fill: C.green, fontSize: 10, position: "right" }} />
+              {filter === "All" && <Line type="monotone" dataKey="Overall" stroke={C.overall} strokeWidth={2.5} strokeDasharray="6 3" dot={{ r: 3.5, fill: C.overall }} />}
+              {modKeys.map(function(k) { return <Line key={k} type="monotone" dataKey={k} stroke={modColor[k]} strokeWidth={2.5} dot={{ r: 3.5, fill: modColor[k] }} />; })}
+            </LineChart>
+          </ResponsiveContainer>
+          <TrendRow trends={schedTrends} />
+          <Callout color={C.textMuted} bg="#F8FAFC">Flat / slight worsening - expected since process redesign has not yet begun. MRI peaked at 52m in Nov before recovering. US creeping upward.</Callout>
+        </ChartCard>
+        <ChartCard>
+          <SectionTitle subtitle="Monthly median, minutes (hover for hours)">Access TAT: Order &rarr; Begin Exam</SectionTitle>
+          <ModLegend filter={filter} />
+          <ResponsiveContainer width="100%" height={240}>
+            <LineChart data={accessTAT} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
+              <XAxis dataKey="month" tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
+              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} domain={[0, accessYMax]} tickFormatter={function(v) { return (v / 60).toFixed(1) + "h"; }} />
+              <Tooltip content={<AccessTooltip />} />
+              {modKeys.map(function(k) { return <Line key={k} type="monotone" dataKey={k} stroke={modColor[k]} strokeWidth={2.5} dot={{ r: 3.5, fill: modColor[k] }} />; })}
+            </LineChart>
+          </ResponsiveContainer>
+          <TrendRow trends={accessTrends} />
+          <Callout color={C.mri} bg="#FDF2F8">Volatile. MRI swings 4.5-7.5 hrs - likely slot availability and protocol complexity, not scheduling workflow. CT stable ~3h. US drifting up.</Callout>
+        </ChartCard>
+      </div>
+      {/* Charts Row 2 */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 }}>
+        <ChartCard>
+          <SectionTitle subtitle="By modality, monthly">Case Volume</SectionTitle>
+          <ModLegend filter={filter} />
+          <ResponsiveContainer width="100%" height={240}>
+            <BarChart data={monthlyVolume} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
+              <XAxis dataKey="month" tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
+              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
+              <Tooltip contentStyle={tooltipStyle.contentStyle} itemStyle={tooltipStyle.itemStyle} labelStyle={tooltipStyle.labelStyle} />
+              {modKeys.map(function(k) { return <Bar key={k} dataKey={k} fill={modColor[k]} radius={[3, 3, 0, 0]} />; })}
+            </BarChart>
+          </ResponsiveContainer>
+          <TrendRow trends={volTrends.filter(function(t) { return filter === "All" || t.mod === filter || t.mod === "Total"; })} />
+          <Callout color={C.textMuted} bg="#F8FAFC">Stable overall (~216/mo). US growing share: 27% in Sep to 36% in Jan. Dec highest volume - likely holiday coverage effects.</Callout>
+        </ChartCard>
+        <ChartCard>
+          <SectionTitle subtitle={"Peak at 3 PM \u00b7 After-hours nearly 2x prior estimate"}>Exam Starts by Hour of Day</SectionTitle>
+          <ResponsiveContainer width="100%" height={240}>
+            <BarChart data={hourlyData} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
+              <XAxis dataKey="hour" tick={{ fill: C.textDim, fontSize: 10 }} axisLine={{ stroke: C.cardBorder }} />
+              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
+              <Tooltip contentStyle={tooltipStyle.contentStyle} itemStyle={tooltipStyle.itemStyle} labelStyle={tooltipStyle.labelStyle} />
+              <Bar dataKey="cases" radius={[3, 3, 0, 0]}>
+                {hourlyData.map(function(entry, i) { return <Cell key={i} fill={entry.block === "after" ? C.afterHours : entry.block === "afternoon" ? C.green : C.accent} opacity={0.85} />; })}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
+            {timeBlocks.map(function(b) {
+              return (
+                <div key={b.label} style={{ display: "flex", alignItems: "center", gap: 6, background: "#F8FAFC", border: "1px solid " + C.cardBorder, borderRadius: 6, padding: "5px 10px" }}>
+                  <div style={{ width: 8, height: 8, borderRadius: 2, background: b.color }} />
+                  <span style={{ fontSize: 11, color: C.textMuted }}>{b.label}:</span>
+                  <span style={{ fontFamily: monoFont, fontSize: 11, fontWeight: 600, color: C.text }}>{b.cases}</span>
+                  <span style={{ fontSize: 11, color: C.textDim }}>({b.pct}%)</span>
+                </div>
+              );
+            })}
           </div>
-        </div>
+          <Callout color={C.afterHours} bg="#FFFBEB">After-hours demand (25.7%) is nearly 2x the prior 13% A3 estimate. RSC closes at 5 PM but 277 exams begin after. Supports extended RSC hours to 9 PM.</Callout>
+        </ChartCard>
       </div>
-      <canvas id="tatBegin" height="260"></canvas>
-      <div class="insight">
-        <h5>Trend</h5>
-        <p><strong style="color:var(--mri)">MRI is the access pain point</strong>, swinging 4.5 to 7.5 hrs. CT stable around 3 hrs. US steady at ~2 hrs. MRI volatility likely reflects slot availability and protocol complexity, not scheduling workflow.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Volume + Hour Row -->
-  <div class="grid2">
-    <div class="card">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Monthly Case Volume</div>
-          <div class="card-sub">By modality, Sep 2025 - Jan 2026</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span class="trend flat">STABLE</span>
-          <div class="legend">
-            <span><span class="dot" style="background:var(--ct)"></span>CT</span>
-            <span><span class="dot" style="background:var(--mri)"></span>MRI</span>
-            <span><span class="dot" style="background:var(--us)"></span>US</span>
+      {/* Row 3: Priority + Sites + Ordering */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 18, marginBottom: 18 }}>
+        <ChartCard>
+          <SectionTitle subtitle={filter === "All" ? "9 options exist, only 2 used meaningfully" : filter + " priority breakdown"}>Order Priority Distribution</SectionTitle>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {priorityData.map(function(p) {
+              return (
+                <div key={p.name}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+                    <span style={{ fontSize: 12, color: C.textMuted }}>{p.name}</span>
+                    <span style={{ fontFamily: monoFont, fontSize: 12, color: C.text }}>{p.value} <span style={{ color: C.textDim, fontSize: 10 }}>({p.pct}%)</span></span>
+                  </div>
+                  <div style={{ height: 5, background: "#F1F5F9", borderRadius: 3, overflow: "hidden" }}>
+                    <div style={{ height: "100%", width: (p.value / maxPriority) * 100 + "%", background: p.color, borderRadius: 3 }} />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
+          {filter === "All" && <Callout color={C.stat} bg="#FFFBEB">Supports case for simplified order priority definitions.</Callout>}
+          {filter === "MRI" && <Callout color={C.mri} bg="#FDF2F8">MRI is dominated by Expedite (77%) - opposite of CT/US which are majority STAT. Reflects different ordering patterns.</Callout>}
+        </ChartCard>
+        <ChartCard>
+          <SectionTitle subtitle="Scheduling TAT median">Performing Sites</SectionTitle>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ display: "flex", padding: "0 8px 6px", borderBottom: "1px solid " + C.cardBorder }}>
+              <span style={{ fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", flex: 1 }}>Site</span>
+              <span style={{ fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", width: 48, textAlign: "right" }}>Cases</span>
+              <span style={{ fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", width: 52, textAlign: "right" }}>TAT</span>
+            </div>
+            {siteData.map(function(s, i) {
+              var tatVal = parseFloat(s.tat);
+              return (
+                <div key={s.site} style={{ display: "flex", alignItems: "center", padding: "6px 8px", borderRadius: 5, background: i % 2 === 0 ? "#F8FAFC" : "transparent" }}>
+                  <span style={{ fontSize: 12, color: C.textMuted, flex: 1 }}>{s.site}</span>
+                  <span style={{ fontFamily: monoFont, fontSize: 12, color: C.text, width: 48, textAlign: "right" }}>{s.cases}</span>
+                  <span style={{ fontFamily: monoFont, fontSize: 11, width: 52, textAlign: "right", fontWeight: 600, color: tatVal > 40 ? C.red : tatVal < 30 ? C.green : C.textMuted }}>{s.tat}</span>
+                </div>
+              );
+            })}
+          </div>
+        </ChartCard>
+        <ChartCard>
+          <SectionTitle subtitle="By case count">Top Ordering Locations</SectionTitle>
+          <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+            {orderingData.map(function(loc, i) {
+              return (
+                <div key={loc.name} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim, width: 16, textAlign: "right" }}>{i + 1}</span>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+                      <span style={{ fontSize: 12, color: C.textMuted }}>{loc.name}</span>
+                      <span style={{ fontFamily: monoFont, fontSize: 12, color: C.text }}>{loc.cases}</span>
+                    </div>
+                    <div style={{ height: 4, background: "#F1F5F9", borderRadius: 2, overflow: "hidden" }}>
+                      <div style={{ height: "100%", width: (loc.cases / maxOrdering) * 100 + "%", background: filter !== "All" ? modColor[filter] : C.accent, borderRadius: 2 }} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </ChartCard>
       </div>
-      <canvas id="volume" height="240"></canvas>
-      <div class="insight">
-        <h5>Trend</h5>
-        <p>Volume fairly stable at ~216/mo. CT dipped in Jan (77 vs avg 102). US growing share (16% Sep to 36% Jan). MRI steady at ~45/mo. Dec was highest volume month (246), likely holiday coverage effects.</p>
+      {/* Collapsible Exam Types - 3 columns */}
+      <div style={{ marginBottom: 18 }}>
+        <button onClick={function() { setExamOpen(!examOpen); }} style={{
+          display: "flex", alignItems: "center", gap: 10, width: "100%", padding: "14px 20px",
+          background: C.white, border: "1px solid " + C.cardBorder, borderRadius: examOpen ? "10px 10px 0 0" : 10,
+          boxShadow: C.shadow, fontFamily: font, textAlign: "left", transition: "border-radius 0.2s"
+        }}>
+          <div style={{ background: "linear-gradient(135deg, #2563EB, #7C3AED)", width: 4, height: 20, borderRadius: 2 }} />
+          <h2 style={{ fontFamily: font, fontSize: 18, fontWeight: 700, color: C.text, margin: 0, flex: 1 }}>Exam Type Breakdown</h2>
+          <span style={{ fontFamily: font, fontSize: 12, color: C.textDim }}>{filter === "All" ? "204 unique exams across modalities" : examSummary[filter].unique + " unique " + filter + " exams"}</span>
+          <span style={{ fontSize: 18, color: C.textDim, transition: "transform 0.2s", transform: examOpen ? "rotate(180deg)" : "rotate(0deg)", lineHeight: 1 }}>{"\u25BC"}</span>
+        </button>
+        {examOpen && (
+          <div style={{ background: C.white, border: "1px solid " + C.cardBorder, borderTop: "none", borderRadius: "0 0 10px 10px", padding: 20, boxShadow: C.shadow }}>
+            <div style={{ display: "grid", gridTemplateColumns: examMods.length === 1 ? "1fr" : "1fr 1fr 1fr", gap: 20 }}>
+              {examMods.map(function(mod) {
+                return (
+                  <div key={mod}>
+                    <ExamTable modality={mod} color={examColors[mod].color} bgColor={examColors[mod].bg} borderColor={examColors[mod].border} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-    <div class="card">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Exam Start by Hour of Day</div>
-          <div class="card-sub">Peak at 3 PM | <span style="color:var(--cardinal-light)">After 5 PM highlighted</span></div>
-        </div>
-        <span class="trend up">25.7% AFTER HRS</span>
-      </div>
-      <canvas id="hourly" height="240"></canvas>
-      <div class="insight">
-        <h5>Trend</h5>
-        <p>Strong afternoon ramp 1-4 PM accounts for 54% of all cases. <span class="hl">After-hours demand (25.7%) is nearly double the prior 13% estimate.</span> RSC closes at 5 PM but 272 exams begin after that. Supports case for extended RSC hours to 9 PM.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Priority + Depts + Locations -->
-  <div class="grid3">
-    <div class="card">
-      <div class="card-title">Volume by Order Priority</div>
-      <div class="card-sub">STAT + Expedite = 96% of all cases</div>
-      <div style="margin-top:12px">
-        <div class="prow">
-          <div class="prow-label">STAT</div>
-          <div class="prow-bar"><div class="prow-fill" style="width:100%;background:rgba(232,93,117,0.15);border-left:3px solid var(--red)"><span class="prow-val">634 (58.8%)</span></div></div>
-        </div>
-        <div class="prow">
-          <div class="prow-label">Expedite</div>
-          <div class="prow-bar"><div class="prow-fill" style="width:63.1%;background:rgba(240,168,48,0.15);border-left:3px solid var(--yellow)"><span class="prow-val">400 (37.1%)</span></div></div>
-        </div>
-        <div class="prow">
-          <div class="prow-label">Urgent</div>
-          <div class="prow-bar"><div class="prow-fill" style="width:3.8%;background:rgba(139,92,246,0.15);border-left:3px solid #8B5CF6"><span class="prow-val">24 (2.2%)</span></div></div>
-        </div>
-        <div class="prow">
-          <div class="prow-label">ASAP</div>
-          <div class="prow-bar"><div class="prow-fill" style="width:3.2%;background:rgba(59,130,246,0.15);border-left:3px solid #3B82F6"><span class="prow-val">20 (1.9%)</span></div></div>
-        </div>
-        <div class="prow">
-          <div class="prow-label">Med Emrg</div>
-          <div class="prow-bar"><div class="prow-fill" style="width:0.5%;background:rgba(16,185,129,0.15);border-left:3px solid var(--green)"><span class="prow-val">1</span></div></div>
-        </div>
-      </div>
-      <div class="insight">
-        <h5>Insight</h5>
-        <p>9 order priority options exist, but only 2 are meaningfully used. Supports case for <strong style="color:var(--text-primary)">simplified order definitions</strong>.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Performing Sites</div>
-      <div class="card-sub">Cases and median TAT (order to scheduled)</div>
-      <table class="dtbl">
-        <thead><tr><th>Site</th><th>Cases</th><th>TAT</th></tr></thead>
-        <tbody>
-          <tr><td>Stanford Hospital</td><td>217</td><td style="color:var(--green)">32.0m</td></tr>
-          <tr><td>Neuroscience</td><td>197</td><td>43.1m</td></tr>
-          <tr><td>OP Center RWC</td><td>161</td><td>36.5m</td></tr>
-          <tr><td>Img Ctr Palo Alto</td><td>129</td><td>34.1m</td></tr>
-          <tr><td>Blake Wilbur</td><td>127</td><td>42.1m</td></tr>
-          <tr><td>Advanced Med Ctr</td><td>94</td><td style="color:var(--green)">2.0m</td></tr>
-          <tr><td>Cancer SB</td><td>87</td><td style="color:var(--green)">26.6m</td></tr>
-          <tr><td>EHC</td><td>39</td><td>43.3m</td></tr>
-        </tbody>
-      </table>
-      <div class="insight">
-        <h5>Insight</h5>
-        <p><strong style="color:var(--green)">Advanced Med Ctr has 2 min TAT</strong> on 94 cases, likely a different workflow worth studying. Cancer SB and Stanford Hospital beat median. Neuroscience and EHC are slowest.</p>
+      {/* Footer */}
+      <div style={{ textAlign: "center", padding: "16px 0 0", borderTop: "1px solid " + C.cardBorder, fontSize: 10, color: C.textDim, fontFamily: monoFont }}>
+        1,079 same-day STAT/Expedite cases &nbsp;&middot;&nbsp; Sep 2025 - Jan 2026 &nbsp;&middot;&nbsp; Source: Epic &nbsp;&middot;&nbsp; 2 records excluded (negative TAT)
       </div>
     </div>
+  );
+}
 
-    <div class="card">
-      <div class="card-title">Top Ordering Locations</div>
-      <div class="card-sub">Where same-day orders originate</div>
-      <canvas id="locations" height="280"></canvas>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-text">Data: 1,079 same-day STAT/Expedite cases | Sep 2025 - Jan 2026 | Source: Epic | 2 records excluded (negative TAT)</div>
-    <div class="footer-brand">
-      <div class="footer-line"></div>
-      <div class="footer-brand-text">Stanford Health Care</div>
-      <div class="footer-line"></div>
-    </div>
-  </footer>
-</div>
-
-<script>
-// ─── Chart.js Global Config ─────────────────────────────────
-Chart.defaults.color = '#5A6478';
-Chart.defaults.borderColor = 'rgba(255,255,255,0.04)';
-Chart.defaults.font.family = "'DM Sans', sans-serif";
-Chart.defaults.font.size = 11;
-Chart.defaults.plugins.legend.display = false;
-Chart.defaults.plugins.tooltip.backgroundColor = '#1E2A3E';
-Chart.defaults.plugins.tooltip.borderColor = 'rgba(255,255,255,0.1)';
-Chart.defaults.plugins.tooltip.borderWidth = 1;
-Chart.defaults.plugins.tooltip.cornerRadius = 8;
-Chart.defaults.plugins.tooltip.titleFont = { family: "'DM Sans'", size: 12, weight: 600 };
-Chart.defaults.plugins.tooltip.bodyFont = { family: "'JetBrains Mono'", size: 11 };
-Chart.defaults.plugins.tooltip.padding = 10;
-Chart.defaults.scale.grid = { color: 'rgba(255,255,255,0.04)' };
-
-var months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan'];
-
-// ─── TAT: Order to Scheduled On ─────────────────────────────
-new Chart(document.getElementById('tatSched'), {
-  type: 'line',
-  data: {
-    labels: months,
-    datasets: [
-      { label: 'CT', data: [31.4, 43.1, 45.3, 43.4, 38.2], borderColor: '#E8913A', backgroundColor: 'rgba(232,145,58,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#E8913A', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
-      { label: 'MRI', data: [33.4, 38.4, 52.1, 44.4, 40.4], borderColor: '#6C8EEF', backgroundColor: 'rgba(108,142,239,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#6C8EEF', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
-      { label: 'US', data: [20.1, 18.9, 26.0, 23.3, 30.1], borderColor: '#4ECDC4', backgroundColor: 'rgba(78,205,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#4ECDC4', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: { intersect: false, mode: 'index' },
-    scales: {
-      y: {
-        min: 0, max: 60,
-        ticks: { callback: function(v) { return v + 'm'; }, font: { family: "'JetBrains Mono'" } },
-        grid: { drawBorder: false }
-      },
-      x: { grid: { display: false }, ticks: { font: { weight: 500 } } }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' min'; }
-        }
-      },
-      annotation: {
-        annotations: {
-          target: {
-            type: 'line', yMin: 17, yMax: 17,
-            borderColor: '#10B981', borderDash: [8, 4], borderWidth: 2,
-            label: { display: true, content: 'TARGET ~17m', position: 'end', backgroundColor: 'transparent', color: '#10B981', font: { family: "'JetBrains Mono'", size: 10, weight: 600 } }
-          }
-        }
-      }
-    }
-  }
-});
-
-// ─── TAT: Order to Begin ────────────────────────────────────
-new Chart(document.getElementById('tatBegin'), {
-  type: 'line',
-  data: {
-    labels: months,
-    datasets: [
-      { label: 'CT', data: [189.5, 198.7, 144.6, 198.6, 179.1], borderColor: '#E8913A', backgroundColor: 'rgba(232,145,58,0.06)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#E8913A', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
-      { label: 'MRI', data: [340.9, 269.5, 452.3, 411.5, 307.1], borderColor: '#6C8EEF', backgroundColor: 'rgba(108,142,239,0.06)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#6C8EEF', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 },
-      { label: 'US', data: [105.3, 103.2, 155.1, 142.6, 148.0], borderColor: '#4ECDC4', backgroundColor: 'rgba(78,205,196,0.06)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#4ECDC4', pointBorderColor: '#0A0E1A', pointBorderWidth: 2, borderWidth: 2.5 }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: { intersect: false, mode: 'index' },
-    scales: {
-      y: {
-        min: 0, max: 500,
-        ticks: {
-          callback: function(v) { return v >= 60 ? Math.round(v/60) + 'h' : v + 'm'; },
-          font: { family: "'JetBrains Mono'" }
-        },
-        grid: { drawBorder: false }
-      },
-      x: { grid: { display: false }, ticks: { font: { weight: 500 } } }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(0) + ' min (' + (ctx.parsed.y/60).toFixed(1) + ' hrs)'; }
-        }
-      }
-    }
-  }
-});
-
-// ─── Monthly Volume ─────────────────────────────────────────
-new Chart(document.getElementById('volume'), {
-  type: 'bar',
-  data: {
-    labels: months,
-    datasets: [
-      { label: 'CT', data: [104, 125, 89, 115, 77], backgroundColor: '#E8913A', borderRadius: 0 },
-      { label: 'US', data: [56, 70, 59, 85, 68], backgroundColor: '#4ECDC4', borderRadius: 0 },
-      { label: 'MRI', data: [49, 47, 45, 46, 44], backgroundColor: '#6C8EEF', borderRadius: {topLeft:4, topRight:4} }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: { stacked: true, grid: { display: false }, ticks: { font: { weight: 500 } } },
-      y: { stacked: true, ticks: { font: { family: "'JetBrains Mono'" } }, grid: { drawBorder: false } }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          afterBody: function(items) {
-            var total = 0;
-            items.forEach(function(i) { total += i.parsed.y; });
-            return 'Total: ' + total;
-          }
-        }
-      }
-    }
-  }
-});
-
-// ─── Hourly Distribution ────────────────────────────────────
-var hourLabels = ['8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p','10p','11p'];
-var hourVals = [7, 11, 42, 75, 83, 112, 144, 181, 147, 55, 63, 55, 48, 38, 8, 5];
-var hourColors = hourVals.map(function(v, i) {
-  if (i >= 9) return 'rgba(184,58,75,0.7)';
-  if (i === 7) return 'rgba(240,242,247,0.85)';
-  return 'rgba(42,54,80,0.6)';
-});
-
-new Chart(document.getElementById('hourly'), {
-  type: 'bar',
-  data: {
-    labels: hourLabels,
-    datasets: [{ data: hourVals, backgroundColor: hourColors, borderRadius: 3 }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-      y: { ticks: { font: { family: "'JetBrains Mono'" } }, grid: { drawBorder: false } }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          title: function(items) {
-            var map = {'8a':'8 AM','9a':'9 AM','10a':'10 AM','11a':'11 AM','12p':'12 PM','1p':'1 PM','2p':'2 PM','3p':'3 PM','4p':'4 PM','5p':'5 PM','6p':'6 PM','7p':'7 PM','8p':'8 PM','9p':'9 PM','10p':'10 PM','11p':'11 PM'};
-            return map[items[0].label] || items[0].label;
-          },
-          label: function(ctx) {
-            var suffix = ctx.dataIndex >= 9 ? ' (after hours)' : '';
-            return ctx.parsed.y + ' cases' + suffix;
-          }
-        }
-      }
-    }
-  }
-});
-
-// ─── Top Locations ──────────────────────────────────────────
-var locNames = ['Express Care Hoover','Breast Oncology','Sports Medicine','GI Oncology','Neurosurgery SNHC','Ortho-Sports Med','Int Med Menlo Park','Infusion Treatment'];
-var locVals = [88, 71, 61, 45, 35, 33, 26, 25];
-var locColors = locVals.map(function(v, i) { return i === 0 ? 'rgba(184,58,75,0.8)' : 'rgba(42,54,80,0.5)'; });
-
-new Chart(document.getElementById('locations'), {
-  type: 'bar',
-  data: {
-    labels: locNames,
-    datasets: [{ data: locVals, backgroundColor: locColors, borderRadius: 4 }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: { ticks: { font: { family: "'JetBrains Mono'" } }, grid: { drawBorder: false } },
-      y: { grid: { display: false }, ticks: { font: { size: 11, color: '#8B95A8' } } }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: { label: function(ctx) { return ctx.parsed.x + ' cases'; } }
-      }
-    }
-  }
-});
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(Dashboard));
 </script>
 </body>
 </html>
