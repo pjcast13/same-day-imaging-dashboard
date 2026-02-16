@@ -7,7 +7,6 @@
 <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +17,8 @@
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel">
+<script>
+var h = React.createElement;
 var useState = React.useState;
 var useMemo = React.useMemo;
 var LineChart = Recharts.LineChart;
@@ -142,51 +142,51 @@ var examSummary = { CT: { total: 510, unique: 93 }, MRI: { total: 231, unique: 5
 
 function MetricCard(props) {
   return (
-    <div style={{ background: props.highlight ? C.accentLight : C.card, border: "1px solid " + (props.highlight ? "#BFDBFE" : C.cardBorder), borderRadius: 10, padding: "16px 20px", boxShadow: C.shadow, flex: 1, minWidth: 170 }}>
-      <div style={{ fontFamily: font, fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{props.label}</div>
-      <div style={{ fontFamily: monoFont, fontSize: 26, fontWeight: 700, color: props.highlight ? C.accent : C.text, lineHeight: 1.1, marginBottom: 4 }}>{props.value}</div>
-      <div style={{ fontFamily: font, fontSize: 11, color: C.textMuted, lineHeight: 1.4 }}>{props.detail}</div>
-    </div>
+    h("div", { style: { background: props.highlight ? C.accentLight : C.card, border: "1px solid " + (props.highlight ? "#BFDBFE" : C.cardBorder), borderRadius: 10, padding: "16px 20px", boxShadow: C.shadow, flex: 1, minWidth: 170 } },
+      h("div", { style: { fontFamily: font, fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 } }, props.label),
+      h("div", { style: { fontFamily: monoFont, fontSize: 26, fontWeight: 700, color: props.highlight ? C.accent : C.text, lineHeight: 1.1, marginBottom: 4 } }, props.value),
+      h("div", { style: { fontFamily: font, fontSize: 11, color: C.textMuted, lineHeight: 1.4 } }, props.detail)
+    )
   );
 }
 function SectionTitle(props) {
   return (
-    <div style={{ marginBottom: 14 }}>
-      <h2 style={{ fontFamily: font, fontSize: 16, fontWeight: 600, color: C.text, margin: 0 }}>{props.children}</h2>
-      {props.subtitle && <p style={{ fontFamily: font, fontSize: 12, color: C.textDim, margin: "3px 0 0 0" }}>{props.subtitle}</p>}
-    </div>
+    h("div", { style: { marginBottom: 14 } },
+      h("h2", { style: { fontFamily: font, fontSize: 16, fontWeight: 600, color: C.text, margin: 0 } }, props.children),
+      props.subtitle && h("p", { style: { fontFamily: font, fontSize: 12, color: C.textDim, margin: "3px 0 0 0" } }, props.subtitle)
+    )
   );
 }
 function ChartCard(props) {
-  return <div style={Object.assign({ background: C.card, border: "1px solid " + C.cardBorder, borderRadius: 10, padding: 22, boxShadow: C.shadow }, props.style || {})}>{props.children}</div>;
+  return h("div", { style: Object.assign({ background: C.card, border: "1px solid " + C.cardBorder, borderRadius: 10, padding: 22, boxShadow: C.shadow }, props.style || {}) }, props.children);
 }
 function ModLegend(props) {
   var items = [{ label: "CT", color: C.ct }, { label: "MRI", color: C.mri }, { label: "US", color: C.us }];
   if (props.filter !== "All") items = items.filter(function(i) { return i.label === props.filter; });
   if (props.showOverall && props.filter === "All") items.push({ label: "Overall", color: C.overall });
   return (
-    <div style={{ display: "flex", gap: 16, marginBottom: 6 }}>
-      {items.map(function(m) { return <div key={m.label} style={{ display: "flex", alignItems: "center", gap: 5 }}><div style={{ width: 8, height: 8, borderRadius: "50%", background: m.color }} /><span style={{ fontFamily: font, fontSize: 11, color: C.textMuted }}>{m.label}</span></div>; })}
-    </div>
+    h("div", { style: { display: "flex", gap: 16, marginBottom: 6 } },
+      items.map(function(m) { return h("div", { key: m.label, style: { display: "flex", alignItems: "center", gap: 5 } }, h("div", { style: { width: 8, height: 8, borderRadius: "50%", background: m.color } }), h("span", { style: { fontFamily: font, fontSize: 11, color: C.textMuted } }, m.label)); })
+    )
   );
 }
 function TrendRow(props) {
   return (
-    <div style={{ display: "flex", gap: 12, marginTop: 10, flexWrap: "wrap" }}>
-      {props.trends.map(function(t) {
+    h("div", { style: { display: "flex", gap: 12, marginTop: 10, flexWrap: "wrap" } },
+      props.trends.map(function(t) {
         return (
-          <div key={t.mod} style={{ display: "flex", alignItems: "center", gap: 5 }}>
-            <div style={{ width: 6, height: 6, borderRadius: "50%", background: t.color }} />
-            <span style={{ fontFamily: font, fontSize: 11, color: C.textMuted }}>{t.mod}</span>
-            <span style={{ fontFamily: monoFont, fontSize: 11, fontWeight: 600, color: t.change.startsWith("+") ? C.red : C.green, background: t.change.startsWith("+") ? "#FEF2F2" : "#F0FDF4", padding: "1px 6px", borderRadius: 4 }}>{t.change} ({t.pct})</span>
-          </div>
+          h("div", { key: t.mod, style: { display: "flex", alignItems: "center", gap: 5 } },
+            h("div", { style: { width: 6, height: 6, borderRadius: "50%", background: t.color } }),
+            h("span", { style: { fontFamily: font, fontSize: 11, color: C.textMuted } }, t.mod),
+            h("span", { style: { fontFamily: monoFont, fontSize: 11, fontWeight: 600, color: t.change.startsWith("+") ? C.red : C.green, background: t.change.startsWith("+") ? "#FEF2F2" : "#F0FDF4", padding: "1px 6px", borderRadius: 4 } }, t.change + " (" + t.pct + ")")
+          )
         );
-      })}
-    </div>
+      })
+    )
   );
 }
 function Callout(props) {
-  return <div style={{ marginTop: 12, padding: "8px 12px", background: props.bg, borderLeft: "3px solid " + props.color, borderRadius: "0 6px 6px 0", fontSize: 12, color: props.color, lineHeight: 1.5 }}>{props.children}</div>;
+  return h("div", { style: { marginTop: 12, padding: "8px 12px", background: props.bg, borderLeft: "3px solid " + props.color, borderRadius: "0 6px 6px 0", fontSize: 12, color: props.color, lineHeight: 1.5 } }, props.children);
 }
 var tooltipStyle = {
   contentStyle: { background: C.white, border: "1px solid " + C.cardBorder, borderRadius: 8, fontFamily: font, fontSize: 12, color: C.text, boxShadow: C.shadowLg },
@@ -196,14 +196,14 @@ var tooltipStyle = {
 function AccessTooltip(props) {
   if (!props.active || !props.payload) return null;
   return (
-    <div style={Object.assign({}, tooltipStyle.contentStyle, { padding: "10px 14px" })}>
-      <div style={tooltipStyle.labelStyle}>{props.label}</div>
-      {props.payload.map(function(p) { return <div key={p.dataKey} style={Object.assign({}, tooltipStyle.itemStyle, { color: p.color })}>{p.dataKey}: {Math.floor(p.value)}min ({(p.value / 60).toFixed(1)}h)</div>; })}
-    </div>
+    h("div", { style: Object.assign({}, tooltipStyle.contentStyle, { padding: "10px 14px" }) },
+      h("div", { style: tooltipStyle.labelStyle }, props.label),
+      props.payload.map(function(p) { return h("div", { key: p.dataKey, style: Object.assign({}, tooltipStyle.itemStyle, { color: p.color }) }, p.dataKey + ": " + Math.floor(p.value) + "min (" + (p.value / 60).toFixed(1) + "h)"); })
+    )
   );
 }
 function GroupLabel(props) {
-  return <div style={{ fontFamily: font, fontSize: 10, fontWeight: 600, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>{props.children}</div>;
+  return h("div", { style: { fontFamily: font, fontSize: 10, fontWeight: 600, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, props.children);
 }
 function ExamTable(props) {
   var exams = examData[props.modality];
@@ -212,37 +212,37 @@ function ExamTable(props) {
   var otherCases = summary.total - topCases;
   var otherUnique = summary.unique - exams.length;
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
-        <div>
-          <div style={{ fontFamily: font, fontSize: 14, fontWeight: 600, color: C.text }}>{props.modality}</div>
-          <div style={{ fontFamily: font, fontSize: 11, color: C.textDim }}>{summary.unique} unique exams</div>
-        </div>
-        <div style={{ fontFamily: monoFont, fontSize: 16, fontWeight: 700, color: props.color, background: props.bgColor, border: "1px solid " + props.borderColor, borderRadius: 6, padding: "4px 10px" }}>{summary.total}</div>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-        {exams.map(function(e, i) {
+    h("div", null,
+      h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 } },
+        h("div", null,
+          h("div", { style: { fontFamily: font, fontSize: 14, fontWeight: 600, color: C.text } }, props.modality),
+          h("div", { style: { fontFamily: font, fontSize: 11, color: C.textDim } }, summary.unique + " unique exams")
+        ),
+        h("div", { style: { fontFamily: monoFont, fontSize: 16, fontWeight: 700, color: props.color, background: props.bgColor, border: "1px solid " + props.borderColor, borderRadius: 6, padding: "4px 10px" } }, summary.total)
+      ),
+      h("div", { style: { display: "flex", flexDirection: "column", gap: 0 } },
+        exams.map(function(e, i) {
           return (
-            <div key={e.exam} style={{ display: "flex", alignItems: "center", padding: "4px 4px", background: i % 2 === 0 ? "#F8FAFC" : "transparent", borderRadius: 3, gap: 6 }}>
-              <span style={{ fontSize: 11, color: C.textMuted, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{e.exam}</span>
-              <span style={{ fontFamily: monoFont, fontSize: 11, color: C.text, width: 32, textAlign: "right", flexShrink: 0 }}>{e.cases}</span>
-              <div style={{ width: 50, flexShrink: 0 }}>
-                <div style={{ width: "100%", height: 5, background: "#F1F5F9", borderRadius: 3, overflow: "hidden" }}>
-                  <div style={{ height: "100%", width: (e.cases / exams[0].cases) * 100 + "%", background: props.color, borderRadius: 3, opacity: 0.7 }} />
-                </div>
-              </div>
-            </div>
+            h("div", { key: e.exam, style: { display: "flex", alignItems: "center", padding: "4px 4px", background: i % 2 === 0 ? "#F8FAFC" : "transparent", borderRadius: 3, gap: 6 } },
+              h("span", { style: { fontSize: 11, color: C.textMuted, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" } }, e.exam),
+              h("span", { style: { fontFamily: monoFont, fontSize: 11, color: C.text, width: 32, textAlign: "right", flexShrink: 0 } }, e.cases),
+              h("div", { style: { width: 50, flexShrink: 0 } },
+                h("div", { style: { width: "100%", height: 5, background: "#F1F5F9", borderRadius: 3, overflow: "hidden" } },
+                  h("div", { style: { height: "100%", width: (e.cases / exams[0].cases) * 100 + "%", background: props.color, borderRadius: 3, opacity: 0.7 } })
+                )
+              )
+            )
           );
-        })}
-        {otherCases > 0 && (
-          <div style={{ display: "flex", alignItems: "center", padding: "5px 4px 2px", borderTop: "1px dashed " + C.cardBorder, marginTop: 3, gap: 6 }}>
-            <span style={{ fontSize: 10, color: C.textDim, flex: 1, fontStyle: "italic" }}>+{otherUnique} more</span>
-            <span style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim, width: 32, textAlign: "right" }}>{otherCases}</span>
-            <div style={{ width: 50 }} />
-          </div>
-        )}
-      </div>
-    </div>
+        }),
+        otherCases > 0 && (
+          h("div", { style: { display: "flex", alignItems: "center", padding: "5px 4px 2px", borderTop: "1px dashed " + C.cardBorder, marginTop: 3, gap: 6 } },
+            h("span", { style: { fontSize: 10, color: C.textDim, flex: 1, fontStyle: "italic" } }, "+" + otherUnique + " more"),
+            h("span", { style: { fontFamily: monoFont, fontSize: 10, color: C.textDim, width: 32, textAlign: "right" } }, otherCases),
+            h("div", { style: { width: 50 } })
+          )
+        )
+      )
+    )
   );
 }
 
@@ -282,258 +282,258 @@ function Dashboard() {
   var examColors = { CT: { color: C.ct, bg: C.ctBg, border: C.ctBorder }, MRI: { color: C.mri, bg: C.mriBg, border: C.mriBorder }, US: { color: C.us, bg: C.usBg, border: C.usBorder } };
 
   return (
-    <div style={{ background: C.bg, minHeight: "100vh", fontFamily: font, color: C.text, padding: "28px 36px 50px" }}>
-      {/* Header */}
-      <div style={{ marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-            <div style={{ background: "linear-gradient(135deg, #2563EB, #7C3AED)", width: 6, height: 28, borderRadius: 3 }} />
-            <h1 style={{ fontFamily: font, fontSize: 24, fontWeight: 700, color: C.text, margin: 0, letterSpacing: "-0.02em" }}>Same-Day Urgent Imaging Access</h1>
-          </div>
-          <p style={{ fontSize: 13, color: C.textDim, margin: "0 0 0 16px" }}>Current State Analysis &middot; FY26 Baseline Data</p>
-        </div>
-        <div style={{ textAlign: "right" }}>
-          <div style={{ fontSize: 12, color: C.textDim }}>Lead: <span style={{ color: C.textMuted, fontWeight: 500 }}>E. Sheridan</span> &nbsp;|&nbsp; Sponsors: <span style={{ color: C.textMuted, fontWeight: 500 }}>T. Morrison, Dr. Crews, E. Oyekan</span></div>
-          <div style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim, marginTop: 3 }}>PRJ0213271 &nbsp;&middot;&nbsp; Sep 2025 - Jan 2026 &nbsp;&middot;&nbsp; 1,079 cases</div>
-        </div>
-      </div>
-      {/* Filter */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 20, padding: "12px 16px", background: C.white, borderRadius: 10, border: "1px solid " + C.cardBorder, boxShadow: C.shadow, alignItems: "center" }}>
-        <span style={{ fontSize: 12, fontWeight: 600, color: C.textMuted, marginRight: 4 }}>Filter:</span>
-        {filterButtons.map(function(b) {
+    h("div", { style: { background: C.bg, minHeight: "100vh", fontFamily: font, color: C.text, padding: "28px 36px 50px" } },
+      /* Header */
+      h("div", { style: { marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 } },
+        h("div", null,
+          h("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 4 } },
+            h("div", { style: { background: "linear-gradient(135deg, #2563EB, #7C3AED)", width: 6, height: 28, borderRadius: 3 } }),
+            h("h1", { style: { fontFamily: font, fontSize: 24, fontWeight: 700, color: C.text, margin: 0, letterSpacing: "-0.02em" } }, "Same-Day Urgent Imaging Access")
+          ),
+          h("p", { style: { fontSize: 13, color: C.textDim, margin: "0 0 0 16px" } }, "Current State Analysis \u00B7 FY26 Baseline Data")
+        ),
+        h("div", { style: { textAlign: "right" } },
+          h("div", { style: { fontSize: 12, color: C.textDim } }, "Lead: ", h("span", { style: { color: C.textMuted, fontWeight: 500 } }, "E. Sheridan"), " \u00A0|\u00A0 Sponsors: ", h("span", { style: { color: C.textMuted, fontWeight: 500 } }, "T. Morrison, Dr. Crews, E. Oyekan")),
+          h("div", { style: { fontFamily: monoFont, fontSize: 10, color: C.textDim, marginTop: 3 } }, "PRJ0213271 \u00A0\u00B7\u00A0 Sep 2025 - Jan 2026 \u00A0\u00B7\u00A0 1,079 cases")
+        )
+      ),
+      /* Filter */
+      h("div", { style: { display: "flex", gap: 8, marginBottom: 20, padding: "12px 16px", background: C.white, borderRadius: 10, border: "1px solid " + C.cardBorder, boxShadow: C.shadow, alignItems: "center" } },
+        h("span", { style: { fontSize: 12, fontWeight: 600, color: C.textMuted, marginRight: 4 } }, "Filter:"),
+        filterButtons.map(function(b) {
           var active = filter === b.key;
-          return <button key={b.key} onClick={function() { setFilter(b.key); }} style={{ fontFamily: font, fontSize: 13, fontWeight: active ? 600 : 500, color: active ? b.color : C.textMuted, background: active ? b.bg : "transparent", border: "1.5px solid " + (active ? b.border : "transparent"), borderRadius: 7, padding: "6px 16px", transition: "all 0.15s ease" }}>{b.label}</button>;
-        })}
-        {filter !== "All" && <span style={{ fontFamily: monoFont, fontSize: 11, color: modColor[filter], marginLeft: "auto", fontWeight: 600 }}>{examSummary[filter].total} cases &middot; {examSummary[filter].unique} exam types</span>}
-      </div>
-      {/* Metric Cards */}
-      <div style={{ display: "flex", gap: 20, marginBottom: 24, flexWrap: "wrap" }}>
-        <div style={{ flex: "1 1 0", minWidth: 400, display: "flex", flexDirection: "column" }}>
-          <GroupLabel>Workload</GroupLabel>
-          <div style={{ display: "flex", gap: 12, flex: 1 }}>
-            <MetricCard label="Total Cases" value={m.totalCases} detail={m.totalDetail} />
-            <MetricCard label="After-Hours" value={m.afterVal} detail={m.afterDetail} />
-            <div style={{ background: C.card, border: "1px solid " + C.cardBorder, borderRadius: 10, padding: "16px 20px", boxShadow: C.shadow, flex: 1, minWidth: 170 }}>
-              <div style={{ fontFamily: font, fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Modality Split</div>
-              <div style={{ display: "flex", gap: 0, height: 8, borderRadius: 4, overflow: "hidden", marginBottom: 10 }}>
-                {modSplitData.map(function(s) { return <div key={s.name} style={{ width: (s.value / 1079) * 100 + "%", background: s.color, opacity: filter !== "All" && filter !== s.name ? 0.2 : 1, transition: "opacity 0.2s" }} />; })}
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                {modSplitData.map(function(s) {
+          return h("button", { key: b.key, onClick: function() { setFilter(b.key); }, style: { fontFamily: font, fontSize: 13, fontWeight: active ? 600 : 500, color: active ? b.color : C.textMuted, background: active ? b.bg : "transparent", border: "1.5px solid " + (active ? b.border : "transparent"), borderRadius: 7, padding: "6px 16px", transition: "all 0.15s ease" } }, b.label);
+        }),
+        filter !== "All" && h("span", { style: { fontFamily: monoFont, fontSize: 11, color: modColor[filter], marginLeft: "auto", fontWeight: 600 } }, examSummary[filter].total + " cases \u00B7 " + examSummary[filter].unique + " exam types")
+      ),
+      /* Metric Cards */
+      h("div", { style: { display: "flex", gap: 20, marginBottom: 24, flexWrap: "wrap" } },
+        h("div", { style: { flex: "1 1 0", minWidth: 400, display: "flex", flexDirection: "column" } },
+          h(GroupLabel, null, "Workload"),
+          h("div", { style: { display: "flex", gap: 12, flex: 1 } },
+            h(MetricCard, { label: "Total Cases", value: m.totalCases, detail: m.totalDetail }),
+            h(MetricCard, { label: "After-Hours", value: m.afterVal, detail: m.afterDetail }),
+            h("div", { style: { background: C.card, border: "1px solid " + C.cardBorder, borderRadius: 10, padding: "16px 20px", boxShadow: C.shadow, flex: 1, minWidth: 170 } },
+              h("div", { style: { fontFamily: font, fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 } }, "Modality Split"),
+              h("div", { style: { display: "flex", gap: 0, height: 8, borderRadius: 4, overflow: "hidden", marginBottom: 10 } },
+                modSplitData.map(function(s) { return h("div", { key: s.name, style: { width: (s.value / 1079) * 100 + "%", background: s.color, opacity: filter !== "All" && filter !== s.name ? 0.2 : 1, transition: "opacity 0.2s" } }); })
+              ),
+              h("div", { style: { display: "flex", flexDirection: "column", gap: 4 } },
+                modSplitData.map(function(s) {
                   return (
-                    <div key={s.name} style={{ display: "flex", alignItems: "center", gap: 6, opacity: filter !== "All" && filter !== s.name ? 0.35 : 1, transition: "opacity 0.2s" }}>
-                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: s.color }} />
-                      <span style={{ fontFamily: font, fontSize: 11, color: C.textMuted, width: 28 }}>{s.name}</span>
-                      <span style={{ fontFamily: monoFont, fontSize: 11, color: C.text, fontWeight: 600 }}>{s.value}</span>
-                      <span style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim }}>({((s.value / 1079) * 100).toFixed(0)}%)</span>
-                    </div>
+                    h("div", { key: s.name, style: { display: "flex", alignItems: "center", gap: 6, opacity: filter !== "All" && filter !== s.name ? 0.35 : 1, transition: "opacity 0.2s" } },
+                      h("div", { style: { width: 6, height: 6, borderRadius: "50%", background: s.color } }),
+                      h("span", { style: { fontFamily: font, fontSize: 11, color: C.textMuted, width: 28 } }, s.name),
+                      h("span", { style: { fontFamily: monoFont, fontSize: 11, color: C.text, fontWeight: 600 } }, s.value),
+                      h("span", { style: { fontFamily: monoFont, fontSize: 10, color: C.textDim } }, "(" + ((s.value / 1079) * 100).toFixed(0) + "%)")
+                    )
                   );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style={{ width: 1, background: C.cardBorder, alignSelf: "stretch", marginTop: 20 }} />
-        <div style={{ flex: "1 1 0", minWidth: 400, display: "flex", flexDirection: "column" }}>
-          <GroupLabel>Performance</GroupLabel>
-          <div style={{ display: "flex", gap: 12, flex: 1 }}>
-            <MetricCard label="Order \u2192 Scheduled" value={m.schedVal} detail={m.schedDetail} highlight={true} />
-            <MetricCard label="Order \u2192 Exam Begin" value={m.accessVal} detail={m.accessDetail} highlight={true} />
-            <MetricCard label="Scheduling Target" value={m.targetVal} detail={m.targetDetail} />
-          </div>
-        </div>
-      </div>
-      {/* KPI Explanation */}
-      <div style={{ background: C.white, border: "1px solid " + C.cardBorder, borderRadius: 8, padding: "14px 22px", marginBottom: 24, display: "flex", gap: 32, flexWrap: "wrap", boxShadow: C.shadow }}>
-        <div style={{ flex: 1, minWidth: 260 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: C.accent, marginBottom: 3 }}>Scheduling KPI &middot; Order &rarr; Scheduled On</div>
-          <div style={{ fontSize: 12, color: C.textMuted, lineHeight: 1.5 }}>How fast the system responds to an urgent order. Reflects coordinator experience and scheduling workflow efficiency.</div>
-        </div>
-        <div style={{ width: 1, background: C.cardBorder, alignSelf: "stretch" }} />
-        <div style={{ flex: 1, minWidth: 260 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: C.us, marginBottom: 3 }}>Access KPI &middot; Order &rarr; Begin Exam</div>
-          <div style={{ fontSize: 12, color: C.textMuted, lineHeight: 1.5 }}>How quickly the patient actually gets imaged. Includes travel time, other appointments, and patient choice.</div>
-        </div>
-      </div>
-      {/* Charts Row 1 */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 }}>
-        <ChartCard>
-          <SectionTitle subtitle="Monthly median, minutes">Scheduling TAT: Order &rarr; Scheduled</SectionTitle>
-          <ModLegend showOverall={true} filter={filter} />
-          <ResponsiveContainer width="100%" height={240}>
-            <LineChart data={schedTAT} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
-              <XAxis dataKey="month" tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
-              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} domain={[0, 60]} />
-              <Tooltip contentStyle={tooltipStyle.contentStyle} itemStyle={tooltipStyle.itemStyle} labelStyle={tooltipStyle.labelStyle} />
-              <ReferenceLine y={17} stroke={C.green} strokeDasharray="6 4" strokeWidth={2} label={{ value: "Target 17m", fill: C.green, fontSize: 10, position: "right" }} />
-              {filter === "All" && <Line type="monotone" dataKey="Overall" stroke={C.overall} strokeWidth={2.5} strokeDasharray="6 3" dot={{ r: 3.5, fill: C.overall }} />}
-              {modKeys.map(function(k) { return <Line key={k} type="monotone" dataKey={k} stroke={modColor[k]} strokeWidth={2.5} dot={{ r: 3.5, fill: modColor[k] }} />; })}
-            </LineChart>
-          </ResponsiveContainer>
-          <TrendRow trends={schedTrends} />
-          <Callout color={C.textMuted} bg="#F8FAFC">Flat / slight worsening - expected since process redesign has not yet begun. MRI peaked at 52m in Nov before recovering. US creeping upward.</Callout>
-        </ChartCard>
-        <ChartCard>
-          <SectionTitle subtitle="Monthly median, minutes (hover for hours)">Access TAT: Order &rarr; Begin Exam</SectionTitle>
-          <ModLegend filter={filter} />
-          <ResponsiveContainer width="100%" height={240}>
-            <LineChart data={accessTAT} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
-              <XAxis dataKey="month" tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
-              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} domain={[0, accessYMax]} tickFormatter={function(v) { return (v / 60).toFixed(1) + "h"; }} />
-              <Tooltip content={<AccessTooltip />} />
-              {modKeys.map(function(k) { return <Line key={k} type="monotone" dataKey={k} stroke={modColor[k]} strokeWidth={2.5} dot={{ r: 3.5, fill: modColor[k] }} />; })}
-            </LineChart>
-          </ResponsiveContainer>
-          <TrendRow trends={accessTrends} />
-          <Callout color={C.mri} bg="#FDF2F8">Volatile. MRI swings 4.5-7.5 hrs - likely slot availability and protocol complexity, not scheduling workflow. CT stable ~3h. US drifting up.</Callout>
-        </ChartCard>
-      </div>
-      {/* Charts Row 2 */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 }}>
-        <ChartCard>
-          <SectionTitle subtitle="By modality, monthly">Case Volume</SectionTitle>
-          <ModLegend filter={filter} />
-          <ResponsiveContainer width="100%" height={240}>
-            <BarChart data={monthlyVolume} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
-              <XAxis dataKey="month" tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
-              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
-              <Tooltip contentStyle={tooltipStyle.contentStyle} itemStyle={tooltipStyle.itemStyle} labelStyle={tooltipStyle.labelStyle} />
-              {modKeys.map(function(k) { return <Bar key={k} dataKey={k} fill={modColor[k]} radius={[3, 3, 0, 0]} />; })}
-            </BarChart>
-          </ResponsiveContainer>
-          <TrendRow trends={volTrends.filter(function(t) { return filter === "All" || t.mod === filter || t.mod === "Total"; })} />
-          <Callout color={C.textMuted} bg="#F8FAFC">Stable overall (~216/mo). US growing share: 27% in Sep to 36% in Jan. Dec highest volume - likely holiday coverage effects.</Callout>
-        </ChartCard>
-        <ChartCard>
-          <SectionTitle subtitle={"Peak at 3 PM \u00b7 After-hours nearly 2x prior estimate"}>Exam Starts by Hour of Day</SectionTitle>
-          <ResponsiveContainer width="100%" height={240}>
-            <BarChart data={hourlyData} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E8EBF0" />
-              <XAxis dataKey="hour" tick={{ fill: C.textDim, fontSize: 10 }} axisLine={{ stroke: C.cardBorder }} />
-              <YAxis tick={{ fill: C.textDim, fontSize: 11 }} axisLine={{ stroke: C.cardBorder }} />
-              <Tooltip contentStyle={tooltipStyle.contentStyle} itemStyle={tooltipStyle.itemStyle} labelStyle={tooltipStyle.labelStyle} />
-              <Bar dataKey="cases" radius={[3, 3, 0, 0]}>
-                {hourlyData.map(function(entry, i) { return <Cell key={i} fill={entry.block === "after" ? C.afterHours : entry.block === "afternoon" ? C.green : C.accent} opacity={0.85} />; })}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-          <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
-            {timeBlocks.map(function(b) {
+                })
+              )
+            )
+          )
+        ),
+        h("div", { style: { width: 1, background: C.cardBorder, alignSelf: "stretch", marginTop: 20 } }),
+        h("div", { style: { flex: "1 1 0", minWidth: 400, display: "flex", flexDirection: "column" } },
+          h(GroupLabel, null, "Performance"),
+          h("div", { style: { display: "flex", gap: 12, flex: 1 } },
+            h(MetricCard, { label: "Order \u2192 Scheduled", value: m.schedVal, detail: m.schedDetail, highlight: true }),
+            h(MetricCard, { label: "Order \u2192 Exam Begin", value: m.accessVal, detail: m.accessDetail, highlight: true }),
+            h(MetricCard, { label: "Scheduling Target", value: m.targetVal, detail: m.targetDetail })
+          )
+        )
+      ),
+      /* KPI Explanation */
+      h("div", { style: { background: C.white, border: "1px solid " + C.cardBorder, borderRadius: 8, padding: "14px 22px", marginBottom: 24, display: "flex", gap: 32, flexWrap: "wrap", boxShadow: C.shadow } },
+        h("div", { style: { flex: 1, minWidth: 260 } },
+          h("div", { style: { fontSize: 12, fontWeight: 600, color: C.accent, marginBottom: 3 } }, "Scheduling KPI \u00B7 Order \u2192 Scheduled On"),
+          h("div", { style: { fontSize: 12, color: C.textMuted, lineHeight: 1.5 } }, "How fast the system responds to an urgent order. Reflects coordinator experience and scheduling workflow efficiency.")
+        ),
+        h("div", { style: { width: 1, background: C.cardBorder, alignSelf: "stretch" } }),
+        h("div", { style: { flex: 1, minWidth: 260 } },
+          h("div", { style: { fontSize: 12, fontWeight: 600, color: C.us, marginBottom: 3 } }, "Access KPI \u00B7 Order \u2192 Begin Exam"),
+          h("div", { style: { fontSize: 12, color: C.textMuted, lineHeight: 1.5 } }, "How quickly the patient actually gets imaged. Includes travel time, other appointments, and patient choice.")
+        )
+      ),
+      /* Charts Row 1 */
+      h("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 } },
+        h(ChartCard, null,
+          h(SectionTitle, { subtitle: "Monthly median, minutes" }, "Scheduling TAT: Order \u2192 Scheduled"),
+          h(ModLegend, { showOverall: true, filter: filter }),
+          h(ResponsiveContainer, { width: "100%", height: 240 },
+            h(LineChart, { data: schedTAT, margin: { top: 8, right: 16, bottom: 4, left: 0 } },
+              h(CartesianGrid, { strokeDasharray: "3 3", stroke: "#E8EBF0" }),
+              h(XAxis, { dataKey: "month", tick: { fill: C.textDim, fontSize: 11 }, axisLine: { stroke: C.cardBorder } }),
+              h(YAxis, { tick: { fill: C.textDim, fontSize: 11 }, axisLine: { stroke: C.cardBorder }, domain: [0, 60] }),
+              h(Tooltip, { contentStyle: tooltipStyle.contentStyle, itemStyle: tooltipStyle.itemStyle, labelStyle: tooltipStyle.labelStyle }),
+              h(ReferenceLine, { y: 17, stroke: C.green, strokeDasharray: "6 4", strokeWidth: 2, label: { value: "Target 17m", fill: C.green, fontSize: 10, position: "right" } }),
+              filter === "All" && h(Line, { type: "monotone", dataKey: "Overall", stroke: C.overall, strokeWidth: 2.5, strokeDasharray: "6 3", dot: { r: 3.5, fill: C.overall } }),
+              modKeys.map(function(k) { return h(Line, { key: k, type: "monotone", dataKey: k, stroke: modColor[k], strokeWidth: 2.5, dot: { r: 3.5, fill: modColor[k] } }); })
+            )
+          ),
+          h(TrendRow, { trends: schedTrends }),
+          h(Callout, { color: C.textMuted, bg: "#F8FAFC" }, "Flat / slight worsening - expected since process redesign has not yet begun. MRI peaked at 52m in Nov before recovering. US creeping upward.")
+        ),
+        h(ChartCard, null,
+          h(SectionTitle, { subtitle: "Monthly median, minutes (hover for hours)" }, "Access TAT: Order \u2192 Begin Exam"),
+          h(ModLegend, { filter: filter }),
+          h(ResponsiveContainer, { width: "100%", height: 240 },
+            h(LineChart, { data: accessTAT, margin: { top: 8, right: 16, bottom: 4, left: 0 } },
+              h(CartesianGrid, { strokeDasharray: "3 3", stroke: "#E8EBF0" }),
+              h(XAxis, { dataKey: "month", tick: { fill: C.textDim, fontSize: 11 }, axisLine: { stroke: C.cardBorder } }),
+              h(YAxis, { tick: { fill: C.textDim, fontSize: 11 }, axisLine: { stroke: C.cardBorder }, domain: [0, accessYMax], tickFormatter: function(v) { return (v / 60).toFixed(1) + "h"; } }),
+              h(Tooltip, { content: h(AccessTooltip) }),
+              modKeys.map(function(k) { return h(Line, { key: k, type: "monotone", dataKey: k, stroke: modColor[k], strokeWidth: 2.5, dot: { r: 3.5, fill: modColor[k] } }); })
+            )
+          ),
+          h(TrendRow, { trends: accessTrends }),
+          h(Callout, { color: C.mri, bg: "#FDF2F8" }, "Volatile. MRI swings 4.5-7.5 hrs - likely slot availability and protocol complexity, not scheduling workflow. CT stable ~3h. US drifting up.")
+        )
+      ),
+      /* Charts Row 2 */
+      h("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 } },
+        h(ChartCard, null,
+          h(SectionTitle, { subtitle: "By modality, monthly" }, "Case Volume"),
+          h(ModLegend, { filter: filter }),
+          h(ResponsiveContainer, { width: "100%", height: 240 },
+            h(BarChart, { data: monthlyVolume, margin: { top: 8, right: 16, bottom: 4, left: 0 } },
+              h(CartesianGrid, { strokeDasharray: "3 3", stroke: "#E8EBF0" }),
+              h(XAxis, { dataKey: "month", tick: { fill: C.textDim, fontSize: 11 }, axisLine: { stroke: C.cardBorder } }),
+              h(YAxis, { tick: { fill: C.textDim, fontSize: 11 }, axisLine: { stroke: C.cardBorder } }),
+              h(Tooltip, { contentStyle: tooltipStyle.contentStyle, itemStyle: tooltipStyle.itemStyle, labelStyle: tooltipStyle.labelStyle }),
+              modKeys.map(function(k) { return h(Bar, { key: k, dataKey: k, fill: modColor[k], radius: [3, 3, 0, 0] }); })
+            )
+          ),
+          h(TrendRow, { trends: volTrends.filter(function(t) { return filter === "All" || t.mod === filter || t.mod === "Total"; }) }),
+          h(Callout, { color: C.textMuted, bg: "#F8FAFC" }, "Stable overall (~216/mo). US growing share: 27% in Sep to 36% in Jan. Dec highest volume - likely holiday coverage effects.")
+        ),
+        h(ChartCard, null,
+          h(SectionTitle, { subtitle: "Peak at 3 PM \u00b7 After-hours nearly 2x prior estimate" }, "Exam Starts by Hour of Day"),
+          h(ResponsiveContainer, { width: "100%", height: 240 },
+            h(BarChart, { data: hourlyData, margin: { top: 8, right: 16, bottom: 4, left: 0 } },
+              h(CartesianGrid, { strokeDasharray: "3 3", stroke: "#E8EBF0" }),
+              h(XAxis, { dataKey: "hour", tick: { fill: C.textDim, fontSize: 10 }, axisLine: { stroke: C.cardBorder } }),
+              h(YAxis, { tick: { fill: C.textDim, fontSize: 11 }, axisLine: { stroke: C.cardBorder } }),
+              h(Tooltip, { contentStyle: tooltipStyle.contentStyle, itemStyle: tooltipStyle.itemStyle, labelStyle: tooltipStyle.labelStyle }),
+              h(Bar, { dataKey: "cases", radius: [3, 3, 0, 0] },
+                hourlyData.map(function(entry, i) { return h(Cell, { key: i, fill: entry.block === "after" ? C.afterHours : entry.block === "afternoon" ? C.green : C.accent, opacity: 0.85 }); })
+              )
+            )
+          ),
+          h("div", { style: { display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" } },
+            timeBlocks.map(function(b) {
               return (
-                <div key={b.label} style={{ display: "flex", alignItems: "center", gap: 6, background: "#F8FAFC", border: "1px solid " + C.cardBorder, borderRadius: 6, padding: "5px 10px" }}>
-                  <div style={{ width: 8, height: 8, borderRadius: 2, background: b.color }} />
-                  <span style={{ fontSize: 11, color: C.textMuted }}>{b.label}:</span>
-                  <span style={{ fontFamily: monoFont, fontSize: 11, fontWeight: 600, color: C.text }}>{b.cases}</span>
-                  <span style={{ fontSize: 11, color: C.textDim }}>({b.pct}%)</span>
-                </div>
+                h("div", { key: b.label, style: { display: "flex", alignItems: "center", gap: 6, background: "#F8FAFC", border: "1px solid " + C.cardBorder, borderRadius: 6, padding: "5px 10px" } },
+                  h("div", { style: { width: 8, height: 8, borderRadius: 2, background: b.color } }),
+                  h("span", { style: { fontSize: 11, color: C.textMuted } }, b.label + ":"),
+                  h("span", { style: { fontFamily: monoFont, fontSize: 11, fontWeight: 600, color: C.text } }, b.cases),
+                  h("span", { style: { fontSize: 11, color: C.textDim } }, "(" + b.pct + "%)")
+                )
               );
-            })}
-          </div>
-          <Callout color={C.afterHours} bg="#FFFBEB">After-hours demand (25.7%) is nearly 2x the prior 13% A3 estimate. RSC closes at 5 PM but 277 exams begin after. Supports extended RSC hours to 9 PM.</Callout>
-        </ChartCard>
-      </div>
-      {/* Row 3: Priority + Sites + Ordering */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 18, marginBottom: 18 }}>
-        <ChartCard>
-          <SectionTitle subtitle={filter === "All" ? "9 options exist, only 2 used meaningfully" : filter + " priority breakdown"}>Order Priority Distribution</SectionTitle>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {priorityData.map(function(p) {
+            })
+          ),
+          h(Callout, { color: C.afterHours, bg: "#FFFBEB" }, "After-hours demand (25.7%) is nearly 2x the prior 13% A3 estimate. RSC closes at 5 PM but 277 exams begin after. Supports extended RSC hours to 9 PM.")
+        )
+      ),
+      /* Row 3: Priority + Sites + Ordering */
+      h("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 18, marginBottom: 18 } },
+        h(ChartCard, null,
+          h(SectionTitle, { subtitle: filter === "All" ? "9 options exist, only 2 used meaningfully" : filter + " priority breakdown" }, "Order Priority Distribution"),
+          h("div", { style: { display: "flex", flexDirection: "column", gap: 10 } },
+            priorityData.map(function(p) {
               return (
-                <div key={p.name}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-                    <span style={{ fontSize: 12, color: C.textMuted }}>{p.name}</span>
-                    <span style={{ fontFamily: monoFont, fontSize: 12, color: C.text }}>{p.value} <span style={{ color: C.textDim, fontSize: 10 }}>({p.pct}%)</span></span>
-                  </div>
-                  <div style={{ height: 5, background: "#F1F5F9", borderRadius: 3, overflow: "hidden" }}>
-                    <div style={{ height: "100%", width: (p.value / maxPriority) * 100 + "%", background: p.color, borderRadius: 3 }} />
-                  </div>
-                </div>
+                h("div", { key: p.name },
+                  h("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: 3 } },
+                    h("span", { style: { fontSize: 12, color: C.textMuted } }, p.name),
+                    h("span", { style: { fontFamily: monoFont, fontSize: 12, color: C.text } }, p.value + " ", h("span", { style: { color: C.textDim, fontSize: 10 } }, "(" + p.pct + "%)"))
+                  ),
+                  h("div", { style: { height: 5, background: "#F1F5F9", borderRadius: 3, overflow: "hidden" } },
+                    h("div", { style: { height: "100%", width: (p.value / maxPriority) * 100 + "%", background: p.color, borderRadius: 3 } })
+                  )
+                )
               );
-            })}
-          </div>
-          {filter === "All" && <Callout color={C.stat} bg="#FFFBEB">Supports case for simplified order priority definitions.</Callout>}
-          {filter === "MRI" && <Callout color={C.mri} bg="#FDF2F8">MRI is dominated by Expedite (77%) - opposite of CT/US which are majority STAT. Reflects different ordering patterns.</Callout>}
-        </ChartCard>
-        <ChartCard>
-          <SectionTitle subtitle="Scheduling TAT median">Performing Sites</SectionTitle>
-          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <div style={{ display: "flex", padding: "0 8px 6px", borderBottom: "1px solid " + C.cardBorder }}>
-              <span style={{ fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", flex: 1 }}>Site</span>
-              <span style={{ fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", width: 48, textAlign: "right" }}>Cases</span>
-              <span style={{ fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", width: 52, textAlign: "right" }}>TAT</span>
-            </div>
-            {siteData.map(function(s, i) {
+            })
+          ),
+          filter === "All" && h(Callout, { color: C.stat, bg: "#FFFBEB" }, "Supports case for simplified order priority definitions."),
+          filter === "MRI" && h(Callout, { color: C.mri, bg: "#FDF2F8" }, "MRI is dominated by Expedite (77%) - opposite of CT/US which are majority STAT. Reflects different ordering patterns.")
+        ),
+        h(ChartCard, null,
+          h(SectionTitle, { subtitle: "Scheduling TAT median" }, "Performing Sites"),
+          h("div", { style: { display: "flex", flexDirection: "column", gap: 4 } },
+            h("div", { style: { display: "flex", padding: "0 8px 6px", borderBottom: "1px solid " + C.cardBorder } },
+              h("span", { style: { fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", flex: 1 } }, "Site"),
+              h("span", { style: { fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", width: 48, textAlign: "right" } }, "Cases"),
+              h("span", { style: { fontSize: 10, color: C.textDim, textTransform: "uppercase", letterSpacing: "0.06em", width: 52, textAlign: "right" } }, "TAT")
+            ),
+            siteData.map(function(s, i) {
               var tatVal = parseFloat(s.tat);
               return (
-                <div key={s.site} style={{ display: "flex", alignItems: "center", padding: "6px 8px", borderRadius: 5, background: i % 2 === 0 ? "#F8FAFC" : "transparent" }}>
-                  <span style={{ fontSize: 12, color: C.textMuted, flex: 1 }}>{s.site}</span>
-                  <span style={{ fontFamily: monoFont, fontSize: 12, color: C.text, width: 48, textAlign: "right" }}>{s.cases}</span>
-                  <span style={{ fontFamily: monoFont, fontSize: 11, width: 52, textAlign: "right", fontWeight: 600, color: tatVal > 40 ? C.red : tatVal < 30 ? C.green : C.textMuted }}>{s.tat}</span>
-                </div>
+                h("div", { key: s.site, style: { display: "flex", alignItems: "center", padding: "6px 8px", borderRadius: 5, background: i % 2 === 0 ? "#F8FAFC" : "transparent" } },
+                  h("span", { style: { fontSize: 12, color: C.textMuted, flex: 1 } }, s.site),
+                  h("span", { style: { fontFamily: monoFont, fontSize: 12, color: C.text, width: 48, textAlign: "right" } }, s.cases),
+                  h("span", { style: { fontFamily: monoFont, fontSize: 11, width: 52, textAlign: "right", fontWeight: 600, color: tatVal > 40 ? C.red : tatVal < 30 ? C.green : C.textMuted } }, s.tat)
+                )
               );
-            })}
-          </div>
-        </ChartCard>
-        <ChartCard>
-          <SectionTitle subtitle="By case count">Top Ordering Locations</SectionTitle>
-          <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-            {orderingData.map(function(loc, i) {
+            })
+          )
+        ),
+        h(ChartCard, null,
+          h(SectionTitle, { subtitle: "By case count" }, "Top Ordering Locations"),
+          h("div", { style: { display: "flex", flexDirection: "column", gap: 7 } },
+            orderingData.map(function(loc, i) {
               return (
-                <div key={loc.name} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontFamily: monoFont, fontSize: 10, color: C.textDim, width: 16, textAlign: "right" }}>{i + 1}</span>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-                      <span style={{ fontSize: 12, color: C.textMuted }}>{loc.name}</span>
-                      <span style={{ fontFamily: monoFont, fontSize: 12, color: C.text }}>{loc.cases}</span>
-                    </div>
-                    <div style={{ height: 4, background: "#F1F5F9", borderRadius: 2, overflow: "hidden" }}>
-                      <div style={{ height: "100%", width: (loc.cases / maxOrdering) * 100 + "%", background: filter !== "All" ? modColor[filter] : C.accent, borderRadius: 2 }} />
-                    </div>
-                  </div>
-                </div>
+                h("div", { key: loc.name, style: { display: "flex", alignItems: "center", gap: 8 } },
+                  h("span", { style: { fontFamily: monoFont, fontSize: 10, color: C.textDim, width: 16, textAlign: "right" } }, i + 1),
+                  h("div", { style: { flex: 1 } },
+                    h("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: 3 } },
+                      h("span", { style: { fontSize: 12, color: C.textMuted } }, loc.name),
+                      h("span", { style: { fontFamily: monoFont, fontSize: 12, color: C.text } }, loc.cases)
+                    ),
+                    h("div", { style: { height: 4, background: "#F1F5F9", borderRadius: 2, overflow: "hidden" } },
+                      h("div", { style: { height: "100%", width: (loc.cases / maxOrdering) * 100 + "%", background: filter !== "All" ? modColor[filter] : C.accent, borderRadius: 2 } })
+                    )
+                  )
+                )
               );
-            })}
-          </div>
-        </ChartCard>
-      </div>
-      {/* Collapsible Exam Types - 3 columns */}
-      <div style={{ marginBottom: 18 }}>
-        <button onClick={function() { setExamOpen(!examOpen); }} style={{
+            })
+          )
+        )
+      ),
+      /* Collapsible Exam Types - 3 columns */
+      h("div", { style: { marginBottom: 18 } },
+        h("button", { onClick: function() { setExamOpen(!examOpen); }, style: {
           display: "flex", alignItems: "center", gap: 10, width: "100%", padding: "14px 20px",
           background: C.white, border: "1px solid " + C.cardBorder, borderRadius: examOpen ? "10px 10px 0 0" : 10,
           boxShadow: C.shadow, fontFamily: font, textAlign: "left", transition: "border-radius 0.2s"
-        }}>
-          <div style={{ background: "linear-gradient(135deg, #2563EB, #7C3AED)", width: 4, height: 20, borderRadius: 2 }} />
-          <h2 style={{ fontFamily: font, fontSize: 18, fontWeight: 700, color: C.text, margin: 0, flex: 1 }}>Exam Type Breakdown</h2>
-          <span style={{ fontFamily: font, fontSize: 12, color: C.textDim }}>{filter === "All" ? "204 unique exams across modalities" : examSummary[filter].unique + " unique " + filter + " exams"}</span>
-          <span style={{ fontSize: 18, color: C.textDim, transition: "transform 0.2s", transform: examOpen ? "rotate(180deg)" : "rotate(0deg)", lineHeight: 1 }}>{"\u25BC"}</span>
-        </button>
-        {examOpen && (
-          <div style={{ background: C.white, border: "1px solid " + C.cardBorder, borderTop: "none", borderRadius: "0 0 10px 10px", padding: 20, boxShadow: C.shadow }}>
-            <div style={{ display: "grid", gridTemplateColumns: examMods.length === 1 ? "1fr" : "1fr 1fr 1fr", gap: 20 }}>
-              {examMods.map(function(mod) {
+        } },
+          h("div", { style: { background: "linear-gradient(135deg, #2563EB, #7C3AED)", width: 4, height: 20, borderRadius: 2 } }),
+          h("h2", { style: { fontFamily: font, fontSize: 18, fontWeight: 700, color: C.text, margin: 0, flex: 1 } }, "Exam Type Breakdown"),
+          h("span", { style: { fontFamily: font, fontSize: 12, color: C.textDim } }, filter === "All" ? "204 unique exams across modalities" : examSummary[filter].unique + " unique " + filter + " exams"),
+          h("span", { style: { fontSize: 18, color: C.textDim, transition: "transform 0.2s", transform: examOpen ? "rotate(180deg)" : "rotate(0deg)", lineHeight: 1 } }, "\u25BC")
+        ),
+        examOpen && (
+          h("div", { style: { background: C.white, border: "1px solid " + C.cardBorder, borderTop: "none", borderRadius: "0 0 10px 10px", padding: 20, boxShadow: C.shadow } },
+            h("div", { style: { display: "grid", gridTemplateColumns: examMods.length === 1 ? "1fr" : "1fr 1fr 1fr", gap: 20 } },
+              examMods.map(function(mod) {
                 return (
-                  <div key={mod}>
-                    <ExamTable modality={mod} color={examColors[mod].color} bgColor={examColors[mod].bg} borderColor={examColors[mod].border} />
-                  </div>
+                  h("div", { key: mod },
+                    h(ExamTable, { modality: mod, color: examColors[mod].color, bgColor: examColors[mod].bg, borderColor: examColors[mod].border })
+                  )
                 );
-              })}
-            </div>
-          </div>
-        )}
-      </div>
-      {/* Footer */}
-      <div style={{ textAlign: "center", padding: "16px 0 0", borderTop: "1px solid " + C.cardBorder, fontSize: 10, color: C.textDim, fontFamily: monoFont }}>
-        1,079 same-day STAT/Expedite cases &nbsp;&middot;&nbsp; Sep 2025 - Jan 2026 &nbsp;&middot;&nbsp; Source: Epic &nbsp;&middot;&nbsp; 2 records excluded (negative TAT)
-      </div>
-    </div>
+              })
+            )
+          )
+        )
+      ),
+      /* Footer */
+      h("div", { style: { textAlign: "center", padding: "16px 0 0", borderTop: "1px solid " + C.cardBorder, fontSize: 10, color: C.textDim, fontFamily: monoFont } },
+        "1,079 same-day STAT/Expedite cases \u00A0\u00B7\u00A0 Sep 2025 - Jan 2026 \u00A0\u00B7\u00A0 Source: Epic \u00A0\u00B7\u00A0 2 records excluded (negative TAT)"
+      )
+    )
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(Dashboard));
+ReactDOM.createRoot(document.getElementById('root')).render(h(Dashboard));
 </script>
 </body>
 </html>
