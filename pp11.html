@@ -26,8 +26,15 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             text-align: center;
         }
-        .gate-form h1 { font-size: 24px; margin-bottom: 8px; color: #1a1a1a; }
-        .gate-form p { color: #666; margin-bottom: 24px; }
+        .gate-form h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .gate-form p {
+            color: #666;
+            margin-bottom: 24px;
+        }
         .gate-form input {
             padding: 12px 16px;
             font-size: 16px;
@@ -83,6 +90,7 @@
             document.getElementById('root').classList.remove('hidden');
         }
 
+        // Check if already authenticated
         if (localStorage.getItem(STORAGE_KEY) === 'true') {
             showDashboard();
         }
@@ -2933,12 +2941,12 @@
         }
       }
     ],
-    "nuclearMedicine": [
+    "nm": [
       {
         "costCenter": "107183015",
         "site": "Satellite PET CT EHC",
         "location": "EHC-6121",
-        "modality": "nuclearMedicine",
+        "modality": "nm",
         "isFTEOnly": false,
         "isOR": false,
         "periods": [
@@ -3062,7 +3070,7 @@
         "costCenter": "107650001",
         "site": "Nuclear Med EHC",
         "location": "Emeryville",
-        "modality": "nuclearMedicine",
+        "modality": "nm",
         "isFTEOnly": false,
         "isOR": false,
         "periods": [
@@ -3186,7 +3194,7 @@
         "costCenter": "107650002",
         "site": "Nuclear Med Multi Site",
         "location": "Main Campus",
-        "modality": "nuclearMedicine",
+        "modality": "nm",
         "isFTEOnly": false,
         "isOR": false,
         "periods": [
@@ -3310,7 +3318,7 @@
         "costCenter": "107650004",
         "site": "Nuclear Med SBCC",
         "location": "South Bay",
-        "modality": "nuclearMedicine",
+        "modality": "nm",
         "isFTEOnly": false,
         "isOR": false,
         "periods": [
@@ -3434,7 +3442,7 @@
         "costCenter": "107650006",
         "site": "Nuclear Med Theragnostic",
         "location": "Main Campus",
-        "modality": "nuclearMedicine",
+        "modality": "nm",
         "isFTEOnly": false,
         "isOR": false,
         "periods": [
@@ -8778,8 +8786,6 @@
     })())));
   };
   var dashboard_app_default = UnifiedImagingDashboard;
-  var root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(React.createElement(UnifiedImagingDashboard));
 })();
 
     </script>
