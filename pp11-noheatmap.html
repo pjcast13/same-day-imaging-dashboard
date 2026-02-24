@@ -8132,7 +8132,7 @@ var App = (() => {
       },
       "YTD UOS ",
       sortConfig.key === "ytdUOS" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
-    ), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("th", { style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#94a3b8", fontWeight: "600" } }, "UOS Bud"), /* @__PURE__ */ React.createElement(
       "th",
       {
         onClick: () => handleSort("uosVar"),
@@ -8166,7 +8166,7 @@ var App = (() => {
       },
       "YTD FTE ",
       sortConfig.key === "totalFTE" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
-    ), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("th", { style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#94a3b8", fontWeight: "600" } }, "FTE Bud"), /* @__PURE__ */ React.createElement(
       "th",
       {
         onClick: () => handleSort("fteVar"),
@@ -8249,6 +8249,11 @@ var App = (() => {
         } }, isFTEOnly ? "\u2013" : site.ytd.actualUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: {
           padding: "12px",
           borderBottom: "1px solid #e2e8f0",
+          color: "#64748b",
+          textAlign: "right"
+        } }, isFTEOnly ? "\u2013" : site.ytd.budgetUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
           textAlign: "right",
           fontWeight: "700"
         } }, isFTEOnly ? "\u2013" : /* @__PURE__ */ React.createElement("span", { style: {
@@ -8267,6 +8272,11 @@ var App = (() => {
           textAlign: "right",
           fontWeight: "600"
         } }, avgFTE.toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          color: "#64748b",
+          textAlign: "right"
+        } }, (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length).toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: {
           padding: "12px",
           borderBottom: "1px solid #e2e8f0",
           textAlign: "right",
