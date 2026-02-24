@@ -7850,6 +7850,14 @@ var App = (() => {
             const bTotalTargetFTE = b.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0);
             bValue = (bTotalActualFTE - bTotalTargetFTE) / bTotalTargetFTE * 100;
             break;
+          case "fteVarActual":
+            const aAvgActual = a.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / a.periods.length;
+            const aAvgTarget = a.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / a.periods.length;
+            aValue = aAvgActual - aAvgTarget;
+            const bAvgActual = b.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / b.periods.length;
+            const bAvgTarget = b.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / b.periods.length;
+            bValue = bAvgActual - bAvgTarget;
+            break;
           case "productivity":
             const aAvgFTE = a.isFTEOnly ? 0 : a.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / a.periods.length;
             const aTotalHours = aAvgFTE * 80 * a.periods.length;
@@ -8094,7 +8102,7 @@ var App = (() => {
         transition: "transform 0.3s",
         color: "#64748b"
       } }, /* @__PURE__ */ React.createElement(TrendingDown, { size: 20 })))
-    ), comparisonExpanded && /* @__PURE__ */ React.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ React.createElement("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: "13px" } }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { background: "#f8fafc", borderBottom: "2px solid #cbd5e1" } }, /* @__PURE__ */ React.createElement(
+    ), comparisonExpanded && /* @__PURE__ */ React.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ React.createElement("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: "13px" } }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { background: "#f1f5f9" } }, /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 12px", position: "sticky", left: 0, background: "#f1f5f9", zIndex: 10 } }), /* @__PURE__ */ React.createElement("th", { colSpan: 3, style: { padding: "8px 12px", textAlign: "center", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.05em", color: "#0f172a", fontWeight: "700", borderLeft: "1px solid #e2e8f0" } }, "Volume"), /* @__PURE__ */ React.createElement("th", { colSpan: 4, style: { padding: "8px 12px", textAlign: "center", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.05em", color: "#0f172a", fontWeight: "700", borderLeft: "1px solid #e2e8f0" } }, "FTE"), /* @__PURE__ */ React.createElement("th", { colSpan: 2, style: { padding: "8px 12px", textAlign: "center", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#475569", fontWeight: "600", borderLeft: "1px solid #e2e8f0" } })), /* @__PURE__ */ React.createElement("tr", { style: { background: "#f8fafc", borderBottom: "2px solid #cbd5e1" } }, /* @__PURE__ */ React.createElement(
       "th",
       {
         onClick: () => handleSort("site"),
@@ -8114,7 +8122,7 @@ var App = (() => {
         }
       },
       "Site ",
-      sortConfig.key === "site" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
+      sortConfig.key === "site" && (sortConfig.direction === "asc" ? "↑" : "↓")
     ), /* @__PURE__ */ React.createElement(
       "th",
       {
@@ -8127,11 +8135,12 @@ var App = (() => {
           color: "#475569",
           fontWeight: "700",
           cursor: "pointer",
-          userSelect: "none"
+          userSelect: "none",
+          borderLeft: "1px solid #e2e8f0"
         }
       },
       "YTD UOS ",
-      sortConfig.key === "ytdUOS" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
+      sortConfig.key === "ytdUOS" && (sortConfig.direction === "asc" ? "↑" : "↓")
     ), /* @__PURE__ */ React.createElement("th", { style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#94a3b8", fontWeight: "600" } }, "UOS Bud"), /* @__PURE__ */ React.createElement(
       "th",
       {
@@ -8148,7 +8157,7 @@ var App = (() => {
         }
       },
       "UOS Var% ",
-      sortConfig.key === "uosVar" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
+      sortConfig.key === "uosVar" && (sortConfig.direction === "asc" ? "↑" : "↓")
     ), /* @__PURE__ */ React.createElement(
       "th",
       {
@@ -8161,12 +8170,13 @@ var App = (() => {
           color: "#475569",
           fontWeight: "700",
           cursor: "pointer",
-          userSelect: "none"
+          userSelect: "none",
+          borderLeft: "1px solid #e2e8f0"
         }
       },
       "YTD FTE ",
-      sortConfig.key === "totalFTE" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
-    ), /* @__PURE__ */ React.createElement("th", { style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#94a3b8", fontWeight: "600" } }, "FTE Bud"), /* @__PURE__ */ React.createElement(
+      sortConfig.key === "totalFTE" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ), /* @__PURE__ */ React.createElement("th", { style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#94a3b8", fontWeight: "600" } }, "FTE Bud"), /* @__PURE__ */ React.createElement("th", { onClick: () => handleSort("fteVarActual"), style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#475569", fontWeight: "700", cursor: "pointer", userSelect: "none" } }, "FTE Var ", sortConfig.key === "fteVarActual" && (sortConfig.direction === "asc" ? "\u2191" : "\u2193")), /* @__PURE__ */ React.createElement(
       "th",
       {
         onClick: () => handleSort("fteVar"),
@@ -8182,7 +8192,7 @@ var App = (() => {
         }
       },
       "FTE Var% ",
-      sortConfig.key === "fteVar" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
+      sortConfig.key === "fteVar" && (sortConfig.direction === "asc" ? "↑" : "↓")
     ), /* @__PURE__ */ React.createElement(
       "th",
       {
@@ -8195,11 +8205,12 @@ var App = (() => {
           color: "#475569",
           fontWeight: "700",
           cursor: "pointer",
-          userSelect: "none"
+          userSelect: "none",
+          borderLeft: "1px solid #e2e8f0"
         }
       },
       "Productivity ",
-      sortConfig.key === "productivity" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
+      sortConfig.key === "productivity" && (sortConfig.direction === "asc" ? "↑" : "↓")
     ), /* @__PURE__ */ React.createElement(
       "th",
       {
@@ -8216,7 +8227,7 @@ var App = (() => {
         }
       },
       "Assessment ",
-      sortConfig.key === "assessment" && (sortConfig.direction === "asc" ? "\xE2\u2020\u2018" : "\xE2\u2020\u201C")
+      sortConfig.key === "assessment" && (sortConfig.direction === "asc" ? "↑" : "↓")
     ))), /* @__PURE__ */ React.createElement("tbody", null, (() => {
       const allProductivityValues = sortedData.map((site) => {
         const { productivity } = calculateMetrics(site);
@@ -8243,6 +8254,7 @@ var App = (() => {
         } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px" } }, site.site), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "10px", color: "#64748b", marginTop: "2px" } }, site.costCenter)), /* @__PURE__ */ React.createElement("td", { style: {
           padding: "12px",
           borderBottom: "1px solid #e2e8f0",
+          borderLeft: "1px solid #e2e8f0",
           color: "#334155",
           textAlign: "right",
           fontWeight: "600"
@@ -8268,6 +8280,7 @@ var App = (() => {
         } }, uosVariance > 0 ? "+" : "", uosVariance.toFixed(1), "%")), /* @__PURE__ */ React.createElement("td", { style: {
           padding: "12px",
           borderBottom: "1px solid #e2e8f0",
+          borderLeft: "1px solid #e2e8f0",
           color: "#334155",
           textAlign: "right",
           fontWeight: "600"
@@ -8277,6 +8290,12 @@ var App = (() => {
           color: "#64748b",
           textAlign: "right"
         } }, (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length).toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          color: avgFTE - (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length) > 0 ? "#dc2626" : "#16a34a",
+          textAlign: "right",
+          fontWeight: "600"
+        } }, (avgFTE - (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length) > 0 ? "+" : "") + (avgFTE - (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length)).toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: {
           padding: "12px",
           borderBottom: "1px solid #e2e8f0",
           textAlign: "right",
@@ -8293,6 +8312,7 @@ var App = (() => {
         } }, fteVariance > 0 ? "+" : "", fteVariance.toFixed(1), "%")), /* @__PURE__ */ React.createElement("td", { style: {
           padding: "12px",
           borderBottom: "1px solid #e2e8f0",
+          borderLeft: "1px solid #e2e8f0",
           textAlign: "right",
           fontWeight: "700"
         } }, isFTEOnly ? "\u2013" : /* @__PURE__ */ React.createElement("span", { style: {
