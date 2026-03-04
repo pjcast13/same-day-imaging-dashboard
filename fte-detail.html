@@ -96,7 +96,7 @@ var App = (() => {
       React.createElement('tbody', null,
         rows.map(function(row) {
           return React.createElement('tr', { key: row.label },
-            React.createElement('td', { style: row.color ? { color: row.color } : null }, row.label),
+            React.createElement('td', null, row.label),
             row.periods.map(function(v, i) {
               return React.createElement('td', { key: i, style: { color: v > 0 ? '#0f172a' : '#d1d5db' } }, v.toFixed(2));
             }),
@@ -153,7 +153,7 @@ var App = (() => {
       var d = site.payTypes[pt];
       var periods = d.periods.map(function(p, i) { payTotalPeriods[i] += p.fte; return p.fte; });
       payTotalFytd += d.fytdFTE;
-      payRows.push({ label: PAY_TYPE_LABELS[pt], periods: periods, fytd: d.fytdFTE, color: COLORS[pt] });
+      payRows.push({ label: PAY_TYPE_LABELS[pt], periods: periods, fytd: d.fytdFTE });
     });
 
     var budgetVal = site.budgetFTE;
@@ -240,7 +240,7 @@ var App = (() => {
           var periods = PERIODS.map(function(pp, pi) { var v = group.periods[pi][pt] || 0; totPeriods[pi] += v; return v; });
           var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
           totFytd += fytd;
-          payRows.push({ label: PAY_TYPE_LABELS[pt], periods: periods, fytd: fytd, color: COLORS[pt] });
+          payRows.push({ label: PAY_TYPE_LABELS[pt], periods: periods, fytd: fytd });
         });
         var budgetRow = group.totalBudget > 0 ? { periods: PERIODS.map(function() { return group.totalBudget; }), fytd: group.totalBudget } : null;
 
