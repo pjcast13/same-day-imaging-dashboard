@@ -331,12 +331,15 @@ var App = (() => {
             React.createElement('h1', { style: { fontSize: '20px', fontWeight: '700', color: '#0f172a', margin: 0 } }, 'FTE Detail Dashboard'),
             React.createElement('div', { style: { fontSize: '12px', color: '#64748b' } }, 'FY2026 PP01-PP12 | Ending ' + data.periodEndDates[data.currentPeriod] + ' | Flex budget')
           ),
-          React.createElement('div', { style: { display: 'flex', gap: '4px' } },
-            ['table', 'rollup'].map(function(v) {
-              return React.createElement('button', { key: v, onClick: function() { setView(v); setSelectedSite(null); },
-                style: { padding: '6px 14px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: '600', background: view === v ? '#0f172a' : '#f1f5f9', color: view === v ? 'white' : '#64748b' }
-              }, v === 'table' ? 'Sites' : 'Rollup');
-            })
+          React.createElement('div', { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
+            React.createElement('a', { href: 'pp12.html', style: { padding: '6px 14px', borderRadius: '6px', border: '1px solid #e2e8f0', cursor: 'pointer', fontSize: '11px', fontWeight: '500', background: 'white', color: '#64748b', textDecoration: 'none', whiteSpace: 'nowrap' } }, 'Productivity \u2192'),
+            React.createElement('div', { style: { display: 'flex', gap: '4px' } },
+              ['table', 'rollup'].map(function(v) {
+                return React.createElement('button', { key: v, onClick: function() { setView(v); setSelectedSite(null); },
+                  style: { padding: '6px 14px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: '600', background: view === v ? '#0f172a' : '#f1f5f9', color: view === v ? 'white' : '#64748b' }
+                }, v === 'table' ? 'Sites' : 'Rollup');
+              })
+            )
           )
         ),
         React.createElement('div', { style: { display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' } },
