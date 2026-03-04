@@ -9443,7 +9443,7 @@ var App = (() => {
         )
       );
     }), tutorialMode && tutorialSite && (() => {
-      const selectedSiteData = filteredSites.find((s) => s.costCenter === tutorialSite);
+      let _allSites = []; Object.keys(data).forEach((mod) => { if (data[mod]) { _allSites = [..._allSites, ...data[mod]]; } }); const selectedSiteData = _allSites.find((s) => s.costCenter === tutorialSite);
       if (!selectedSiteData) return null;
       const { uosVariance, fteVariance, productivity, isFTEOnly } = calculateMetrics(selectedSiteData);
       const avgFTE = selectedSiteData.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / selectedSiteData.periods.length;
