@@ -1,0 +1,5388 @@
+{
+  "metadata": {
+    "fiscal_year": 2026,
+    "pay_periods": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "total_employees": 726,
+    "total_permanent": 649,
+    "total_travelers": 118,
+    "method": "audited_classification_v2",
+    "active_threshold_hours": 8.0,
+    "loa_threshold_hours": 16.0,
+    "loa_rule": "ESL pay code 452 with actual hours > 0 AND productive hours < 16h"
+  },
+  "waterfall": [
+    {
+      "pp": 1,
+      "perm_active": 429,
+      "trav_active": 39,
+      "perm_on_loa": 9,
+      "total_active": 468,
+      "hires": 0,
+      "terminations": 1,
+      "trav_starts": 0,
+      "trav_ends": 1,
+      "loa_starts": 9,
+      "loa_returns": 0,
+      "training_hours": 403.7,
+      "trainee_count": 18,
+      "hire_details": [],
+      "termination_details": [
+        {
+          "name": "Amy Valenciano",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "trav_start_details": [],
+      "trav_end_details": [
+        {
+          "name": "Dre Lea",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Zachary Allen",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Caryn Damits",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Amanda Lopez",
+          "title": "RADIOLOGY READING ROOM ASST",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Nathanael Pangilinan",
+          "title": "SUPV-IMAGE LIBRARY",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Stephanie Tracey",
+          "title": "OFFICE ASST III",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Tatiana Zavala",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "TIFFANY VU",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Douglas Kurosaka",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Tanya Miller",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_return_details": []
+    },
+    {
+      "pp": 2,
+      "perm_active": 425,
+      "trav_active": 39,
+      "perm_on_loa": 10,
+      "total_active": 464,
+      "hires": 15,
+      "terminations": 2,
+      "trav_starts": 3,
+      "trav_ends": 2,
+      "loa_starts": 1,
+      "loa_returns": 0,
+      "training_hours": 449.2,
+      "trainee_count": 14,
+      "hire_details": [
+        {
+          "name": "Andres Cortes",
+          "title": "RADIOLOGY TECH AIDE (NON-REP)",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Allan Ramon Tiangson",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Joe Vargas Rodriguez Jr",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Victoria Cruz",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Ida Walworth",
+          "title": "RADIOLOGY TECHNICAL COORD",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        },
+        {
+          "name": "David Hom",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Faranak Tabatabaeian",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "JUSTIN YEUNG",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Ricky Huang",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Zdravka Ivanova",
+          "title": "RADIOLOGY TECH III",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Cynthia Hu",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Mark Vierneza",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Jennifer Tran",
+          "title": "RLF RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Jane Patrick",
+          "title": "RLF MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Garrison Chin",
+          "title": "RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Allan Ramon Tiangson",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Jennifer Tran",
+          "title": "RLF RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Kehinde Karunwi",
+          "title": "CONTRACTOR-CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Cheree Peterson",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Kaylee Puckett",
+          "title": "CONTRACTOR-NUCLEAR MED TECH",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Jorge Castaneda-Campos",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Richard Padilla",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Cynthia Peterson",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "loa_return_details": []
+    },
+    {
+      "pp": 3,
+      "perm_active": 424,
+      "trav_active": 40,
+      "perm_on_loa": 11,
+      "total_active": 464,
+      "hires": 5,
+      "terminations": 2,
+      "trav_starts": 4,
+      "trav_ends": 4,
+      "loa_starts": 2,
+      "loa_returns": 1,
+      "training_hours": 546.0,
+      "trainee_count": 14,
+      "hire_details": [
+        {
+          "name": "Fiona Holtzclaw",
+          "title": "CLINICAL NURSE IV",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Dennis Martinez",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Douglas Kurosaka",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Bhakthima Siribua",
+          "title": "RLF RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Krynn Arbuck",
+          "title": "RLF RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Serman Lim",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Savannah Morales",
+          "title": "SONOGRAPHER",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Loise Cassidy",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Jennyfer Garcia",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Amber Diego",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Mallory Wilcox",
+          "title": "CONTRACTOR-NUCLEAR MED TECH",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Seth Elam",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "James Rapose",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Justin Arriola",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Kaylee Puckett",
+          "title": "CONTRACTOR-NUCLEAR MED TECH",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Julia Amezcua",
+          "title": "MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        },
+        {
+          "name": "Manveer Kaur",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Douglas Kurosaka",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ]
+    },
+    {
+      "pp": 4,
+      "perm_active": 442,
+      "trav_active": 37,
+      "perm_on_loa": 11,
+      "total_active": 479,
+      "hires": 17,
+      "terminations": 7,
+      "trav_starts": 2,
+      "trav_ends": 2,
+      "loa_starts": 2,
+      "loa_returns": 2,
+      "training_hours": 494.3,
+      "trainee_count": 16,
+      "hire_details": [
+        {
+          "name": "Krupa Patel",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "OMAR GARCIA SERRANO",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Stephanie Tracey",
+          "title": "OFFICE ASST III",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Elizabeth Rodriguez",
+          "title": "RLF MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Marco Salvaggio",
+          "title": "MGR-BUSINESS SYSTEMS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Maria Vanessa R De Jesus",
+          "title": "ASST MGR-BIOMEDICAL ENG OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Michael Lopez",
+          "title": "ASST MGR-BIOMEDICAL ENG OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Manpreet Kaur",
+          "title": "MGR-BIOMED OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Jermaine Abapo",
+          "title": "BIOMED SYSTEMS ENGINEER",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Desire Graves",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Niko Larot",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Allen Lal",
+          "title": "LEAD BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Michael Kenery",
+          "title": "LEAD BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Joel Francisco",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Patrick Juanson",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Vikrant Prasad",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Gordon Dang",
+          "title": "ASST BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Laurina Girgis",
+          "title": "LEAD RADIOLOGY TECH",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Kendall Leung",
+          "title": "RADIOLOGY TECH I",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Michael Lopez",
+          "title": "ASST MGR-BIOMEDICAL ENG OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Desire Graves",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Niko Larot",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Michael Kenery",
+          "title": "LEAD BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Gordon Dang",
+          "title": "ASST BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Haley Martin-Collins",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Jennifer Valle",
+          "title": "CONTRACTOR-MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Melchor Paras",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Uri Zelmon",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Alfonso Padilla Jr.",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Alana Canada",
+          "title": "PATIENT CARE COORD IV",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Stephanie Tracey",
+          "title": "OFFICE ASST III",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Manveer Kaur",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ]
+    },
+    {
+      "pp": 5,
+      "perm_active": 438,
+      "trav_active": 38,
+      "perm_on_loa": 10,
+      "total_active": 476,
+      "hires": 7,
+      "terminations": 5,
+      "trav_starts": 2,
+      "trav_ends": 1,
+      "loa_starts": 1,
+      "loa_returns": 2,
+      "training_hours": 519.1,
+      "trainee_count": 16,
+      "hire_details": [
+        {
+          "name": "Alfonso Padilla Jr.",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Jensen Philip",
+          "title": "SONOGRAPHER",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        },
+        {
+          "name": "Jennifer Ortiz Garcia",
+          "title": "PATIENT ACCESS REP III",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Justin Hurd",
+          "title": "RLF CLINICAL NURSE II (LAB)",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Nathalyn Rubin",
+          "title": "CLINICAL NURSE IV",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Hayat Ali",
+          "title": "MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        },
+        {
+          "name": "Leticia Yanez",
+          "title": "RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Patricia Bolich",
+          "title": "RLF CLINICAL NURSE II (LAB)",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Cecile Kliatchko",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Alana Canada",
+          "title": "PATIENT CARE COORD IV",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Jennifer Ortiz Garcia",
+          "title": "PATIENT ACCESS REP III",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Nathalyn Rubin",
+          "title": "CLINICAL NURSE IV",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Meaghan Reilley",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Gabriela Mortillaro",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Oladipupo Akintoye",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Julia Langellotti",
+          "title": "MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Alfonso Padilla Jr.",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Alana Canada",
+          "title": "PATIENT CARE COORD IV",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ]
+    },
+    {
+      "pp": 6,
+      "perm_active": 437,
+      "trav_active": 39,
+      "perm_on_loa": 15,
+      "total_active": 476,
+      "hires": 9,
+      "terminations": 1,
+      "trav_starts": 2,
+      "trav_ends": 1,
+      "loa_starts": 6,
+      "loa_returns": 1,
+      "training_hours": 704.1,
+      "trainee_count": 25,
+      "hire_details": [
+        {
+          "name": "Zachary Allen",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Alejandra Flores",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Regina Hua",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Katy Oseguera",
+          "title": "PATIENT ACCESS REP I",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Wazma Azizi",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Mehdi Raeissi",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Mia Cruz",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Lacey Newcomer",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Simranjit Mann",
+          "title": "RLF RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Katy Oseguera",
+          "title": "PATIENT ACCESS REP I",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Andrea Crane",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Megan English",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Mateo Sanabria",
+          "title": "CONTRACTOR-CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Alanna Harrison",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Mary Hart",
+          "title": "RADIOLOGY READING ROOM ASST",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Clarence Sabado",
+          "title": "OFFICE ASST III",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Hector Perez",
+          "title": "OFFICE ASST III",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Nicole Sohal",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Joanna Goble",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Monglan Duong",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Zachary Allen",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ]
+    },
+    {
+      "pp": 7,
+      "perm_active": 435,
+      "trav_active": 37,
+      "perm_on_loa": 14,
+      "total_active": 472,
+      "hires": 4,
+      "terminations": 0,
+      "trav_starts": 0,
+      "trav_ends": 0,
+      "loa_starts": 1,
+      "loa_returns": 2,
+      "training_hours": 673.8,
+      "trainee_count": 27,
+      "hire_details": [
+        {
+          "name": "Catherine Shindelus",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "TIFFANY VU",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Jenny Maddox",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Leslie Enerio",
+          "title": "RADIOLOGY TECH I",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        }
+      ],
+      "termination_details": [],
+      "trav_start_details": [],
+      "trav_end_details": [],
+      "loa_start_details": [
+        {
+          "name": "Jeremiah Kasozi",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Mary Hart",
+          "title": "RADIOLOGY READING ROOM ASST",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "TIFFANY VU",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ]
+    },
+    {
+      "pp": 8,
+      "perm_active": 455,
+      "trav_active": 43,
+      "perm_on_loa": 15,
+      "total_active": 498,
+      "hires": 17,
+      "terminations": 14,
+      "trav_starts": 4,
+      "trav_ends": 2,
+      "loa_starts": 3,
+      "loa_returns": 2,
+      "training_hours": 988.4,
+      "trainee_count": 31,
+      "hire_details": [
+        {
+          "name": "Caryn Damits",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Eun Kim",
+          "title": "RLF SR SONOGRAPHER SPECIALIST",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        },
+        {
+          "name": "vidyasagar seerapu",
+          "title": "CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Michael Chan",
+          "title": "SR CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Aishwarya Viswanathan",
+          "title": "PRIN CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Jason Smith",
+          "title": "CLINICAL INFORMATICS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Juan Madriz",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Hardeep Singh",
+          "title": "LEAD BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Trinity Chao",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Matthew Taddei",
+          "title": "ASST BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Gabriel Ackley",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Alex Yeh",
+          "title": "SR CLIN DATA ANALYST-RADIOLOGY",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Lourdes Gueco",
+          "title": "CLINICAL NURSE II",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Kritika Jhalani",
+          "title": "LEAD CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Jeffrey Meinhold",
+          "title": "CLINICAL INFORMATICS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Senthil Vedanayagam",
+          "title": "PRIN SOFTWARE ENGINEER-INTGRTN",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Alberto Gutierrez Monroy",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Cassidy Yaksic",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "vidyasagar seerapu",
+          "title": "CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Michael Chan",
+          "title": "SR CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Jermaine Abapo",
+          "title": "BIOMED SYSTEMS ENGINEER",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Allen Lal",
+          "title": "LEAD BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Hardeep Singh",
+          "title": "LEAD BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Trinity Chao",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Vikrant Prasad",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Matthew Taddei",
+          "title": "ASST BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Leticia Yanez",
+          "title": "RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Simranjit Mann",
+          "title": "RLF RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Kritika Jhalani",
+          "title": "LEAD CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Senthil Vedanayagam",
+          "title": "PRIN SOFTWARE ENGINEER-INTGRTN",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Alberto Gutierrez Monroy",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Greyson McGee",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Tracy Seligson",
+          "title": "CONTRACTOR-MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        },
+        {
+          "name": "Dominique Charlton",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Feliciana Flores",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Samuel Lopez",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Cheree Peterson",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Alexandra Washburne",
+          "title": "RADIOLOGY READING ROOM ASST",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Jennifer Tsui",
+          "title": "DIR-FIN BUS OPERATIONS",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Tony Galletta",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Caryn Damits",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Julia Amezcua",
+          "title": "MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        }
+      ]
+    },
+    {
+      "pp": 9,
+      "perm_active": 423,
+      "trav_active": 42,
+      "perm_on_loa": 19,
+      "total_active": 465,
+      "hires": 5,
+      "terminations": 0,
+      "trav_starts": 1,
+      "trav_ends": 1,
+      "loa_starts": 7,
+      "loa_returns": 3,
+      "training_hours": 421.5,
+      "trainee_count": 11,
+      "hire_details": [
+        {
+          "name": "Kelsey McDonagh",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Tanya Miller",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Levi Aguirre",
+          "title": "CLINICAL NURSE II",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Maria De Kuykendall",
+          "title": "ACCESS OPERATIONS ASSOCIATE",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Gaelen Filtzanidis",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "termination_details": [],
+      "trav_start_details": [
+        {
+          "name": "Dana Mosley",
+          "title": "CONTRACTOR-RADIOLOGY TECH",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Agnes Davis",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Mark Bieler",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Victoria Cruz",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Brittney Godoy",
+          "title": "RADIOLOGY TECH AIDE (NON-REP)",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Melissa Lum",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Jon Mengel",
+          "title": "MRI TECHNICAL COORDINATOR",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Giuliana Hobeychi",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Zdravka Ivanova",
+          "title": "RADIOLOGY TECH III",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Hector Perez",
+          "title": "OFFICE ASST III",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Jennifer Tsui",
+          "title": "DIR-FIN BUS OPERATIONS",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Tanya Miller",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        }
+      ]
+    },
+    {
+      "pp": 10,
+      "perm_active": 451,
+      "trav_active": 47,
+      "perm_on_loa": 17,
+      "total_active": 498,
+      "hires": 4,
+      "terminations": 7,
+      "trav_starts": 5,
+      "trav_ends": 1,
+      "loa_starts": 2,
+      "loa_returns": 4,
+      "training_hours": 687.0,
+      "trainee_count": 18,
+      "hire_details": [
+        {
+          "name": "Trevor Hudson",
+          "title": "RLF NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Elizabeth Frazier",
+          "title": "RLF CLINICAL NURSE II (LAB)",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Elexiss Criswell",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Teresita Padron",
+          "title": "CLINICAL NURSE II",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Christopher Clark",
+          "title": "RADIOLOGY TECH AIDE (NON-REP)",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Michelle Zhang",
+          "title": "OFFICE ASSISTANT III (SEIU)",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Nancy Carpio",
+          "title": "OFFICE ASSISTANT III (SEIU)",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Stephanie Tracey",
+          "title": "OFFICE ASST III",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Alen Jabraeili-Saatlouei",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Aubrey Curtis-Peno",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Teresa Lacey",
+          "title": "SONOGRAPHER",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Lydia Henton",
+          "title": "CONTRACTOR-SONOGRAPHER",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        },
+        {
+          "name": "Wendy Rotar",
+          "title": "CONTRACTOR-MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        },
+        {
+          "name": "Catrina Lanchinebre",
+          "title": "CONTRACTOR-CLIN-MEDICAL ASST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Destiny Camacho",
+          "title": "CONTRACTOR-CLIN-MEDICAL ASST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Tracey Amato",
+          "title": "CONTRACTOR-NUCLEAR MED TECH",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Rachael Ramler",
+          "title": "CONTRACTOR-MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Dorothy Doan",
+          "title": "NURSE COORDINATOR",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Kiyoe Quarry",
+          "title": "RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Victoria Cruz",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Brittney Godoy",
+          "title": "RADIOLOGY TECH AIDE (NON-REP)",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Giuliana Hobeychi",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Zdravka Ivanova",
+          "title": "RADIOLOGY TECH III",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        }
+      ]
+    },
+    {
+      "pp": 11,
+      "perm_active": 449,
+      "trav_active": 49,
+      "perm_on_loa": 17,
+      "total_active": 498,
+      "hires": 3,
+      "terminations": 18,
+      "trav_starts": 4,
+      "trav_ends": 4,
+      "loa_starts": 2,
+      "loa_returns": 2,
+      "training_hours": 700.3,
+      "trainee_count": 23,
+      "hire_details": [
+        {
+          "name": "Afeefa Rizvi",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Nancy Ceja",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Suruj Narayan",
+          "title": "ASST MGR-BIOMEDICAL ENG OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Edgard Mendez-Rodriguez",
+          "title": "RLF CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "TIFFANY VU",
+          "title": "NUCLEAR MED TECHNOLOGIST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Gabriela Mora",
+          "title": "SR SONOGRAPHER",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        },
+        {
+          "name": "James Choyce",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Douglas Kurosaka",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Monica Pacheco",
+          "title": "RADIOLOGY TECH AIDE (NON-REP)",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Elizabeth Rodriguez",
+          "title": "RLF MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Justin Hurd",
+          "title": "RLF CLINICAL NURSE II (LAB)",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        },
+        {
+          "name": "Marco Salvaggio",
+          "title": "MGR-BUSINESS SYSTEMS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Maria Vanessa R De Jesus",
+          "title": "ASST MGR-BIOMEDICAL ENG OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Manpreet Kaur",
+          "title": "MGR-BIOMED OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Aishwarya Viswanathan",
+          "title": "PRIN CLINICAL SYSTEMS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Jason Smith",
+          "title": "CLINICAL INFORMATICS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Juan Madriz",
+          "title": "CERT BIO-MED EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Joel Francisco",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Patrick Juanson",
+          "title": "BIO-MEDICAL EQUIP TECH",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Jeffrey Meinhold",
+          "title": "CLINICAL INFORMATICS ANALYST",
+          "manager": "Judy Wood",
+          "modality": "US"
+        },
+        {
+          "name": "Suruj Narayan",
+          "title": "ASST MGR-BIOMEDICAL ENG OPS",
+          "manager": "Judy Wood",
+          "modality": "US"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Teresa Lacey",
+          "title": "SONOGRAPHER",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        },
+        {
+          "name": "Christopher Irvine",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Jehan Ferrera",
+          "title": "CONTRACTOR-CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Demetrius Thermidor",
+          "title": "CONTRACTOR-NUCLEAR MED TECH",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Qiao Dan Zheng",
+          "title": "CONTRACTOR-CLINICAL NURSE",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Ricky Phan",
+          "title": "BUSINESS OPERATIONS ANALYST",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Thomas Armstrong",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Destiny Camacho",
+          "title": "CONTRACTOR-CLIN-MEDICAL ASST",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Judith Wood",
+          "title": "EXEC DIR-IMAGING SERVICES",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Rudolph Brookter III",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Jeremiah Kasozi",
+          "title": "CLINICAL NURSE II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Melissa Lum",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ]
+    },
+    {
+      "pp": 12,
+      "perm_active": 437,
+      "trav_active": 48,
+      "perm_on_loa": 18,
+      "total_active": 485,
+      "hires": 3,
+      "terminations": 14,
+      "trav_starts": 1,
+      "trav_ends": 1,
+      "loa_starts": 4,
+      "loa_returns": 3,
+      "training_hours": 548.9,
+      "trainee_count": 16,
+      "hire_details": [
+        {
+          "name": "Amanda Lopez",
+          "title": "RADIOLOGY READING ROOM ASST",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Meredith Muratori",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Miguel Moreno",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "termination_details": [
+        {
+          "name": "Israel Fine",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Ma Orozco Barriga",
+          "title": "CT TECHNOLOGIST",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        },
+        {
+          "name": "Angela Dignadice",
+          "title": "RLF CT TECHNOLOGIST",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Dang Lee",
+          "title": "CLINICAL NURSE IV",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Uyen Nguyen",
+          "title": "CLINICAL NURSE IV",
+          "manager": "Monglan Duong",
+          "modality": "CT"
+        },
+        {
+          "name": "Jennifer Tsui",
+          "title": "DIR-FIN BUS OPERATIONS",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Brittney Godoy",
+          "title": "RADIOLOGY TECH AIDE (NON-REP)",
+          "manager": "Stephanie Shaffer",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Thuy Tien Tran",
+          "title": "RLF MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Paula Fredricks",
+          "title": "RLF MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Anthony Keoni Marquez",
+          "title": "RADIOLOGY TECH AIDE (NON-REP)",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Sara George",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Rose Serriteno",
+          "title": "RLF RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Emmanuel Rivera",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Levi Aguirre",
+          "title": "CLINICAL NURSE II",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "trav_start_details": [
+        {
+          "name": "Shakira Browne",
+          "title": "CONTRACTOR-NUCLEAR MED TECH",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "trav_end_details": [
+        {
+          "name": "Jennyfer Garcia",
+          "title": "CONTRACTOR-MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ],
+      "loa_start_details": [
+        {
+          "name": "Ricky Phan",
+          "title": "BUSINESS OPERATIONS ANALYST",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Manveer Kaur",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Thomas Norgren",
+          "title": "RADIOLOGY TECH II",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        },
+        {
+          "name": "Tina Brewer",
+          "title": "LEAD RADIOLOGY TECH",
+          "manager": "Marilyn Son",
+          "modality": "XRAY"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Amanda Lopez",
+          "title": "RADIOLOGY READING ROOM ASST",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Tony Galletta",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Kiyoe Quarry",
+          "title": "RADIOLOGY TECH I",
+          "manager": "Teddy Kosciolek",
+          "modality": "XRAY"
+        }
+      ]
+    },
+    {
+      "pp": 13,
+      "perm_active": 435,
+      "trav_active": 49,
+      "perm_on_loa": 19,
+      "total_active": 484,
+      "hires": 4,
+      "terminations": 0,
+      "trav_starts": 2,
+      "trav_ends": 0,
+      "loa_starts": 2,
+      "loa_returns": 1,
+      "training_hours": 666.7,
+      "trainee_count": 30,
+      "hire_details": [
+        {
+          "name": "JULIA JACOBS",
+          "title": "RLF MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        },
+        {
+          "name": "Marianne Johnson",
+          "title": "SR SONOGRAPHER SPECIALIST",
+          "manager": "Krystal Aoay",
+          "modality": "US"
+        },
+        {
+          "name": "Angelo Farrington",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        },
+        {
+          "name": "Rosalia Nisenbaum",
+          "title": "CLINICAL NURSE III",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "termination_details": [],
+      "trav_start_details": [
+        {
+          "name": "Baylis Zak",
+          "title": "CONTRACTOR-MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        },
+        {
+          "name": "Zannecqua Callum",
+          "title": "CONTRACTOR-MAMMOGRAPHY TECH",
+          "manager": "Audrey Strain",
+          "modality": "MAMMO"
+        }
+      ],
+      "trav_end_details": [],
+      "loa_start_details": [
+        {
+          "name": "Jordyn Carroll",
+          "title": "QUALITY PROJ MGR - RADIOLOGY",
+          "manager": "Judy Wood",
+          "modality": "ADMIN"
+        },
+        {
+          "name": "Jessica King",
+          "title": "SUPV-RADIOLOGY NUCLEAR MED",
+          "manager": "Tina Visser",
+          "modality": "NM"
+        }
+      ],
+      "loa_return_details": [
+        {
+          "name": "Manveer Kaur",
+          "title": "MRI TECHNOLOGIST",
+          "manager": "Teresa Nelson",
+          "modality": "MRI"
+        }
+      ]
+    }
+  ],
+  "by_manager": {
+    "Audrey Strain": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 16,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 18,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 16,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 18,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Ida Walworth"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 16,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 18,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Julia Amezcua"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 15,
+          "trav": 3,
+          "perm_on_loa": 1,
+          "total": 18,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [
+            "Jennifer Valle"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 16,
+          "trav": 3,
+          "perm_on_loa": 2,
+          "total": 19,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 16.0,
+          "hire_names": [
+            "Hayat Ali"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Julia Langellotti"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 15,
+          "trav": 3,
+          "perm_on_loa": 2,
+          "total": 18,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 8.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 15,
+          "trav": 3,
+          "perm_on_loa": 2,
+          "total": 18,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 16,
+          "trav": 4,
+          "perm_on_loa": 1,
+          "total": 20,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 8.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [
+            "Tracy Seligson"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Julia Amezcua"
+          ]
+        },
+        {
+          "pp": 9,
+          "perm": 15,
+          "trav": 4,
+          "perm_on_loa": 1,
+          "total": 19,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 8.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 10,
+          "perm": 17,
+          "trav": 5,
+          "perm_on_loa": 1,
+          "total": 22,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [
+            "Wendy Rotar"
+          ],
+          "trav_end_names": [
+            "Rachael Ramler"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 11,
+          "perm": 17,
+          "trav": 4,
+          "perm_on_loa": 1,
+          "total": 21,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 17,
+          "trav": 4,
+          "perm_on_loa": 1,
+          "total": 21,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 8.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 13,
+          "perm": 18,
+          "trav": 6,
+          "perm_on_loa": 1,
+          "total": 24,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 2,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 10.0,
+          "hire_names": [
+            "JULIA JACOBS"
+          ],
+          "termination_names": [],
+          "trav_start_names": [
+            "Baylis Zak",
+            "Zannecqua Callum"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 16,
+        "end_perm": 18,
+        "net_perm": 2,
+        "start_trav": 2,
+        "end_trav": 6,
+        "total_hires": 3,
+        "total_terminations": 0,
+        "total_trav_starts": 5,
+        "total_trav_ends": 1,
+        "total_loa_starts": 2,
+        "total_loa_returns": 1,
+        "total_training_hours": 58.0,
+        "modalities": [
+          "MAMMO"
+        ]
+      }
+    },
+    "Judy Wood": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 52,
+          "trav": 0,
+          "perm_on_loa": 3,
+          "total": 52,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 3,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Amanda Lopez",
+            "Nathanael Pangilinan",
+            "Stephanie Tracey"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 52,
+          "trav": 0,
+          "perm_on_loa": 3,
+          "total": 52,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 51,
+          "trav": 0,
+          "perm_on_loa": 3,
+          "total": 51,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 65,
+          "trav": 0,
+          "perm_on_loa": 2,
+          "total": 65,
+          "hires": 14,
+          "terminations": 5,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Stephanie Tracey",
+            "Marco Salvaggio",
+            "Maria Vanessa R De Jesus",
+            "Michael Lopez",
+            "Manpreet Kaur",
+            "Jermaine Abapo",
+            "Desire Graves",
+            "Niko Larot",
+            "Allen Lal",
+            "Michael Kenery",
+            "Joel Francisco",
+            "Patrick Juanson",
+            "Vikrant Prasad",
+            "Gordon Dang"
+          ],
+          "termination_names": [
+            "Michael Lopez",
+            "Desire Graves",
+            "Niko Larot",
+            "Michael Kenery",
+            "Gordon Dang"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Stephanie Tracey"
+          ]
+        },
+        {
+          "pp": 5,
+          "perm": 52,
+          "trav": 0,
+          "perm_on_loa": 2,
+          "total": 52,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 51,
+          "trav": 0,
+          "perm_on_loa": 4,
+          "total": 51,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 2,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Mary Hart",
+            "Clarence Sabado"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 51,
+          "trav": 0,
+          "perm_on_loa": 3,
+          "total": 51,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 24.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Mary Hart"
+          ]
+        },
+        {
+          "pp": 8,
+          "perm": 70,
+          "trav": 0,
+          "perm_on_loa": 5,
+          "total": 70,
+          "hires": 13,
+          "terminations": 11,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 2,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "vidyasagar seerapu",
+            "Michael Chan",
+            "Aishwarya Viswanathan",
+            "Jason Smith",
+            "Juan Madriz",
+            "Hardeep Singh",
+            "Trinity Chao",
+            "Matthew Taddei",
+            "Alex Yeh",
+            "Kritika Jhalani",
+            "Jeffrey Meinhold",
+            "Senthil Vedanayagam",
+            "Alberto Gutierrez Monroy"
+          ],
+          "termination_names": [
+            "vidyasagar seerapu",
+            "Michael Chan",
+            "Jermaine Abapo",
+            "Allen Lal",
+            "Hardeep Singh",
+            "Trinity Chao",
+            "Vikrant Prasad",
+            "Matthew Taddei",
+            "Kritika Jhalani",
+            "Senthil Vedanayagam",
+            "Alberto Gutierrez Monroy"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Alexandra Washburne",
+            "Jennifer Tsui"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 51,
+          "trav": 0,
+          "perm_on_loa": 4,
+          "total": 51,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Jennifer Tsui"
+          ]
+        },
+        {
+          "pp": 10,
+          "perm": 52,
+          "trav": 0,
+          "perm_on_loa": 4,
+          "total": 52,
+          "hires": 0,
+          "terminations": 3,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "Michelle Zhang",
+            "Nancy Carpio",
+            "Stephanie Tracey"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 11,
+          "perm": 58,
+          "trav": 0,
+          "perm_on_loa": 5,
+          "total": 58,
+          "hires": 1,
+          "terminations": 10,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Suruj Narayan"
+          ],
+          "termination_names": [
+            "Marco Salvaggio",
+            "Maria Vanessa R De Jesus",
+            "Manpreet Kaur",
+            "Aishwarya Viswanathan",
+            "Jason Smith",
+            "Juan Madriz",
+            "Joel Francisco",
+            "Patrick Juanson",
+            "Jeffrey Meinhold",
+            "Suruj Narayan"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Judith Wood"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 49,
+          "trav": 0,
+          "perm_on_loa": 4,
+          "total": 49,
+          "hires": 1,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Amanda Lopez"
+          ],
+          "termination_names": [
+            "Jennifer Tsui"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Amanda Lopez"
+          ]
+        },
+        {
+          "pp": 13,
+          "perm": 47,
+          "trav": 0,
+          "perm_on_loa": 5,
+          "total": 47,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Jordyn Carroll"
+          ],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 52,
+        "end_perm": 47,
+        "net_perm": -5,
+        "start_trav": 0,
+        "end_trav": 0,
+        "total_hires": 29,
+        "total_terminations": 30,
+        "total_trav_starts": 0,
+        "total_trav_ends": 0,
+        "total_loa_starts": 9,
+        "total_loa_returns": 4,
+        "total_training_hours": 24.0,
+        "modalities": [
+          "ADMIN",
+          "US"
+        ]
+      }
+    },
+    "Kris Owiesny": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 36.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 10,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 11,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 13,
+          "perm": 4,
+          "trav": 0,
+          "perm_on_loa": 0,
+          "total": 4,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 4,
+        "end_perm": 4,
+        "net_perm": 0,
+        "start_trav": 0,
+        "end_trav": 0,
+        "total_hires": 0,
+        "total_terminations": 0,
+        "total_trav_starts": 0,
+        "total_trav_ends": 0,
+        "total_loa_starts": 0,
+        "total_loa_returns": 0,
+        "total_training_hours": 36.0,
+        "modalities": [
+          "ADMIN"
+        ]
+      }
+    },
+    "Krystal Aoay": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 38,
+          "trav": 4,
+          "perm_on_loa": 0,
+          "total": 42,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 38,
+          "trav": 4,
+          "perm_on_loa": 0,
+          "total": 42,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 21.5,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 36,
+          "trav": 4,
+          "perm_on_loa": 0,
+          "total": 40,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "Savannah Morales"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 37,
+          "trav": 3,
+          "perm_on_loa": 0,
+          "total": 40,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 37,
+          "trav": 3,
+          "perm_on_loa": 0,
+          "total": 40,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Jensen Philip"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 37,
+          "trav": 4,
+          "perm_on_loa": 0,
+          "total": 41,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 26.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 38,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 40,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 38,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 40,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Eun Kim"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 36,
+          "trav": 3,
+          "perm_on_loa": 0,
+          "total": 39,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 10,
+          "perm": 39,
+          "trav": 5,
+          "perm_on_loa": 0,
+          "total": 44,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "Teresa Lacey"
+          ],
+          "trav_start_names": [
+            "Lydia Henton"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 11,
+          "perm": 37,
+          "trav": 5,
+          "perm_on_loa": 0,
+          "total": 42,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "Gabriela Mora"
+          ],
+          "trav_start_names": [
+            "Teresa Lacey"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 35,
+          "trav": 6,
+          "perm_on_loa": 0,
+          "total": 41,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 2.2,
+          "hire_names": [],
+          "termination_names": [
+            "Ma Orozco Barriga"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 13,
+          "perm": 37,
+          "trav": 6,
+          "perm_on_loa": 0,
+          "total": 43,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 10.5,
+          "hire_names": [
+            "Marianne Johnson"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 38,
+        "end_perm": 37,
+        "net_perm": -1,
+        "start_trav": 4,
+        "end_trav": 6,
+        "total_hires": 3,
+        "total_terminations": 4,
+        "total_trav_starts": 2,
+        "total_trav_ends": 0,
+        "total_loa_starts": 0,
+        "total_loa_returns": 0,
+        "total_training_hours": 60.2,
+        "modalities": [
+          "US"
+        ]
+      }
+    },
+    "Marilyn Son": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 33,
+          "trav": 0,
+          "perm_on_loa": 1,
+          "total": 33,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 17.2,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Tanya Miller"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 34,
+          "trav": 0,
+          "perm_on_loa": 1,
+          "total": 34,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 15.7,
+          "hire_names": [
+            "Zdravka Ivanova"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 33,
+          "trav": 0,
+          "perm_on_loa": 1,
+          "total": 33,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 16.9,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 34,
+          "trav": 0,
+          "perm_on_loa": 1,
+          "total": 34,
+          "hires": 0,
+          "terminations": 2,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 8.4,
+          "hire_names": [],
+          "termination_names": [
+            "Laurina Girgis",
+            "Kendall Leung"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 31,
+          "trav": 0,
+          "perm_on_loa": 1,
+          "total": 31,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 22.3,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 32,
+          "trav": 0,
+          "perm_on_loa": 1,
+          "total": 32,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 10.5,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 31,
+          "trav": 0,
+          "perm_on_loa": 1,
+          "total": 31,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 51.6,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 29,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 31,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 2,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 36.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [
+            "Greyson McGee",
+            "Feliciana Flores"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 29,
+          "trav": 2,
+          "perm_on_loa": 2,
+          "total": 31,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 2,
+          "loa_returns": 1,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Tanya Miller"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Giuliana Hobeychi",
+            "Zdravka Ivanova"
+          ],
+          "loa_return_names": [
+            "Tanya Miller"
+          ]
+        },
+        {
+          "pp": 10,
+          "perm": 32,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 34,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 2,
+          "training_hours": 34.5,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Giuliana Hobeychi",
+            "Zdravka Ivanova"
+          ]
+        },
+        {
+          "pp": 11,
+          "perm": 31,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 33,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 43.1,
+          "hire_names": [],
+          "termination_names": [
+            "Monica Pacheco"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 30,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 32,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "Anthony Keoni Marquez"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Tina Brewer"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 13,
+          "perm": 30,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 32,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 33,
+        "end_perm": 30,
+        "net_perm": -3,
+        "start_trav": 0,
+        "end_trav": 2,
+        "total_hires": 2,
+        "total_terminations": 4,
+        "total_trav_starts": 2,
+        "total_trav_ends": 0,
+        "total_loa_starts": 4,
+        "total_loa_returns": 3,
+        "total_training_hours": 256.2,
+        "modalities": [
+          "XRAY"
+        ]
+      }
+    },
+    "Monglan Duong": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 64,
+          "trav": 3,
+          "perm_on_loa": 1,
+          "total": 67,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 10.9,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Caryn Damits"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 65,
+          "trav": 3,
+          "perm_on_loa": 1,
+          "total": 68,
+          "hires": 2,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Allan Ramon Tiangson",
+            "Joe Vargas Rodriguez Jr"
+          ],
+          "termination_names": [
+            "Allan Ramon Tiangson"
+          ],
+          "trav_start_names": [
+            "Kehinde Karunwi"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 63,
+          "trav": 3,
+          "perm_on_loa": 1,
+          "total": 66,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 65,
+          "trav": 4,
+          "perm_on_loa": 1,
+          "total": 69,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "OMAR GARCIA SERRANO"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 65,
+          "trav": 4,
+          "perm_on_loa": 1,
+          "total": 69,
+          "hires": 1,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 2.5,
+          "hire_names": [
+            "Nathalyn Rubin"
+          ],
+          "termination_names": [
+            "Nathalyn Rubin"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 66,
+          "trav": 4,
+          "perm_on_loa": 2,
+          "total": 70,
+          "hires": 2,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 1,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 72.0,
+          "hire_names": [
+            "Alejandra Flores",
+            "Regina Hua"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [
+            "Mateo Sanabria"
+          ],
+          "loa_start_names": [
+            "Joanna Goble"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 66,
+          "trav": 3,
+          "perm_on_loa": 2,
+          "total": 69,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 156.9,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 65,
+          "trav": 3,
+          "perm_on_loa": 1,
+          "total": 68,
+          "hires": 2,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 159.8,
+          "hire_names": [
+            "Caryn Damits",
+            "Gabriel Ackley"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Caryn Damits"
+          ]
+        },
+        {
+          "pp": 9,
+          "perm": 63,
+          "trav": 3,
+          "perm_on_loa": 2,
+          "total": 66,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 63.3,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Mark Bieler"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 10,
+          "perm": 66,
+          "trav": 3,
+          "perm_on_loa": 2,
+          "total": 69,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 99.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 11,
+          "perm": 67,
+          "trav": 4,
+          "perm_on_loa": 2,
+          "total": 71,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 93.5,
+          "hire_names": [],
+          "termination_names": [
+            "Edgard Mendez-Rodriguez"
+          ],
+          "trav_start_names": [
+            "Jehan Ferrera"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 66,
+          "trav": 4,
+          "perm_on_loa": 2,
+          "total": 70,
+          "hires": 0,
+          "terminations": 4,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 58.7,
+          "hire_names": [],
+          "termination_names": [
+            "Israel Fine",
+            "Angela Dignadice",
+            "Dang Lee",
+            "Uyen Nguyen"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 13,
+          "perm": 63,
+          "trav": 4,
+          "perm_on_loa": 2,
+          "total": 67,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 45.2,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 64,
+        "end_perm": 63,
+        "net_perm": -1,
+        "start_trav": 3,
+        "end_trav": 4,
+        "total_hires": 8,
+        "total_terminations": 7,
+        "total_trav_starts": 2,
+        "total_trav_ends": 1,
+        "total_loa_starts": 3,
+        "total_loa_returns": 1,
+        "total_training_hours": 761.8000000000002,
+        "modalities": [
+          "CT",
+          "XRAY"
+        ]
+      }
+    },
+    "Stephanie Shaffer": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 11,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 13,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 10,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 12,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 11,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 13,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [
+            "Dennis Martinez"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 11,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 13,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 11,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 13,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 11,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 13,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Nicole Sohal"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 12,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 14,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 37.8,
+          "hire_names": [
+            "Leslie Enerio"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 12,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 14,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 78.2,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [
+            "Samuel Lopez"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 11,
+          "trav": 0,
+          "perm_on_loa": 2,
+          "total": 11,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 52.4,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Brittney Godoy"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 10,
+          "perm": 12,
+          "trav": 1,
+          "perm_on_loa": 1,
+          "total": 13,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Brittney Godoy"
+          ]
+        },
+        {
+          "pp": 11,
+          "perm": 11,
+          "trav": 1,
+          "perm_on_loa": 2,
+          "total": 12,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "James Choyce"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Rudolph Brookter III"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 10,
+          "trav": 1,
+          "perm_on_loa": 2,
+          "total": 11,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "Brittney Godoy"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 13,
+          "perm": 9,
+          "trav": 1,
+          "perm_on_loa": 2,
+          "total": 10,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 11,
+        "end_perm": 9,
+        "net_perm": -2,
+        "start_trav": 2,
+        "end_trav": 1,
+        "total_hires": 2,
+        "total_terminations": 2,
+        "total_trav_starts": 0,
+        "total_trav_ends": 1,
+        "total_loa_starts": 3,
+        "total_loa_returns": 1,
+        "total_training_hours": 168.4,
+        "modalities": [
+          "MAMMO",
+          "XRAY"
+        ]
+      }
+    },
+    "Teddy Kosciolek": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 75,
+          "trav": 13,
+          "perm_on_loa": 2,
+          "total": 88,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 2,
+          "loa_returns": 0,
+          "training_hours": 55.2,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Zachary Allen",
+            "Douglas Kurosaka"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 76,
+          "trav": 13,
+          "perm_on_loa": 2,
+          "total": 89,
+          "hires": 4,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 91.0,
+          "hire_names": [
+            "Cynthia Hu",
+            "Mark Vierneza",
+            "Jennifer Tran",
+            "Garrison Chin"
+          ],
+          "termination_names": [
+            "Jennifer Tran"
+          ],
+          "trav_start_names": [
+            "Cheree Peterson"
+          ],
+          "trav_end_names": [
+            "Richard Padilla"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 77,
+          "trav": 13,
+          "perm_on_loa": 1,
+          "total": 90,
+          "hires": 3,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 2,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 194.8,
+          "hire_names": [
+            "Douglas Kurosaka",
+            "Bhakthima Siribua",
+            "Krynn Arbuck"
+          ],
+          "termination_names": [],
+          "trav_start_names": [
+            "Loise Cassidy"
+          ],
+          "trav_end_names": [
+            "James Rapose",
+            "Justin Arriola"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Douglas Kurosaka"
+          ]
+        },
+        {
+          "pp": 4,
+          "perm": 79,
+          "trav": 12,
+          "perm_on_loa": 1,
+          "total": 91,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 138.7,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [
+            "Haley Martin-Collins"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 81,
+          "trav": 13,
+          "perm_on_loa": 1,
+          "total": 94,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 187.3,
+          "hire_names": [
+            "Leticia Yanez"
+          ],
+          "termination_names": [],
+          "trav_start_names": [
+            "Gabriela Mortillaro"
+          ],
+          "trav_end_names": [
+            "Oladipupo Akintoye"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 6,
+          "perm": 84,
+          "trav": 11,
+          "perm_on_loa": 0,
+          "total": 95,
+          "hires": 2,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 167.9,
+          "hire_names": [
+            "Zachary Allen",
+            "Simranjit Mann"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Zachary Allen"
+          ]
+        },
+        {
+          "pp": 7,
+          "perm": 83,
+          "trav": 12,
+          "perm_on_loa": 1,
+          "total": 95,
+          "hires": 2,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 19.2,
+          "hire_names": [
+            "Catherine Shindelus",
+            "Jenny Maddox"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Jeremiah Kasozi"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 84,
+          "trav": 14,
+          "perm_on_loa": 1,
+          "total": 98,
+          "hires": 0,
+          "terminations": 2,
+          "trav_starts": 1,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 140.3,
+          "hire_names": [],
+          "termination_names": [
+            "Leticia Yanez",
+            "Simranjit Mann"
+          ],
+          "trav_start_names": [
+            "Dominique Charlton"
+          ],
+          "trav_end_names": [
+            "Cheree Peterson"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 79,
+          "trav": 14,
+          "perm_on_loa": 1,
+          "total": 93,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [
+            "Dana Mosley"
+          ],
+          "trav_end_names": [
+            "Agnes Davis"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 10,
+          "perm": 82,
+          "trav": 13,
+          "perm_on_loa": 2,
+          "total": 95,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 127.4,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Kiyoe Quarry"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 11,
+          "perm": 79,
+          "trav": 13,
+          "perm_on_loa": 1,
+          "total": 92,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 2,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 63.9,
+          "hire_names": [],
+          "termination_names": [
+            "Douglas Kurosaka"
+          ],
+          "trav_start_names": [
+            "Christopher Irvine"
+          ],
+          "trav_end_names": [
+            "Qiao Dan Zheng",
+            "Ricky Phan"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Jeremiah Kasozi"
+          ]
+        },
+        {
+          "pp": 12,
+          "perm": 82,
+          "trav": 12,
+          "perm_on_loa": 2,
+          "total": 94,
+          "hires": 0,
+          "terminations": 3,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 2,
+          "loa_returns": 1,
+          "training_hours": 69.8,
+          "hire_names": [],
+          "termination_names": [
+            "Sara George",
+            "Rose Serriteno",
+            "Emmanuel Rivera"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Ricky Phan",
+            "Thomas Norgren"
+          ],
+          "loa_return_names": [
+            "Kiyoe Quarry"
+          ]
+        },
+        {
+          "pp": 13,
+          "perm": 79,
+          "trav": 12,
+          "perm_on_loa": 2,
+          "total": 91,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 84.2,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 75,
+        "end_perm": 79,
+        "net_perm": 4,
+        "start_trav": 13,
+        "end_trav": 12,
+        "total_hires": 12,
+        "total_terminations": 7,
+        "total_trav_starts": 7,
+        "total_trav_ends": 8,
+        "total_loa_starts": 6,
+        "total_loa_returns": 4,
+        "total_training_hours": 1339.7000000000003,
+        "modalities": [
+          "XRAY"
+        ]
+      }
+    },
+    "Teresa Nelson": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 107,
+          "trav": 14,
+          "perm_on_loa": 1,
+          "total": 121,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 1,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 253.8,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [
+            "Dre Lea"
+          ],
+          "loa_start_names": [
+            "Tatiana Zavala"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 103,
+          "trav": 13,
+          "perm_on_loa": 2,
+          "total": 116,
+          "hires": 5,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 1,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 254.5,
+          "hire_names": [
+            "Andres Cortes",
+            "Victoria Cruz",
+            "David Hom",
+            "Faranak Tabatabaeian",
+            "Jane Patrick"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [
+            "Jorge Castaneda-Campos"
+          ],
+          "loa_start_names": [
+            "Cynthia Peterson"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 107,
+          "trav": 13,
+          "perm_on_loa": 3,
+          "total": 120,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 2,
+          "trav_ends": 1,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 220.0,
+          "hire_names": [],
+          "termination_names": [
+            "Serman Lim"
+          ],
+          "trav_start_names": [
+            "Jennyfer Garcia",
+            "Amber Diego"
+          ],
+          "trav_end_names": [
+            "Seth Elam"
+          ],
+          "loa_start_names": [
+            "Manveer Kaur"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 105,
+          "trav": 11,
+          "perm_on_loa": 3,
+          "total": 116,
+          "hires": 2,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 2,
+          "loa_starts": 1,
+          "loa_returns": 1,
+          "training_hours": 275.2,
+          "hire_names": [
+            "Krupa Patel",
+            "Elizabeth Rodriguez"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [
+            "Melchor Paras",
+            "Uri Zelmon"
+          ],
+          "loa_start_names": [
+            "Alfonso Padilla Jr."
+          ],
+          "loa_return_names": [
+            "Manveer Kaur"
+          ]
+        },
+        {
+          "pp": 5,
+          "perm": 110,
+          "trav": 11,
+          "perm_on_loa": 2,
+          "total": 121,
+          "hires": 1,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 219.0,
+          "hire_names": [
+            "Alfonso Padilla Jr."
+          ],
+          "termination_names": [
+            "Patricia Bolich"
+          ],
+          "trav_start_names": [
+            "Meaghan Reilley"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Alfonso Padilla Jr."
+          ]
+        },
+        {
+          "pp": 6,
+          "perm": 111,
+          "trav": 13,
+          "perm_on_loa": 4,
+          "total": 124,
+          "hires": 3,
+          "terminations": 1,
+          "trav_starts": 2,
+          "trav_ends": 0,
+          "loa_starts": 2,
+          "loa_returns": 0,
+          "training_hours": 309.8,
+          "hire_names": [
+            "Katy Oseguera",
+            "Wazma Azizi",
+            "Mehdi Raeissi"
+          ],
+          "termination_names": [
+            "Katy Oseguera"
+          ],
+          "trav_start_names": [
+            "Andrea Crane",
+            "Megan English"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Alanna Harrison",
+            "Hector Perez"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 107,
+          "trav": 13,
+          "perm_on_loa": 4,
+          "total": 120,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 322.5,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 8,
+          "perm": 108,
+          "trav": 14,
+          "perm_on_loa": 5,
+          "total": 122,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 470.4,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Tony Galletta"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 103,
+          "trav": 14,
+          "perm_on_loa": 7,
+          "total": 117,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 3,
+          "loa_returns": 1,
+          "training_hours": 231.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Victoria Cruz",
+            "Melissa Lum",
+            "Jon Mengel"
+          ],
+          "loa_return_names": [
+            "Hector Perez"
+          ]
+        },
+        {
+          "pp": 10,
+          "perm": 109,
+          "trav": 13,
+          "perm_on_loa": 7,
+          "total": 122,
+          "hires": 1,
+          "terminations": 2,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 1,
+          "training_hours": 336.3,
+          "hire_names": [
+            "Elexiss Criswell"
+          ],
+          "termination_names": [
+            "Christopher Clark",
+            "Alen Jabraeili-Saatlouei"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Dorothy Doan"
+          ],
+          "loa_return_names": [
+            "Victoria Cruz"
+          ]
+        },
+        {
+          "pp": 11,
+          "perm": 107,
+          "trav": 14,
+          "perm_on_loa": 6,
+          "total": 121,
+          "hires": 1,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 424.4,
+          "hire_names": [
+            "Afeefa Rizvi"
+          ],
+          "termination_names": [
+            "Elizabeth Rodriguez"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [
+            "Thomas Armstrong"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Melissa Lum"
+          ]
+        },
+        {
+          "pp": 12,
+          "perm": 109,
+          "trav": 13,
+          "perm_on_loa": 6,
+          "total": 122,
+          "hires": 2,
+          "terminations": 2,
+          "trav_starts": 0,
+          "trav_ends": 1,
+          "loa_starts": 1,
+          "loa_returns": 1,
+          "training_hours": 410.2,
+          "hire_names": [
+            "Meredith Muratori",
+            "Miguel Moreno"
+          ],
+          "termination_names": [
+            "Thuy Tien Tran",
+            "Paula Fredricks"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [
+            "Jennyfer Garcia"
+          ],
+          "loa_start_names": [
+            "Manveer Kaur"
+          ],
+          "loa_return_names": [
+            "Tony Galletta"
+          ]
+        },
+        {
+          "pp": 13,
+          "perm": 111,
+          "trav": 12,
+          "perm_on_loa": 5,
+          "total": 123,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 485.9,
+          "hire_names": [
+            "Angelo Farrington"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Manveer Kaur"
+          ]
+        }
+      ],
+      "summary": {
+        "start_perm": 107,
+        "end_perm": 111,
+        "net_perm": 4,
+        "start_trav": 14,
+        "end_trav": 12,
+        "total_hires": 16,
+        "total_terminations": 8,
+        "total_trav_starts": 5,
+        "total_trav_ends": 7,
+        "total_loa_starts": 12,
+        "total_loa_returns": 7,
+        "total_training_hours": 4213.0,
+        "modalities": [
+          "MRI"
+        ]
+      }
+    },
+    "Tina Visser": {
+      "periods": [
+        {
+          "pp": 1,
+          "perm": 29,
+          "trav": 1,
+          "perm_on_loa": 1,
+          "total": 30,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 66.6,
+          "hire_names": [],
+          "termination_names": [
+            "Amy Valenciano"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "TIFFANY VU"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 2,
+          "perm": 27,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 29,
+          "hires": 2,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 66.6,
+          "hire_names": [
+            "JUSTIN YEUNG",
+            "Ricky Huang"
+          ],
+          "termination_names": [],
+          "trav_start_names": [
+            "Kaylee Puckett"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 3,
+          "perm": 26,
+          "trav": 3,
+          "perm_on_loa": 1,
+          "total": 29,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 1,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 78.3,
+          "hire_names": [
+            "Fiona Holtzclaw"
+          ],
+          "termination_names": [],
+          "trav_start_names": [
+            "Mallory Wilcox"
+          ],
+          "trav_end_names": [
+            "Kaylee Puckett"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 4,
+          "perm": 27,
+          "trav": 2,
+          "perm_on_loa": 2,
+          "total": 29,
+          "hires": 0,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 72.0,
+          "hire_names": [],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Alana Canada"
+          ],
+          "loa_return_names": []
+        },
+        {
+          "pp": 5,
+          "perm": 31,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 33,
+          "hires": 2,
+          "terminations": 3,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 71.9,
+          "hire_names": [
+            "Jennifer Ortiz Garcia",
+            "Justin Hurd"
+          ],
+          "termination_names": [
+            "Cecile Kliatchko",
+            "Alana Canada",
+            "Jennifer Ortiz Garcia"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "Alana Canada"
+          ]
+        },
+        {
+          "pp": 6,
+          "perm": 26,
+          "trav": 2,
+          "perm_on_loa": 1,
+          "total": 28,
+          "hires": 2,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 109.9,
+          "hire_names": [
+            "Mia Cruz",
+            "Lacey Newcomer"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 7,
+          "perm": 28,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 30,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 1,
+          "training_hours": 61.8,
+          "hire_names": [
+            "TIFFANY VU"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": [
+            "TIFFANY VU"
+          ]
+        },
+        {
+          "pp": 8,
+          "perm": 29,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 31,
+          "hires": 1,
+          "terminations": 1,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 95.7,
+          "hire_names": [
+            "Lourdes Gueco"
+          ],
+          "termination_names": [
+            "Cassidy Yaksic"
+          ],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 9,
+          "perm": 32,
+          "trav": 2,
+          "perm_on_loa": 0,
+          "total": 34,
+          "hires": 4,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 66.9,
+          "hire_names": [
+            "Kelsey McDonagh",
+            "Levi Aguirre",
+            "Maria De Kuykendall",
+            "Gaelen Filtzanidis"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 10,
+          "perm": 38,
+          "trav": 5,
+          "perm_on_loa": 0,
+          "total": 43,
+          "hires": 3,
+          "terminations": 1,
+          "trav_starts": 3,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 89.8,
+          "hire_names": [
+            "Trevor Hudson",
+            "Elizabeth Frazier",
+            "Teresita Padron"
+          ],
+          "termination_names": [
+            "Aubrey Curtis-Peno"
+          ],
+          "trav_start_names": [
+            "Catrina Lanchinebre",
+            "Destiny Camacho",
+            "Tracey Amato"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 11,
+          "perm": 38,
+          "trav": 6,
+          "perm_on_loa": 0,
+          "total": 44,
+          "hires": 1,
+          "terminations": 2,
+          "trav_starts": 1,
+          "trav_ends": 1,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 75.3,
+          "hire_names": [
+            "Nancy Ceja"
+          ],
+          "termination_names": [
+            "TIFFANY VU",
+            "Justin Hurd"
+          ],
+          "trav_start_names": [
+            "Demetrius Thermidor"
+          ],
+          "trav_end_names": [
+            "Destiny Camacho"
+          ],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 12,
+          "perm": 35,
+          "trav": 6,
+          "perm_on_loa": 0,
+          "total": 41,
+          "hires": 0,
+          "terminations": 1,
+          "trav_starts": 1,
+          "trav_ends": 0,
+          "loa_starts": 0,
+          "loa_returns": 0,
+          "training_hours": 0.0,
+          "hire_names": [],
+          "termination_names": [
+            "Levi Aguirre"
+          ],
+          "trav_start_names": [
+            "Shakira Browne"
+          ],
+          "trav_end_names": [],
+          "loa_start_names": [],
+          "loa_return_names": []
+        },
+        {
+          "pp": 13,
+          "perm": 37,
+          "trav": 6,
+          "perm_on_loa": 1,
+          "total": 43,
+          "hires": 1,
+          "terminations": 0,
+          "trav_starts": 0,
+          "trav_ends": 0,
+          "loa_starts": 1,
+          "loa_returns": 0,
+          "training_hours": 30.8,
+          "hire_names": [
+            "Rosalia Nisenbaum"
+          ],
+          "termination_names": [],
+          "trav_start_names": [],
+          "trav_end_names": [],
+          "loa_start_names": [
+            "Jessica King"
+          ],
+          "loa_return_names": []
+        }
+      ],
+      "summary": {
+        "start_perm": 29,
+        "end_perm": 37,
+        "net_perm": 8,
+        "start_trav": 1,
+        "end_trav": 6,
+        "total_hires": 18,
+        "total_terminations": 9,
+        "total_trav_starts": 7,
+        "total_trav_ends": 2,
+        "total_loa_starts": 3,
+        "total_loa_returns": 2,
+        "total_training_hours": 885.5999999999998,
+        "modalities": [
+          "NM"
+        ]
+      }
+    }
+  },
+  "by_modality": {
+    "ADMIN": {
+      "total_hires": 3,
+      "total_terminations": 4,
+      "total_trav_starts": 0,
+      "total_trav_ends": 0,
+      "total_loa_starts": 9,
+      "total_loa_returns": 4
+    },
+    "CT": {
+      "total_hires": 8,
+      "total_terminations": 7,
+      "total_trav_starts": 2,
+      "total_trav_ends": 1,
+      "total_loa_starts": 2,
+      "total_loa_returns": 1
+    },
+    "MAMMO": {
+      "total_hires": 3,
+      "total_terminations": 0,
+      "total_trav_starts": 5,
+      "total_trav_ends": 1,
+      "total_loa_starts": 2,
+      "total_loa_returns": 1
+    },
+    "MRI": {
+      "total_hires": 16,
+      "total_terminations": 8,
+      "total_trav_starts": 5,
+      "total_trav_ends": 7,
+      "total_loa_starts": 12,
+      "total_loa_returns": 7
+    },
+    "NM": {
+      "total_hires": 18,
+      "total_terminations": 9,
+      "total_trav_starts": 7,
+      "total_trav_ends": 2,
+      "total_loa_starts": 3,
+      "total_loa_returns": 2
+    },
+    "US": {
+      "total_hires": 29,
+      "total_terminations": 30,
+      "total_trav_starts": 2,
+      "total_trav_ends": 0,
+      "total_loa_starts": 0,
+      "total_loa_returns": 0
+    },
+    "XRAY": {
+      "total_hires": 16,
+      "total_terminations": 13,
+      "total_trav_starts": 9,
+      "total_trav_ends": 9,
+      "total_loa_starts": 14,
+      "total_loa_returns": 8
+    }
+  },
+  "modalities": [
+    "ADMIN",
+    "CT",
+    "MAMMO",
+    "MRI",
+    "NM",
+    "US",
+    "XRAY"
+  ],
+  "managers": [
+    "Audrey Strain",
+    "Judy Wood",
+    "Kris Owiesny",
+    "Krystal Aoay",
+    "Marilyn Son",
+    "Monglan Duong",
+    "Stephanie Shaffer",
+    "Teddy Kosciolek",
+    "Teresa Nelson",
+    "Tina Visser"
+  ]
+}
