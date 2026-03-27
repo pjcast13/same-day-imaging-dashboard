@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staffing Journey - FY2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; background: #0f172a; color: #e2e8f0; }
+
+        .header { padding: 32px 40px 24px; border-bottom: 1px solid #1e293b; }
+        .header h1 { font-size: 22px; font-weight: 700; color: #f8fafc; letter-spacing: -0.02em; }
+        .header .subtitle { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+        .stat-bar { display: flex; gap: 12px; padding: 0 40px; margin-top: 20px; flex-wrap: wrap; }
+        .stat-card { flex: 1; min-width: 100px; background: #1e293b; padding: 14px 16px; border-radius: 8px; }
+        .stat-card .label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+        .stat-card .value { font-size: 24px; font-weight: 700; color: #f8fafc; margin-top: 3px; font-variant-numeric: tabular-nums; }
+        .stat-card .detail { font-size: 10px; color: #94a3b8; margin-top: 2px; }
+        .stat-group { flex: 1; min-width: 180px; background: #1e293b; border-radius: 8px; padding: 14px 16px; }
+        .stat-group .group-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #f8fafc; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #334155; }
+        .stat-group .sub-stats { display: flex; gap: 16px; }
+        .stat-group .sub-stat { flex: 1; }
+        .stat-group .sub-stat .num { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .stat-group .sub-stat .lbl { font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1px; }
+        .green { color: #4ade80 !important; }
+        .red { color: #f87171 !important; }
+        .amber { color: #fbbf24 !important; }
+        .blue { color: #60a5fa !important; }
+        .purple { color: #a78bfa !important; }
+
+        .section { padding: 32px 40px; }
+        .section-title { font-size: 14px; font-weight: 700; color: #f8fafc; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .chart-container { background: #1e293b; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .chart-container canvas { width: 100% !important; }
+
+        .view-toggle { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+        .view-btn { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+        .view-btn:hover { border-color: #475569; color: #e2e8f0; }
+        .view-btn.active { background: #334155; border-color: #475569; color: #f8fafc; }
+
+        .manager-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; }
+        .manager-card { background: #1e293b; border-radius: 10px; padding: 20px; border: 1px solid #334155; transition: border-color 0.15s; cursor: pointer; }
+        .manager-card:hover { border-color: #475569; }
+        .manager-card.selected { border-color: #3b82f6; }
+        .mgr-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .mgr-name { font-size: 15px; font-weight: 700; color: #f8fafc; }
+        .mgr-modality { font-size: 10px; font-weight: 600; background: #334155; color: #94a3b8; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .mgr-stats { display: flex; gap: 2px; margin-bottom: 12px; }
+        .mgr-stat-group { flex: 1; background: #0f172a; border-radius: 6px; padding: 8px 6px 6px; text-align: center; }
+        .mgr-stat-group .grp-title { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 4px; }
+        .mgr-stat-group .grp-nums { display: flex; justify-content: center; gap: 10px; }
+        .mgr-stat-group .grp-nums .item { }
+        .mgr-stat-group .grp-nums .num { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .mgr-stat-group .grp-nums .lbl { font-size: 7px; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; }
+        .mgr-spark-wrap { position: relative; height: 48px; width: 100%; margin-top: 8px; }
+        .mgr-spark-wrap canvas { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; }
+
+        .activity-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .activity-table th { text-align: left; padding: 8px 12px; color: #64748b; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #334155; }
+        .activity-table td { padding: 7px 12px; border-bottom: 1px solid #1e293b; vertical-align: top; }
+        .activity-table tr:hover td { background: rgba(59, 130, 246, 0.05); }
+        .badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+        .badge.hire { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+        .badge.term { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+        .badge.trav-start { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+        .badge.trav-end { background: rgba(251, 191, 36, 0.1); color: #d97706; }
+        .badge.loa-start { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+        .badge.loa-return { background: rgba(96, 165, 250, 0.15); color: #60a5fa; }
+
+        .detail-panel { background: #1e293b; border-radius: 10px; padding: 20px; border: 1px solid #334155; margin-top: 16px; display: none; }
+        .detail-panel.visible { display: block; }
+        .detail-panel h3 { font-size: 14px; font-weight: 700; color: #f8fafc; margin-bottom: 12px; }
+        .pp-label { font-weight: 600; color: #94a3b8; font-variant-numeric: tabular-nums; }
+
+        .training-bar { height: 5px; background: #334155; border-radius: 3px; overflow: hidden; margin-top: 4px; }
+        .training-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+
+        .net-arrow { font-weight: 700; }
+        .net-arrow.up { color: #4ade80; }
+        .net-arrow.down { color: #f87171; }
+        .net-arrow.flat { color: #64748b; }
+
+        .filter-row { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+        .filter-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; margin-right: 4px; white-space: nowrap; }
+        .filter-btn { background: #1e293b; border: 1px solid #334155; color: #94a3b8; padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+        .filter-btn:hover { border-color: #475569; color: #e2e8f0; }
+        .filter-btn.on { background: #334155; border-color: #475569; color: #f8fafc; }
+        .filter-btn.mod-CT.on { background: rgba(74,222,128,0.2); border-color: #4ade80; color: #4ade80; }
+        .filter-btn.mod-MRI.on { background: rgba(96,165,250,0.2); border-color: #60a5fa; color: #60a5fa; }
+        .filter-btn.mod-XRAY.on { background: rgba(251,191,36,0.2); border-color: #fbbf24; color: #fbbf24; }
+        .filter-btn.mod-US.on { background: rgba(167,139,250,0.2); border-color: #a78bfa; color: #a78bfa; }
+        .filter-btn.mod-NM.on { background: rgba(248,113,113,0.2); border-color: #f87171; color: #f87171; }
+        .filter-btn.mod-MAMMO.on { background: rgba(244,114,182,0.2); border-color: #f472b6; color: #f472b6; }
+        .filter-btn.mod-ADMIN.on { background: rgba(148,163,184,0.2); border-color: #94a3b8; color: #94a3b8; }
+
+        .activity-table th.sortable { cursor: pointer; user-select: none; position: relative; padding-right: 18px; }
+        .activity-table th.sortable:hover { color: #e2e8f0; }
+        .activity-table th.sortable::after { content: '⇅'; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 10px; opacity: 0.4; }
+        .activity-table th.sortable.asc::after { content: '↑'; opacity: 1; color: #60a5fa; }
+        .activity-table th.sortable.desc::after { content: '↓'; opacity: 1; color: #60a5fa; }
+
+        .filter-count { font-size: 10px; color: #64748b; margin-left: 8px; font-weight: 400; }
+
+        .waterfall-legend { display: flex; gap: 16px; margin-bottom: 12px; justify-content: center; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #94a3b8; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
+
+        @media (max-width: 768px) {
+            .stat-bar { padding: 0 16px; }
+            .stat-card { min-width: calc(33% - 2px); }
+            .stat-card:first-child, .stat-card:last-child { border-radius: 0; }
+            .section { padding: 24px 16px; }
+            .manager-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Staffing Journey</h1>
+        <div class="subtitle">Imaging Services, FY2026 PP01-PP13 &middot; Employee-level movement analysis</div>
+    </div>
+    <div id="stat-bar" class="stat-bar"></div>
+
+    <div class="section">
+        <div class="section-title">The Waterfall</div>
+        <div class="waterfall-legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:#4ade80"></div> FTE Hired</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#f87171"></div> FTE Termed</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#fbbf24"></div> Traveler Start</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#d97706"></div> Traveler End</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#a78bfa"></div> LOA Start</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#60a5fa"></div> LOA Return</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#f8fafc; border-radius:50%"></div> Active Headcount</div>
+        </div>
+        <div class="chart-container">
+            <canvas id="waterfallChart" height="300"></canvas>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">By Manager</div>
+        <div class="view-toggle" id="mgrViewToggle">
+            <button class="view-btn active" data-view="cards">Cards</button>
+            <button class="view-btn" data-view="table">Table</button>
+        </div>
+        <div id="managerCards" class="manager-grid"></div>
+        <div id="managerTable" style="display:none"></div>
+        <div id="managerDetail" class="detail-panel"></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Activity Timeline <span id="activityCount" class="filter-count"></span></div>
+        <div class="view-toggle" id="activityFilter">
+            <button class="view-btn active" data-filter="all">All</button>
+            <button class="view-btn" data-filter="hires">Hires</button>
+            <button class="view-btn" data-filter="terms">Terminations</button>
+            <button class="view-btn" data-filter="travelers">Travelers</button>
+            <button class="view-btn" data-filter="loa">LOA</button>
+        </div>
+        <div class="filter-row" id="modalityFilter">
+            <span class="filter-label">Modality</span>
+        </div>
+        <div class="filter-row" id="managerFilter">
+            <span class="filter-label">Manager</span>
+        </div>
+        <div class="chart-container" style="max-height: 500px; overflow-y: auto;">
+            <table class="activity-table" id="activityTable">
+                <thead><tr>
+                    <th class="sortable" data-col="pp">Period</th>
+                    <th class="sortable" data-col="type">Type</th>
+                    <th class="sortable" data-col="name">Name</th>
+                    <th class="sortable" data-col="title">Title</th>
+                    <th class="sortable" data-col="modality">Modality</th>
+                    <th class="sortable" data-col="manager">Manager</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Training Load</div>
+        <div class="chart-container">
+            <canvas id="trainingChart" height="160"></canvas>
+        </div>
+    </div>
+
+    <script>
+    var DATA = null;
+    function loadData() { return fetch('staffing_journey_data.json').then(r => r.json()); }
+
+    var activeTypeFilter = 'all';
+    var activeModalities = new Set();
+    var activeManagers = new Set();
+    var sortCol = 'pp';
+    var sortDir = 'asc';
+
+    function init(data) {
+        DATA = data;
+        renderStats();
+        renderWaterfall();
+        renderManagerCards();
+        buildFilterButtons();
+        renderActivityTable();
+        renderTrainingChart();
+        bindEvents();
+    }
+
+    function renderStats() {
+        var w = DATA.waterfall;
+        var first = w[0], last = w[w.length - 1];
+        var sum = (key) => w.reduce((s, p) => s + p[key], 0);
+        var netPerm = last.perm_active - first.perm_active;
+        document.getElementById('stat-bar').innerHTML = `
+            <div class="stat-card">
+                <div class="label">Active Headcount</div>
+                <div class="value">${last.total_active}</div>
+                <div class="detail">${first.total_active} &rarr; ${last.total_active}</div>
+            </div>
+            <div class="stat-group">
+                <div class="group-label">FTE <span style="font-weight:400;color:#64748b">${first.perm_active}&rarr;${last.perm_active} (${netPerm > 0 ? '+' : ''}${netPerm} net)</span></div>
+                <div class="sub-stats">
+                    <div class="sub-stat"><div class="num green">+${sum('hires')}</div><div class="lbl">Hired</div></div>
+                    <div class="sub-stat"><div class="num red">-${sum('terminations')}</div><div class="lbl">Termed</div></div>
+                </div>
+            </div>
+            <div class="stat-group">
+                <div class="group-label">Traveler <span style="font-weight:400;color:#64748b">${first.trav_active}&rarr;${last.trav_active} active</span></div>
+                <div class="sub-stats">
+                    <div class="sub-stat"><div class="num amber">+${sum('trav_starts')}</div><div class="lbl">Onboarded</div></div>
+                    <div class="sub-stat"><div class="num" style="color:#d97706">-${sum('trav_ends')}</div><div class="lbl">Ended</div></div>
+                </div>
+            </div>
+            <div class="stat-group">
+                <div class="group-label">LOA <span style="font-weight:400;color:#64748b">${last.perm_on_loa} currently out</span></div>
+                <div class="sub-stats">
+                    <div class="sub-stat"><div class="num purple">${sum('loa_starts')}</div><div class="lbl">Leave</div></div>
+                    <div class="sub-stat"><div class="num blue">${sum('loa_returns')}</div><div class="lbl">Return</div></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Training</div>
+                <div class="value blue">${Math.round(sum('training_hours')).toLocaleString()}h</div>
+                <div class="detail">${Math.max(...w.map(p => p.trainee_count))} peak trainees</div>
+            </div>
+        `;
+    }
+
+    function renderWaterfall() {
+        var ctx = document.getElementById('waterfallChart').getContext('2d');
+        var w = DATA.waterfall;
+        var labels = w.map(p => 'PP' + String(p.pp).padStart(2, '0'));
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    { label: 'FTE Hired', data: w.map(p => p.hires), backgroundColor: '#4ade80', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.85, stack: 'pos' },
+                    { label: 'Traveler Start', data: w.map(p => p.trav_starts), backgroundColor: '#fbbf24', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.85, stack: 'pos' },
+                    { label: 'LOA Return', data: w.map(p => p.loa_returns), backgroundColor: '#60a5fa', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.85, stack: 'pos' },
+                    { label: 'FTE Termed', data: w.map(p => -p.terminations), backgroundColor: '#f87171', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.85, stack: 'neg' },
+                    { label: 'Traveler End', data: w.map(p => -p.trav_ends), backgroundColor: '#d97706', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.85, stack: 'neg' },
+                    { label: 'LOA Start', data: w.map(p => -p.loa_starts), backgroundColor: '#a78bfa', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.85, stack: 'neg' },
+                    { label: 'Active Headcount', data: w.map(p => p.total_active), type: 'line', borderColor: '#f8fafc', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#f8fafc', pointBorderColor: '#1e293b', pointBorderWidth: 2, fill: false, tension: 0.3, yAxisID: 'y1' }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1e293b', borderColor: '#334155', borderWidth: 1,
+                        titleColor: '#f8fafc', bodyColor: '#e2e8f0', padding: 12,
+                        callbacks: {
+                            afterBody: function(items) {
+                                var idx = items[0].dataIndex, p = w[idx], lines = [''];
+                                if (p.perm_on_loa > 0) lines.push('On LOA: ' + p.perm_on_loa);
+                                if (p.hire_details.length) lines.push('Hired: ' + p.hire_details.map(d => d.name).join(', '));
+                                if (p.termination_details.length) lines.push('Termed: ' + p.termination_details.map(d => d.name).join(', '));
+                                if (p.loa_start_details.length) lines.push('LOA out: ' + p.loa_start_details.map(d => d.name).join(', '));
+                                if (p.loa_return_details.length) lines.push('LOA back: ' + p.loa_return_details.map(d => d.name).join(', '));
+                                return lines;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 11, weight: '600' } } },
+                    y: { position: 'left', title: { display: true, text: 'Movement', color: '#64748b', font: { size: 11 } }, grid: { color: '#1e293b' }, ticks: { color: '#64748b' } },
+                    y1: { position: 'right', title: { display: true, text: 'Active', color: '#94a3b8', font: { size: 11 } }, grid: { display: false }, ticks: { color: '#94a3b8' },
+                        min: Math.min(...w.map(p => p.total_active)) - 15, max: Math.max(...w.map(p => p.total_active)) + 15 }
+                }
+            }
+        });
+    }
+
+    function renderManagerCards() {
+        var mgrs = DATA.by_manager;
+        var maxTraining = Math.max(...Object.values(mgrs).map(m => m.summary.total_training_hours));
+        var sorted = Object.keys(mgrs).sort((a, b) => (mgrs[b].summary.end_perm + mgrs[b].summary.end_trav) - (mgrs[a].summary.end_perm + mgrs[a].summary.end_trav));
+
+        var html = '';
+        sorted.forEach(function(mgr) {
+            var s = mgrs[mgr].summary;
+            var netPerm = s.net_perm;
+            var netClass = netPerm > 0 ? 'up' : netPerm < 0 ? 'down' : 'flat';
+            var netSym = netPerm > 0 ? '&#9650;' : netPerm < 0 ? '&#9660;' : '&#9644;';
+            var tPct = maxTraining > 0 ? (s.total_training_hours / maxTraining * 100) : 0;
+
+            html += `
+                <div class="manager-card" data-manager="${mgr}">
+                    <div class="mgr-header">
+                        <div class="mgr-name">${mgr}</div>
+                        <div class="mgr-modality">${s.modalities.join(' / ')}</div>
+                    </div>
+                    <div class="mgr-stats">
+                        <div class="mgr-stat-group">
+                            <div class="grp-title">FTE <span style="color:#64748b;font-weight:400">${s.start_perm}&rarr;${s.end_perm}</span></div>
+                            <div class="grp-nums">
+                                <div class="item"><div class="num green">+${s.total_hires}</div><div class="lbl">Hired</div></div>
+                                <div class="item"><div class="num red">-${s.total_terminations}</div><div class="lbl">Termed</div></div>
+                            </div>
+                        </div>
+                        <div class="mgr-stat-group">
+                            <div class="grp-title">Traveler <span style="color:#64748b;font-weight:400">${s.start_trav}&rarr;${s.end_trav}</span></div>
+                            <div class="grp-nums">
+                                <div class="item"><div class="num amber">+${s.total_trav_starts}</div><div class="lbl">On</div></div>
+                                <div class="item"><div class="num" style="color:#d97706">-${s.total_trav_ends}</div><div class="lbl">End</div></div>
+                            </div>
+                        </div>
+                        <div class="mgr-stat-group">
+                            <div class="grp-title">LOA <span style="color:#64748b;font-weight:400">${mgrs[mgr].periods[mgrs[mgr].periods.length-1].perm_on_loa || 0} out now</span></div>
+                            <div class="grp-nums">
+                                <div class="item"><div class="num purple">${s.total_loa_starts}</div><div class="lbl">Leave</div></div>
+                                <div class="item"><div class="num blue">${s.total_loa_returns}</div><div class="lbl">Return</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mgr-spark-wrap"><canvas data-manager="${mgr}"></canvas></div>
+                </div>`;
+        });
+        document.getElementById('managerCards').innerHTML = html;
+
+        sorted.forEach(function(mgr) {
+            var canvas = document.querySelector('canvas[data-manager="' + mgr + '"]');
+            if (!canvas) return;
+            var periods = mgrs[mgr].periods;
+            var permVals = periods.map(p => p.perm);
+            var pMin = Math.min(...permVals), pMax = Math.max(...permVals);
+            var pad = Math.max(3, Math.round((pMax - pMin) * 0.5));
+            new Chart(canvas.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: periods.map(p => 'PP' + String(p.pp).padStart(2, '0')),
+                    datasets: [
+                        { data: periods.map(p => p.hires), backgroundColor: '#4ade80', barPercentage: 0.8, categoryPercentage: 0.9, stack: 'pos' },
+                        { data: periods.map(p => p.trav_starts), backgroundColor: '#fbbf24', barPercentage: 0.8, categoryPercentage: 0.9, stack: 'pos' },
+                        { data: periods.map(p => p.loa_returns), backgroundColor: '#60a5fa', barPercentage: 0.8, categoryPercentage: 0.9, stack: 'pos' },
+                        { data: periods.map(p => -p.terminations), backgroundColor: '#f87171', barPercentage: 0.8, categoryPercentage: 0.9, stack: 'neg' },
+                        { data: periods.map(p => -p.trav_ends), backgroundColor: '#d97706', barPercentage: 0.8, categoryPercentage: 0.9, stack: 'neg' },
+                        { data: periods.map(p => -p.loa_starts), backgroundColor: '#a78bfa', barPercentage: 0.8, categoryPercentage: 0.9, stack: 'neg' },
+                        { data: permVals, type: 'line', borderColor: '#60a5fa', borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.3, yAxisID: 'y1' }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                    scales: { x: { display: false }, y: { display: false }, y1: { display: false, min: pMin - pad, max: pMax + pad } }
+                }
+            });
+        });
+    }
+
+    function renderManagerTable() {
+        var mgrs = DATA.by_manager;
+        var sorted = Object.keys(mgrs).sort((a, b) => (mgrs[b].summary.end_perm + mgrs[b].summary.end_trav) - (mgrs[a].summary.end_perm + mgrs[a].summary.end_trav));
+        var html = '<table class="activity-table"><thead><tr><th>Manager</th><th>Mod</th><th>Start</th><th>End</th><th>Hired</th><th>Termed</th><th>Net</th><th>Trav</th><th>LOA</th><th>Training</th></tr></thead><tbody>';
+        sorted.forEach(function(mgr) {
+            var s = mgrs[mgr].summary;
+            html += '<tr><td style="font-weight:600;color:#f8fafc">' + mgr + '</td><td>' + s.modalities.join(', ') + '</td>'
+                + '<td class="pp-label">' + s.start_perm + '</td><td class="pp-label">' + s.end_perm + '</td>'
+                + '<td class="green" style="font-weight:600">+' + s.total_hires + '</td>'
+                + '<td class="red" style="font-weight:600">-' + s.total_terminations + '</td>'
+                + '<td style="color:' + (s.net_perm > 0 ? '#4ade80' : s.net_perm < 0 ? '#f87171' : '#64748b') + ';font-weight:700">' + (s.net_perm > 0 ? '+' : '') + s.net_perm + '</td>'
+                + '<td>' + s.start_trav + '&rarr;' + s.end_trav + '</td>'
+                + '<td class="purple">' + s.total_loa_starts + ' out / ' + s.total_loa_returns + ' back</td>'
+                + '<td class="purple">' + Math.round(s.total_training_hours).toLocaleString() + 'h</td></tr>';
+        });
+        html += '</tbody></table>';
+        document.getElementById('managerTable').innerHTML = html;
+    }
+
+    function buildFilterButtons() {
+        var modalities = ['CT','MRI','XRAY','US','NM','MAMMO','ADMIN'];
+        var managers = Object.keys(DATA.by_manager).sort();
+        var modRow = document.getElementById('modalityFilter');
+        modalities.forEach(function(mod) {
+            var btn = document.createElement('button');
+            btn.className = 'filter-btn mod-' + mod;
+            btn.textContent = mod;
+            btn.dataset.mod = mod;
+            modRow.appendChild(btn);
+        });
+        var mgrRow = document.getElementById('managerFilter');
+        managers.forEach(function(mgr) {
+            var btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.textContent = mgr.split(' ').pop();
+            btn.dataset.mgr = mgr;
+            btn.title = mgr;
+            mgrRow.appendChild(btn);
+        });
+    }
+
+    function collectRows() {
+        var w = DATA.waterfall;
+        var rows = [];
+        var typeOrder = { 'HIRED': 1, 'TERMED': 2, 'TRAV START': 3, 'TRAV END': 4, 'LOA START': 5, 'LOA RETURN': 6 };
+        w.forEach(function(p) {
+            function add(details, badgeClass, badgeText, typeFilter) {
+                details.forEach(function(d) {
+                    rows.push({ pp: p.pp, type: badgeText, typeFilter: typeFilter, badgeClass: badgeClass, name: d.name, title: d.title, modality: d.modality, manager: d.manager, typeOrder: typeOrder[badgeText] || 99 });
+                });
+            }
+            add(p.hire_details, 'hire', 'HIRED', 'hires');
+            add(p.termination_details, 'term', 'TERMED', 'terms');
+            add(p.trav_start_details, 'trav-start', 'TRAV START', 'travelers');
+            add(p.trav_end_details, 'trav-end', 'TRAV END', 'travelers');
+            add(p.loa_start_details, 'loa-start', 'LOA START', 'loa');
+            add(p.loa_return_details, 'loa-return', 'LOA RETURN', 'loa');
+        });
+        return rows;
+    }
+
+    function renderActivityTable() {
+        var rows = collectRows();
+        var filtered = rows.filter(function(r) {
+            if (activeTypeFilter !== 'all' && r.typeFilter !== activeTypeFilter) return false;
+            if (activeModalities.size > 0 && !activeModalities.has(r.modality)) return false;
+            if (activeManagers.size > 0 && !activeManagers.has(r.manager)) return false;
+            return true;
+        });
+        filtered.sort(function(a, b) {
+            var va, vb;
+            switch (sortCol) {
+                case 'pp': va = a.pp; vb = b.pp; break;
+                case 'type': va = a.typeOrder; vb = b.typeOrder; break;
+                case 'name': va = a.name.toLowerCase(); vb = b.name.toLowerCase(); break;
+                case 'title': va = a.title.toLowerCase(); vb = b.title.toLowerCase(); break;
+                case 'modality': va = a.modality; vb = b.modality; break;
+                case 'manager': va = a.manager.toLowerCase(); vb = b.manager.toLowerCase(); break;
+                default: va = a.pp; vb = b.pp;
+            }
+            if (va < vb) return sortDir === 'asc' ? -1 : 1;
+            if (va > vb) return sortDir === 'asc' ? 1 : -1;
+            return a.pp - b.pp;
+        });
+        var html = '';
+        filtered.forEach(function(r) {
+            html += '<tr><td class="pp-label">PP' + String(r.pp).padStart(2, '0') + '</td>'
+                + '<td><span class="badge ' + r.badgeClass + '">' + r.type + '</span></td>'
+                + '<td style="color:#f8fafc;font-weight:500">' + r.name + '</td>'
+                + '<td>' + r.title + '</td><td>' + r.modality + '</td><td>' + r.manager + '</td></tr>';
+        });
+        document.querySelector('#activityTable tbody').innerHTML = html;
+        document.getElementById('activityCount').textContent = filtered.length + ' of ' + rows.length + ' events';
+        document.querySelectorAll('#activityTable th.sortable').forEach(function(th) {
+            th.classList.remove('asc', 'desc');
+            if (th.dataset.col === sortCol) th.classList.add(sortDir);
+        });
+    }
+
+    function renderTrainingChart() {
+        var w = DATA.waterfall;
+        new Chart(document.getElementById('trainingChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: w.map(p => 'PP' + String(p.pp).padStart(2, '0')),
+                datasets: [
+                    { label: 'Training Hours', data: w.map(p => p.training_hours), backgroundColor: 'rgba(139,92,246,0.6)', borderColor: '#8b5cf6', borderWidth: 1, borderRadius: 4, barPercentage: 0.6, yAxisID: 'y' },
+                    { label: 'Trainees', data: w.map(p => p.trainee_count), type: 'line', borderColor: '#a78bfa', borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#a78bfa', fill: false, tension: 0.3, yAxisID: 'y1' }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } }, position: 'top' },
+                    tooltip: { backgroundColor: '#1e293b', borderColor: '#334155', borderWidth: 1, titleColor: '#f8fafc', bodyColor: '#e2e8f0' } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 11 } } },
+                    y: { position: 'left', title: { display: true, text: 'Hours', color: '#64748b', font: { size: 11 } }, grid: { color: '#1e293b' }, ticks: { color: '#64748b' } },
+                    y1: { position: 'right', title: { display: true, text: 'Trainees', color: '#a78bfa', font: { size: 11 } }, grid: { display: false }, ticks: { color: '#a78bfa' } }
+                }
+            }
+        });
+    }
+
+    function showManagerDetail(mgr) {
+        var panel = document.getElementById('managerDetail');
+        var m = DATA.by_manager[mgr];
+        if (!m) return;
+        var html = '<h3>' + mgr + ' &middot; Staffing Timeline</h3>';
+        html += '<table class="activity-table"><thead><tr><th>Period</th><th>Perm</th><th>Trav</th><th>LOA</th><th>Hired</th><th>Termed</th><th>Trav +/-</th><th>LOA +/-</th><th>Training</th><th>Details</th></tr></thead><tbody>';
+        m.periods.forEach(function(p) {
+            var details = [];
+            if (p.hire_names.length) details.push('<span class="green">+ ' + p.hire_names.join(', ') + '</span>');
+            if (p.termination_names.length) details.push('<span class="red">- ' + p.termination_names.join(', ') + '</span>');
+            if (p.trav_start_names.length) details.push('<span class="amber">trav+ ' + p.trav_start_names.join(', ') + '</span>');
+            if (p.trav_end_names.length) details.push('<span style="color:#d97706">trav- ' + p.trav_end_names.join(', ') + '</span>');
+            if (p.loa_start_names.length) details.push('<span class="purple">LOA&rarr; ' + p.loa_start_names.join(', ') + '</span>');
+            if (p.loa_return_names.length) details.push('<span class="blue">&larr;LOA ' + p.loa_return_names.join(', ') + '</span>');
+            html += '<tr><td class="pp-label">PP' + String(p.pp).padStart(2, '0') + '</td>'
+                + '<td style="font-weight:600">' + p.perm + '</td><td>' + p.trav + '</td>'
+                + '<td class="purple">' + (p.perm_on_loa || '') + '</td>'
+                + '<td class="green">' + (p.hires > 0 ? '+' + p.hires : '') + '</td>'
+                + '<td class="red">' + (p.terminations > 0 ? '-' + p.terminations : '') + '</td>'
+                + '<td>' + (p.trav_starts > 0 ? '+' + p.trav_starts : '') + (p.trav_ends > 0 ? ' -' + p.trav_ends : '') + '</td>'
+                + '<td class="purple">' + (p.loa_starts > 0 ? '+' + p.loa_starts : '') + (p.loa_returns > 0 ? ' -' + p.loa_returns : '') + '</td>'
+                + '<td style="color:#8b5cf6">' + (p.training_hours > 0 ? Math.round(p.training_hours) + 'h' : '') + '</td>'
+                + '<td style="font-size:11px">' + details.join('<br>') + '</td></tr>';
+        });
+        html += '</tbody></table>';
+        panel.innerHTML = html;
+        panel.classList.add('visible');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function bindEvents() {
+        document.getElementById('managerCards').addEventListener('click', function(e) {
+            var card = e.target.closest('.manager-card');
+            if (!card) return;
+            document.querySelectorAll('.manager-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            showManagerDetail(card.dataset.manager);
+        });
+        document.getElementById('mgrViewToggle').addEventListener('click', function(e) {
+            var btn = e.target.closest('.view-btn');
+            if (!btn) return;
+            this.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            var view = btn.dataset.view;
+            document.getElementById('managerCards').style.display = view === 'cards' ? 'grid' : 'none';
+            document.getElementById('managerTable').style.display = view === 'table' ? 'block' : 'none';
+            if (view === 'table') renderManagerTable();
+        });
+        document.getElementById('activityFilter').addEventListener('click', function(e) {
+            var btn = e.target.closest('.view-btn');
+            if (!btn) return;
+            this.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeTypeFilter = btn.dataset.filter;
+            renderActivityTable();
+        });
+        document.getElementById('modalityFilter').addEventListener('click', function(e) {
+            var btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            var mod = btn.dataset.mod;
+            if (activeModalities.has(mod)) { activeModalities.delete(mod); btn.classList.remove('on'); }
+            else { activeModalities.add(mod); btn.classList.add('on'); }
+            renderActivityTable();
+        });
+        document.getElementById('managerFilter').addEventListener('click', function(e) {
+            var btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            var mgr = btn.dataset.mgr;
+            if (activeManagers.has(mgr)) { activeManagers.delete(mgr); btn.classList.remove('on'); }
+            else { activeManagers.add(mgr); btn.classList.add('on'); }
+            renderActivityTable();
+        });
+        document.querySelectorAll('#activityTable th.sortable').forEach(function(th) {
+            th.addEventListener('click', function() {
+                var col = this.dataset.col;
+                if (sortCol === col) { sortDir = sortDir === 'asc' ? 'desc' : 'asc'; }
+                else { sortCol = col; sortDir = 'asc'; }
+                renderActivityTable();
+            });
+        });
+    }
+
+    loadData().then(init);
+    </script>
+</body>
+</html>
